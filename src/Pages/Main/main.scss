@@ -1,0 +1,17 @@
+.main-container {
+  display: flex;
+  background-color: #fafafa;
+  justify-content: center;
+
+  .main-left {
+  }
+  .main-right {
+    width: 292px;
+    margin-top: 27px;
+    margin-left: 20px;
+
+    .my-pf-container {
+      width: 293px;
+    }
+  }
+}

@@ -1,0 +1,77 @@
+$lightgray: #fafafa;
+$moregray: #dbdbdb;
+$white: #fff;
+$buttonBlue: #0095f6;
+
+@mixin center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin inputFamily {
+  width: 258px;
+  padding: 9px 2px;
+  border: 1px solid $moregray;
+  border-radius: 4px;
+  background-color: $lightgray;
+}
+
+.login-container {
+  background-color: $lightgray;
+  height: 100vh;
+  @include center;
+
+  .login-box {
+    background-color: $white;
+    border: 1px solid $moregray;
+    width: 350px;
+    text-align: center;
+
+    img {
+      width: 175px;
+      margin-bottom: 30px;
+    }
+  }
+
+  .upper {
+    padding: 60px 0px;
+  }
+
+  .down {
+    margin-top: 10px;
+    padding: 20px 60px;
+    color: $moregray;
+    font-size: 14px;
+    font-weight: 900;
+
+    cursor: pointer;
+
+    > p > span {
+      color: $buttonBlue;
+    }
+  }
+
+  .login-input-box {
+    display: inline-block;
+    input {
+      @include inputFamily;
+      margin-bottom: 6px;
+    }
+
+    button {
+      @include inputFamily;
+      border: 1px solid transparent;
+      margin-top: 10px;
+      background-color: rgba(0, 149, 246, 0.3);
+      color: #fff;
+      font-weight: 900;
+
+      cursor: pointer;
+
+      &.active {
+        background-color: rgba(0, 149, 246, 1);
+      }
+    }
+  }
+}

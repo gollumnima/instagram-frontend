@@ -1,0 +1,41 @@
+$lightgray: #fafafa;
+$moregray: #dbdbdb;
+$darkgray: #999999;
+$white: #fff;
+$buttonBlue: #0095f6;
+
+.profile-container {
+  display: flex;
+  .pf-img-container {
+    width: 50px;
+    margin-top: 4px;
+    .profile-img {
+      border-radius: 50%;
+      width: 100%;
+    }
+  }
+  .pf-font-container {
+    align-self: center;
+    margin-left: 15px;
+
+    .profile-id {
+      color: #262626;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .profile-desc {
+      font-size: 12px;
+      margin-top: 3px;
+      color: $darkgray;
+    }
+  }
+  .profile-btn {
+    align-self: center;
+    margin-left: 80px;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    color: $buttonBlue;
+  }
+}

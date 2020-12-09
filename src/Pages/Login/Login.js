@@ -1,9 +1,12 @@
 import React, { useReducer } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import { API } from "utils/config";
 import { usernameCheck, passwordCheck } from "utils/validation";
-import Counter from "Components/Counter/Counter";
+// import Counter from "Components/Counter/Counter";
 import "./login.scss";
 
-const initialState = { username: "", password: "", merong: "" };
+const initialState = { username: "", password: "" };
 
 // const reducer = (state, { name, value }) => {
 //   return { ...state, [name]: value };
@@ -18,7 +21,7 @@ const reducer = (state, action) => {
   return result;
 };
 
-const Login = () => {
+const Login = props => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const handleChange = e => {
@@ -27,26 +30,45 @@ const Login = () => {
   };
 
   const handleSubmit = e => {
-    e.preventDefault();
+    // e.preventDefault();
     // POST Method
+    axios
+      .post(`${API}/login`, { username, password })
+      .then(res => {
+        if (res.status === 200) {
+          localStorage.setItem("insta-login-token", res.data.token);
+          console.log("로그인 성공! 오예에~~");
+
+          props.history.push("/");
+        }
+      })
+      .catch(err => console.log(err));
 
     dispatch({ type: "reset" });
+  };
+
+  const handleEnter = e => {
+    if (e.key === "Enter") {
+      handleSubmit();
+    }
   };
 
   const regExpId = /^[0-9a-z]+$/;
   const regExpPw = /(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{2,50}).{8,50}$/;
   // : 숫자, 특문 각 1회 이상, 영문은 2개 이상 사용하여 8자리 이상 입력
 
-  const { username, password, merong } = state;
+  const { username, password } = state;
 
-  console.log(username, password, merong);
+  console.log(username, password);
   return (
     <div className="login-container">
       <div>
         <div className="login-box upper">
-          <img src="/instalogo.png" alt="insta-logo" />
+          <Link to="/">
+            <img src="/instalogo.png" alt="insta-logo" />
+          </Link>
           <div className="login-input-box">
-            <Counter />
+            {/* <Counter /> */}
             <input
               className="input-id"
               name="username"
@@ -61,6 +83,7 @@ const Login = () => {
               type="password"
               placeholder="  비밀번호"
               onChange={handleChange}
+              onKeyPress={handleEnter}
             />
             <button
               className={`login-btn ${username && password && `active`} `}

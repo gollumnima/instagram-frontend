@@ -1,7 +1,4 @@
-$lightgray: #fafafa;
-$moregray: #dbdbdb;
-$white: #fff;
-$buttonBlue: #0095f6;
+@import 'styles/colorPalette';
 
 @mixin center {
   display: flex;
@@ -63,14 +60,14 @@ $buttonBlue: #0095f6;
       @include inputFamily;
       border: 1px solid transparent;
       margin-top: 10px;
-      background-color: rgba(0, 149, 246, 0.3);
-      color: #fff;
+      background-color: $deepblue;
+      color: $white;
       font-weight: 900;
 
       cursor: pointer;
 
       &.active {
-        background-color: rgba(0, 149, 246, 1);
+        background-color: $buttonBlue;
       }
     }
   }

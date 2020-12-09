@@ -1,8 +1,4 @@
-$lightgray: #fafafa;
-$moregray: #dbdbdb;
-$white: #fff;
-$buttonBlue: #0095f6;
-$black: #262626;
+@import 'styles/colorPalette';
 
 .layout-container {
   border: 1px solid $moregray;
@@ -88,12 +84,20 @@ $black: #262626;
 }
 
 .comment-box {
+  margin-top: 5px;
+
   .comment-group {
     display: flex;
+    margin-top: 5px;
 
     > span {
       font-size: 14px;
     }
+  }
+  .comment-all {
+    margin-top: 10px;
+    font-size: 14px;
+    color: $deepgray;
   }
 }
 
@@ -120,6 +124,14 @@ $black: #262626;
     }
     .comment-btn {
       color: $buttonBlue;
+      .deactive-btn {
+        opacity: 0.3;
+      }
+    }
+    .active-btn {
+      opacity: 1;
+      cursor: pointer;
+      font-weight: 600;
     }
   }
 }

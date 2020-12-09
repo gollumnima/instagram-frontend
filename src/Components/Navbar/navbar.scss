@@ -1,12 +1,25 @@
+@import 'styles/colorPalette';
+
 .navbar-container {
+  position: fixed;
   width: 100%;
   height: 54px;
-  border-bottom: 1px solid rgba(var(--b6a, 219, 219, 219), 1);
-  display: flex;
-  justify-content: space-around;
+  text-align: -webkit-center;
+
+  border-bottom: 1px solid $moregray;
+  background-color: $white;
+
+  .navbar-inner {
+    display: flex;
+    max-width: 939px;
+    justify-content: space-between;
+  }
+
   .nav-left {
     display: flex;
     margin-top: 11px;
+
+    cursor: pointer;
 
     .nav-left-words {
       width: 103px;
@@ -18,8 +31,8 @@
       margin-top: 15px;
       padding: 4px 28px;
 
-      border: solid 1px rgba(var(--b6a, 219, 219, 219), 1);
-      background-color: #fafafa;
+      border: 1px solid $moregray;
+      background-color: $lightgray;
     }
     .input-img-container {
       .search-icon {
@@ -29,14 +42,20 @@
     }
     .search-word {
       font-size: 12px;
-      margin-left: 15px;
-      color: #bdbdbd;
+      margin-left: 22px;
+      color: $moregray;
     }
   }
   .nav-right {
-    img {
+    cursor: pointer;
+
+    .nav-icons {
       width: 25px;
-      padding: 15px;
+      height: 25px;
+      margin-top: 15px;
+      margin-left: 22px;
+
+      // padding: 15px;
     }
   }
 }
@@ -46,4 +65,9 @@
   position: absolute;
   top: 21px;
   margin-left: 80px;
+}
+
+.navbar-guard {
+  width: 0;
+  height: 54px;
 }

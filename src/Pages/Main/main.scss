@@ -1,17 +1,29 @@
-.main-container {
-  display: flex;
-  background-color: #fafafa;
-  justify-content: center;
+@import 'styles/colorPalette';
 
-  .main-left {
+.main-container {
+  background-color: $lightgray;
+  text-align: -webkit-center;
+
+  .main-inner {
+    display: flex;
+    max-width: 939px;
+    justify-content: center;
   }
+
   .main-right {
-    width: 292px;
+    // position: fixed;
+    width: 325px;
     margin-top: 27px;
     margin-left: 20px;
 
     .my-pf-container {
-      width: 293px;
+      // width: 293px;
     }
+  }
+  .main-right-guard {
+    max-width: 293px;
+    position: absolute;
+    right: 0;
+    width: 100%;
   }
 }

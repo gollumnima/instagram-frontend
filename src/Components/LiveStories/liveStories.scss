@@ -1,8 +1,4 @@
-$lightgray: #fafafa;
-$moregray: #dbdbdb;
-$white: #fff;
-$buttonBlue: #0095f6;
-$black: #262626;
+@import 'styles/colorPalette';
 
 .live-story-container {
   display: flex;

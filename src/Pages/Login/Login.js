@@ -1,5 +1,5 @@
-import React, { useReducer } from "react";
-import { Link } from "react-router-dom";
+import React, { useReducer, useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import { API } from "utils/config";
 import { usernameCheck, passwordCheck } from "utils/validation";
@@ -16,29 +16,36 @@ const reducer = (state, action) => {
   if (action.type === "reset") return initialState;
   const result = { ...state };
   console.log({ result });
+
   console.log(action, "ac");
   result[action.type] = action.value;
   return result;
 };
 
-const Login = props => {
+const Login = (props, location) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [userInfo, setUserInfo] = useState([]);
+  location = useLocation();
+  console.log(location, "sss");
 
+  console.log(userInfo, "i");
   const handleChange = e => {
     const { name, value } = e.target;
     dispatch({ type: name, value });
   };
 
+  console.log(props, "ppppppppppppppp");
   const handleSubmit = e => {
     // e.preventDefault();
     // POST Method
     axios
-      .post(`${API}/login`, { username, password })
+      .post(`${API}/users/login`, { username, password })
       .then(res => {
         if (res.status === 200) {
+          console.log(res);
+          setUserInfo(userInfo.concat(res.data.user[0]));
           localStorage.setItem("insta-login-token", res.data.token);
           console.log("로그인 성공! 오예에~~");
-
           props.history.push("/");
         }
       })
@@ -46,6 +53,11 @@ const Login = props => {
 
     dispatch({ type: "reset" });
   };
+
+  useEffect(() => {
+    console.log(location.state, "st");
+    // handleSubmit();
+  });
 
   const handleEnter = e => {
     if (e.key === "Enter") {

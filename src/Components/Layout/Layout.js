@@ -25,10 +25,12 @@ const Layout = props => {
 
   const handleSubmit = () => {
     setCommentList(commentList.concat(comment));
+    setComment("");
   };
 
   const handleEnter = e => {
     if (e.key === "Enter") {
+      e.preventDefault();
       handleSubmit();
     }
   };
@@ -149,6 +151,7 @@ const Layout = props => {
               placeholder="댓글달기..."
               onChange={e => handleChange(e)}
               onKeyPress={e => handleEnter(e)}
+              value={comment}
             ></input>
             <button className="comment-btn" onClick={handleSubmit}>
               <span className={cn(comment ? "active-btn" : "deactive-btn")}>

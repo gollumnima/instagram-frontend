@@ -11,4 +11,4 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
-console.log(store, "st");
+console.log({ store });

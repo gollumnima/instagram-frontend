@@ -14,7 +14,7 @@ const LiveStories = () => {
   return (
     <div className="live-story-container">
       {profileData.map(el => (
-        <div className="live-story-wrapper">
+        <div key={el.image} className="live-story-wrapper">
           <Profile url={el.image} />
           <span>{el.user.name}</span>
         </div>

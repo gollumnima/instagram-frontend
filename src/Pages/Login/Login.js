@@ -1,7 +1,9 @@
 import React, { useReducer, useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import { API } from "utils/config";
+import { setUserInfo } from "store/user";
 import { usernameCheck, passwordCheck } from "utils/validation";
 // import Counter from "Components/Counter/Counter";
 import "./login.scss";
@@ -15,26 +17,23 @@ const initialState = { username: "", password: "" };
 const reducer = (state, action) => {
   if (action.type === "reset") return initialState;
   const result = { ...state };
-  console.log({ result });
 
-  console.log(action, "ac");
   result[action.type] = action.value;
   return result;
 };
 
 const Login = (props, location) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const [userInfo, setUserInfo] = useState([]);
-  location = useLocation();
-  console.log(location, "sss");
+  const [state, setDispatch] = useReducer(reducer, initialState);
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.user);
+  console.log(user, "uuuu");
+  // const [userInfo, setUserInfo] = useState([]);
 
-  console.log(userInfo, "i");
   const handleChange = e => {
     const { name, value } = e.target;
-    dispatch({ type: name, value });
+    setDispatch({ type: name, value });
   };
 
-  console.log(props, "ppppppppppppppp");
   const handleSubmit = e => {
     // e.preventDefault();
     // POST Method
@@ -43,7 +42,8 @@ const Login = (props, location) => {
       .then(res => {
         if (res.status === 200) {
           console.log(res);
-          setUserInfo(userInfo.concat(res.data.user[0]));
+          dispatch(setUserInfo(res.data.user[0]));
+          // setUserInfo(userInfo.concat(res.data.user[0]));
           localStorage.setItem("insta-login-token", res.data.token);
           console.log("로그인 성공! 오예에~~");
           props.history.push("/");
@@ -51,7 +51,7 @@ const Login = (props, location) => {
       })
       .catch(err => console.log(err));
 
-    dispatch({ type: "reset" });
+    setDispatch({ type: "reset" });
   };
 
   useEffect(() => {
@@ -71,7 +71,6 @@ const Login = (props, location) => {
 
   const { username, password } = state;
 
-  console.log(username, password);
   return (
     <div className="login-container">
       <div>

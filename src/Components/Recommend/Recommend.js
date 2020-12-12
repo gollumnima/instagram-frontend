@@ -21,6 +21,7 @@ const Recommend = () => {
       <div className="recommend-list">
         {userList.map(el => (
           <Profile
+            key={el.image}
             url={el.image}
             id={el.user.name}
             btn="팔로우"

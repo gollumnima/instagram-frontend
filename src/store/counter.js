@@ -1,24 +1,30 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 // Slice
-const countetSlice = createSlice({
+const counterSlice = createSlice({
   name: "counter",
   initialState: 0,
   reducers: {
     // 아래의 두 개가 actions property
-    increment: state => state + 1,
-    decrement: state => state - 1
+    increment: (state, action) => state + action.payload,
+    decrement: (state, action) => state - action.payload
   }
 });
 
-console.log(countetSlice, "slislislisils");
-
-// 왜 이게 export 기본값인지 이해 안감...!!! 도움!! help!!!
-export default countetSlice.reducer;
+// RTK 기본 문법임. 그냥 따르기.
+export default counterSlice.reducer;
 
 // Actions
-const { increment, decrement } = countetSlice.actions;
+const { increment, decrement } = counterSlice.actions;
 
-export const INCREMENT = state => {
-  dispatch(increment);
+export const INCREMENT = number => dispatch => dispatch(increment(number));
+
+export const incrementDouble = number => dispatch => {
+  dispatch(INCREMENT(number * 2));
+};
+
+export const DECREMENT = number => dispatch => dispatch(decrement(number));
+
+export const addTwo = (num1, num2) => dispatch => {
+  dispatch(INCREMENT(num1 + num2));
 };

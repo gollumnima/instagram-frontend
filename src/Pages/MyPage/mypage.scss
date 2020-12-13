@@ -1,0 +1,119 @@
+@import 'styles/colorPalette';
+
+.mypage-container {
+  max-width: 939px;
+  margin: 0 auto;
+}
+
+.mypage-top-container {
+  margin-top: 20px;
+
+  .mypage-top-upper {
+    display: flex;
+
+    .mypage-pf-container {
+      width: 291px;
+      margin-left: 40px;
+    }
+  }
+
+  .mypage-top-lower {
+  }
+}
+
+.mypage-profile-box {
+  width: 613px;
+  margin-top: 16px;
+  font-size: 28px;
+
+  .my-pf-username {
+    display: flex;
+    > button {
+      all: unset;
+      margin-left: 19px;
+
+      > span {
+        border: 1px solid $moregray;
+        border-radius: 4px;
+        color: $black;
+        padding: 5px 9px;
+        font-size: 14px;
+        font-weight: 600;
+      }
+    }
+  }
+  .my-pf-follows {
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    .my-pf-flex-wrapper {
+      // display: flex;
+      font-size: 16px;
+
+      .my-pf-flex-title {
+        margin-right: 40px;
+      }
+
+      .my-pf-flex-nums {
+        font-weight: 900;
+      }
+    }
+  }
+  .my-pf-desc-wrapper {
+    display: flex;
+    flex-direction: column;
+    color: $black;
+    font-size: 16px;
+
+    .username {
+      font-weight: 900;
+      margin-bottom: 5px;
+    }
+  }
+}
+
+.mypage-feed-property-container {
+  > ul {
+    display: flex;
+    border-top: 1px solid $moregray;
+  }
+}
+
+.mypage-feed-container {
+  .my-card-wrapper {
+    display: flex;
+    flex-flow: wrap;
+
+    :nth-child(1) {
+      margin: 0 15px;
+    }
+    :nth-child(2) {
+      margin: 0 15px;
+    }
+    :nth-child(3) {
+      margin: 0 15px;
+    }
+    :nth-child(3*n) {
+      margin: 15px 15px;
+    }
+  }
+
+  .my-img-card {
+    width: 273px;
+    height: 273px;
+    margin: 15px 15px;
+  }
+}
+
+footer {
+  display: flex;
+  text-align: center;
+
+  > span {
+    margin-right: 20px;
+    color: $darkgray;
+    font-size: 14px;
+    font-weight: 400;
+  }
+}

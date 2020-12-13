@@ -8,10 +8,7 @@ const userSlice = createSlice({
   },
   reducers: {
     login: (state, action) => {
-      console.log(action, "action!!!");
-      return {
-        userInfo: [...state.userInfo, ...action.payload]
-      };
+      return state.userInfo.concat(action.payload);
     },
     logout: (state, action) => {
       state.userInfo = [];

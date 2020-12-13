@@ -1,6 +1,6 @@
 import React, { useReducer, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { API } from "utils/config";
 import { setUserInfo } from "store/user";
@@ -26,7 +26,6 @@ const Login = (props, location) => {
   const [state, setDispatch] = useReducer(reducer, initialState);
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
-  console.log(user, "uuuu");
   // const [userInfo, setUserInfo] = useState([]);
 
   const handleChange = e => {
@@ -42,7 +41,7 @@ const Login = (props, location) => {
       .then(res => {
         if (res.status === 200) {
           console.log(res);
-          dispatch(setUserInfo(res.data.user[0]));
+          dispatch(setUserInfo(res.data.user));
           // setUserInfo(userInfo.concat(res.data.user[0]));
           localStorage.setItem("insta-login-token", res.data.token);
           console.log("로그인 성공! 오예에~~");
@@ -53,11 +52,6 @@ const Login = (props, location) => {
 
     setDispatch({ type: "reset" });
   };
-
-  useEffect(() => {
-    console.log(location.state, "st");
-    // handleSubmit();
-  });
 
   const handleEnter = e => {
     if (e.key === "Enter") {

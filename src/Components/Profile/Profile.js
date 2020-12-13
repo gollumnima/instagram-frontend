@@ -5,7 +5,17 @@ const Profile = props => (
   <div className="profile-container">
     <div className="profile-left">
       <div className="pf-img-container" style={{ width: `${props.size}px` }}>
-        <img className="profile-img" alt="profile" src={props.url}></img>
+        <div
+          className='profile-img"'
+          style={{
+            backgroundImage: `url(${props.url})`,
+            backgroundPosition: "center",
+            backgroundSize: "cover",
+            width: `${props.size}px`,
+            height: `${props.size}px`,
+            borderRadius: "50%"
+          }}
+        />
       </div>
       {props.id && (
         <div className="pf-font-container">

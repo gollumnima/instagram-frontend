@@ -10,7 +10,7 @@ const LiveStories = () => {
       setProfileData(res);
     });
   }, []);
-  console.log(profileData, "data");
+
   return (
     <div className="live-story-container">
       {profileData.map(el => (

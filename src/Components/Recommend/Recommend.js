@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import Profile from "Components/Profile";
 import dummyApi from "utils/dummyApi";
 
@@ -11,6 +12,8 @@ const Recommend = () => {
       setUserList(data);
     });
   }, []);
+  console.log(userList);
+  const user = useSelector(state => state.user);
 
   return (
     <div className="recommend-container">

@@ -10,5 +10,3 @@ const passwordCheck = pw => {
   )
     return true;
 };
-
-console.log(usernameCheck("12"));

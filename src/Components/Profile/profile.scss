@@ -21,11 +21,6 @@
   .pf-img-container {
     width: 50px;
     margin-top: 4px;
-
-    .profile-img {
-      border-radius: 50%;
-      width: 100%;
-    }
   }
   .pf-font-container {
     align-self: center;
@@ -48,4 +43,11 @@
 .nav-pf-container {
   display: inline-block;
   margin-left: 15px;
+}
+
+.profile-img {
+  height: 100%;
+  border-radius: 50%;
+  background-position: center;
+  background-size: cover;
 }

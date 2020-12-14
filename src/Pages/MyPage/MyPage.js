@@ -1,13 +1,35 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { useSelector } from "react-redux";
 import Navbar from "Components/Navbar";
 import Profile from "Components/Profile";
 import dummyApi from "utils/dummyApi";
-
+import { API } from "utils/config";
+// import AuthService from "services/auth-server";
 import "./mypage.scss";
+import authHeader from "services/auth-header";
 
 const MyPage = () => {
   const user = useSelector(state => state.user);
+  const [overlay, setOverlay] = useState(false);
+  // const handleMouseOver = e => {
+  //   setOverlay(true);
+  // };
+
+  const [file, setFile] = useState(null);
+  const handleFileChange = e => {
+    e.preventDefault();
+    setFile(e.target.files[0]);
+  };
+
+  const fileUploadHandler = () => {
+    const fd = new FormData();
+    fd.append("image", file);
+    axios.post(`${API}/1/image`, { headers: authHeader() }, fd).then(res => {
+      console.log(res);
+    });
+  };
+
   const [userList, setUserList] = useState([]);
 
   useEffect(() => {
@@ -37,6 +59,15 @@ const MyPage = () => {
                 <button>
                   <span>프로필 편집</span>
                 </button>
+                <button>
+                  <span onClick={() => fileUploadHandler()}>이미지 업로드</span>
+                </button>
+                <input
+                  type="file"
+                  accept="image/jpg,impge/png,image/jpeg,image/gif"
+                  // name={file.name}
+                  onChange={e => handleFileChange(e)}
+                />
               </div>
               <ul className="my-pf-follows">
                 <li className="my-pf-flex-wrapper">
@@ -60,7 +91,7 @@ const MyPage = () => {
                   {user[0]?.name ?? "Doori Kim"}
                 </span>
                 <span className="my-pf-words desc">
-                  {user[0]?.name ?? "Girls support girls💪💪"}
+                  {user[0]?.description ?? "Girls support girls💪💪"}
                 </span>
               </div>
             </div>
@@ -82,11 +113,22 @@ const MyPage = () => {
         <div className="mypage-feed-container">
           <div className="my-card-wrapper">
             {userList.map(el => (
-              <div
-                className="my-img-card"
-                key={el.image}
-                style={{ backgroundImage: `url(${el.image})` }}
-              />
+              <>
+                <div
+                  className="my-img-card"
+                  // onMouseEnter={() => setOverlay(true)}
+                  // onMouseLeave={() => setOverlay(false)}
+                  key={el.image}
+                  style={{ backgroundImage: `url(${el.image})` }}
+                >
+                  <div className="overlay" key={`${el.image} overlay`}>
+                    <ul className="overlay-flex">
+                      <li>♥︎ 하트개수</li>
+                      <li>☁︎ 댓개수</li>
+                    </ul>
+                  </div>
+                </div>
+              </>
             ))}
           </div>
         </div>

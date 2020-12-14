@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { API } from "utils/config";
 import { setUserInfo } from "store/user";
+import AuthService from "services/auth.server";
 import { usernameCheck, passwordCheck } from "utils/validation";
 // import Counter from "Components/Counter/Counter";
 import "./login.scss";
@@ -36,6 +37,7 @@ const Login = (props, location) => {
   const handleSubmit = e => {
     // e.preventDefault();
     // POST Method
+    // AuthService.login(username, password)
     axios
       .post(`${API}/users/login`, { username, password })
       .then(res => {

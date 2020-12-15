@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { API } from "utils/config";
-import { setUserInfo } from "store/user";
+import { login } from "store/user";
+import { instaAPI } from "utils/axios.wrapper";
 import AuthService from "services/auth.server";
 import { usernameCheck, passwordCheck } from "utils/validation";
 // import Counter from "Components/Counter/Counter";
@@ -27,7 +28,7 @@ const Login = (props, location) => {
   const [state, setDispatch] = useReducer(reducer, initialState);
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
-  // const [userInfo, setUserInfo] = useState([]);
+  // const [userInfo, login] = useState([]);
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -38,15 +39,15 @@ const Login = (props, location) => {
     // e.preventDefault();
     // POST Method
     // AuthService.login(username, password)
-    axios
-      .post(`${API}/users/login`, { username, password })
+
+    instaAPI
+      .post(`/api/users/login`, { username, password })
       .then(res => {
         if (res.status === 200) {
-          console.log(res);
-          dispatch(setUserInfo(res.data.user));
-          // setUserInfo(userInfo.concat(res.data.user[0]));
+          dispatch(login(res.data.user));
           localStorage.setItem("insta-login-token", res.data.token);
           console.log("로그인 성공! 오예에~~");
+
           props.history.push("/");
         }
       })

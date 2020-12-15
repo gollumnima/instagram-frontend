@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
 import Profile from "Components/Profile";
 import dummyApi from "utils/dummyApi";
 
@@ -13,7 +12,6 @@ const Recommend = () => {
     });
   }, []);
   console.log(userList);
-  const user = useSelector(state => state.user);
 
   return (
     <div className="recommend-container">
@@ -22,7 +20,7 @@ const Recommend = () => {
         <span className="recommend-right">모두보기</span>
       </div>
       <div className="recommend-list">
-        {userList.map(el => (
+        {userList?.map(el => (
           <Profile
             key={el.image}
             url={el.image}

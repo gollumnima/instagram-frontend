@@ -1,14 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+import { instaAPI } from "utils/axios.wrapper";
 // Slice
 const userSlice = createSlice({
   name: "user",
   initialState: {
-    userInfo: []
+    userInfo: null
   },
   reducers: {
-    login: (state, action) => {
-      return state.userInfo.concat(action.payload);
+    setUserInfo: (state, action) => {
+      state.userInfo = action.payload;
     },
     logout: (state, action) => {
       state.userInfo = [];
@@ -20,12 +20,14 @@ export default userSlice.reducer;
 
 // Action
 
-const { login } = userSlice.actions;
+const { setUserInfo } = userSlice.actions;
 
-export const setUserInfo = data => (dispatch, getState) => {
-  const state = getState();
-  dispatch(login(data));
-  if (!state.user.userInfo) {
-    dispatch(login(data));
-  }
+export const login = data => (dispatch, getState) => {
+  dispatch(setUserInfo(data));
+};
+
+export const getSelf = () => dispatch => {
+  instaAPI.get(`/api/users/self`).then(({ data }) => {
+    dispatch(setUserInfo(data));
+  });
 };

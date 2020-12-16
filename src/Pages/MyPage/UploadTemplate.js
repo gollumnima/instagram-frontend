@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { API } from "utils/config";
-import authHeader from "services/auth-header";
+import { useSelector, useDispatch } from "react-redux";
 import { instaAPI } from "utils/axios.wrapper";
+import { getPostNumber } from "store/post";
 
 const UploadTemplate = () => {
+  const post = useSelector(state => state.post);
+  const dispatch = useDispatch();
+
+  console.log(post, "posssst");
   const [content, setContent] = useState("");
   const handleChange = e => {
     setContent(e.target.value);
@@ -24,22 +27,30 @@ const UploadTemplate = () => {
         }
       })
       .then(({ data }) => {
+        dispatch(getPostNumber(data.post_id));
         setImageURL(data.url);
       });
   };
 
   const [postID, setPostID] = useState(null);
+  const [userList, setUserList] = useState([]);
 
   useEffect(() => {
     handleTempPost();
+    instaAPI.get(`/api/posts`).then(({ data }) => {
+      console.log(data);
+      userList.concat(data.rows);
+    });
   }, []);
 
   const handleSubmit = () => {
-    instaAPI.put(`/api/posts/${postID}`, { content, status: "PUBLISHED" });
+    instaAPI
+      .put(`/api/posts/${postID}`, { content, status: "PUBLISHED" })
+      .then(({ data }) => console.log(data, "수정되었을까"));
   };
 
   const handleTempPost = () => {
-    instaAPI.post(`/api/posts/`, { content: "" }).then(({ data }) => {
+    instaAPI.post(`/api/posts`, { content: "" }).then(({ data }) => {
       setPostID(data.id);
     });
   };

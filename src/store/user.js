@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { instaAPI } from "utils/axios.wrapper";
+
 // Slice
 const userSlice = createSlice({
   name: "user",
@@ -19,7 +20,6 @@ const userSlice = createSlice({
 export default userSlice.reducer;
 
 // Action
-
 const { setUserInfo } = userSlice.actions;
 
 export const login = data => (dispatch, getState) => {

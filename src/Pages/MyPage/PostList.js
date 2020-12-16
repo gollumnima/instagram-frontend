@@ -10,8 +10,7 @@ const PostList = props => {
     //   setUserList(data);
     // });
     instaAPI.get(`/api/posts`).then(({ data }) => {
-      console.log(data);
-      userList.concat(data.rows);
+      setUserList(userList.concat(data.rows));
     });
   }, []);
   console.log(userList);
@@ -26,8 +25,8 @@ const PostList = props => {
                 className="my-img-card"
                 // onMouseEnter={() => setOverlay(true)}
                 // onMouseLeave={() => setOverlay(false)}
-                key={el.image}
-                style={{ backgroundImage: `url(${el.image})` }}
+                key={el?.files[0]?.post_id}
+                style={{ backgroundImage: `url(${el?.files[0]?.url})` }}
               >
                 <div className="overlay" key={`${el.image}-overlay`}>
                   <ul className="overlay-flex">

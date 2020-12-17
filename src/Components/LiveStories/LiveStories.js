@@ -11,11 +11,12 @@ const LiveStories = () => {
     });
   }, []);
 
+  console.log(profileData, "ddd");
   return (
     <div className="live-story-container">
       {profileData.map(el => (
         <div key={el.image} className="live-story-wrapper">
-          <Profile url={el.image} />
+          <Profile url={el.image} size="56" />
           <span>{el.user.name}</span>
         </div>
       ))}

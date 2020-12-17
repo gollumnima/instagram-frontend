@@ -2,9 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Profile from "Components/Profile";
-import "./navbar.scss";
+import "./wrapper.scss";
 
-const Navbar = () => {
+const Wrapper = props => {
   const user = useSelector(state => state.user);
 
   return (
@@ -88,15 +88,28 @@ const Navbar = () => {
             </svg>
             <Link to="/myPage">
               <div className="nav-pf-container">
-                <Profile url={user[0]?.image_url} size="25" />
+                <Profile
+                  url={
+                    user[0]?.image_url ??
+                    "https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/s1080x1080/120288681_808150636668713_1917941423406171055_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&_nc_cat=105&_nc_ohc=FSX0lotSjFkAX97Onb9&tp=1&oh=7388996391d84f379d7297138f4e06e7&oe=5FEF3658"
+                  }
+                  size="25"
+                />
               </div>
             </Link>
           </div>
         </div>
       </div>
       <div className="navbar-guard" />
+      {props.children}
+      <footer>
+        <span>소개</span>
+        <span>블로그</span>
+        <span>인기 계정</span>
+        <span>© 2020 Instagram from Doori Kim</span>
+      </footer>
     </>
   );
 };
 
-export default Navbar;
+export default Wrapper;

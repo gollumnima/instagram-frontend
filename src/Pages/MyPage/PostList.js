@@ -13,12 +13,17 @@ const PostList = props => {
       setUserList(userList.concat(data.rows));
     });
   }, []);
-  console.log(userList);
+
+  console.log(userList[0] && userList[0].files);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  console.log(props, "pppp");
   return (
     <div className="mypage-feed-container">
       <div className="my-card-wrapper">
         {props.activeTab === "posts" &&
           userList.length > 1 &&
+          userList &&
           userList?.map(el => (
             <>
               <div
@@ -27,13 +32,16 @@ const PostList = props => {
                 // onMouseLeave={() => setOverlay(false)}
                 key={el?.files[0]?.post_id}
                 style={{ backgroundImage: `url(${el?.files[0]?.url})` }}
+                onClick={() => setIsModalOpen(!props.isOpen)}
               >
-                <div className="overlay" key={`${el.image}-overlay`}>
-                  <ul className="overlay-flex">
-                    <li>♥︎ 하트개수</li>
-                    <li>☁︎ 댓개수</li>
-                  </ul>
-                </div>
+                {el?.files[0]?.url && (
+                  <div className="overlay" key={`${el.image}-overlay`}>
+                    <ul className="overlay-flex">
+                      <li>♥︎ 하트개수</li>
+                      <li>☁︎ 댓개수</li>
+                    </ul>
+                  </div>
+                )}
               </div>
             </>
           ))}

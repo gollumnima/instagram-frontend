@@ -3,11 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { instaAPI } from "utils/axios.wrapper";
 import { getPostNumber } from "store/post";
 
-const UploadTemplate = () => {
+const UploadTemplate = props => {
   const post = useSelector(state => state.post);
   const dispatch = useDispatch();
 
-  console.log(post, "posssst");
   const [content, setContent] = useState("");
   const handleChange = e => {
     setContent(e.target.value);
@@ -38,15 +37,12 @@ const UploadTemplate = () => {
   useEffect(() => {
     handleTempPost();
     instaAPI.get(`/api/posts`).then(({ data }) => {
-      console.log(data);
       userList.concat(data.rows);
     });
   }, []);
 
   const handleSubmit = () => {
-    instaAPI
-      .put(`/api/posts/${postID}`, { content, status: "PUBLISHED" })
-      .then(({ data }) => console.log(data, "수정되었을까"));
+    instaAPI.put(`/api/posts/${postID}`, { content, status: "PUBLISHED" });
   };
 
   const handleTempPost = () => {

@@ -6,7 +6,7 @@ import Main from "./Pages/Main";
 import Login from "./Pages/Login";
 import Counter from "./Pages/Counter";
 import MyPage from "./Pages/MyPage/MyPage";
-import Detail from "./Pages/Detail/index.js";
+import Detail from "./Pages/Detail";
 import "./styles/reset.scss";
 
 const Routes = () => {
@@ -23,6 +23,8 @@ const Routes = () => {
         <Route exact path="/myPage" component={MyPage} />
         <Route exact path="/detail" component={Detail} />
         <Route exact path="/counter" component={Counter} />
+        <Route excat path="/detail" component={Detail} />
+        {/* // 추후 /p/:post_id 로 변경하기 */}
       </Switch>
     </Router>
   );

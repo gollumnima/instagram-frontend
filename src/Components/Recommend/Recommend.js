@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Profile from "Components/Profile";
 import dummyApi from "utils/dummyApi";
-
 import "./recommend.scss";
 
 const Recommend = () => {

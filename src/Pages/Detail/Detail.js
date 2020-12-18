@@ -19,7 +19,11 @@ const Detail = () => {
         </div>
         <div className="detail-right">
           <LayoutPfBox />
-          <LayoutCmtBox size="335" />
+          <LayoutCmtBox
+            size="335"
+            username="dooreplay"
+            desc="조랭이떡 귀여운 우리 아인이"
+          />
         </div>
       </div>
     </Wrapper>

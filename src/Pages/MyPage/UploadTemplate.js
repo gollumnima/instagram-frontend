@@ -34,6 +34,12 @@ const UploadTemplate = props => {
   const [postID, setPostID] = useState(null);
   const [userList, setUserList] = useState([]);
 
+  const handleTempPost = () => {
+    instaAPI.post(`/api/posts`, { content: "" }).then(({ data }) => {
+      setPostID(data.id);
+    });
+  };
+
   useEffect(() => {
     handleTempPost();
     instaAPI.get(`/api/posts`).then(({ data }) => {
@@ -43,12 +49,6 @@ const UploadTemplate = props => {
 
   const handleSubmit = () => {
     instaAPI.put(`/api/posts/${postID}`, { content, status: "PUBLISHED" });
-  };
-
-  const handleTempPost = () => {
-    instaAPI.post(`/api/posts`, { content: "" }).then(({ data }) => {
-      setPostID(data.id);
-    });
   };
 
   return (

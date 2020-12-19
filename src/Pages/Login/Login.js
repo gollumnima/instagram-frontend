@@ -26,21 +26,27 @@ const Login = props => {
     setDispatch({ type: name, value });
   };
 
-  const handleSubmit = e => {
-    instaAPI
-      .post(`/api/users/login`, { username, password })
-      .then(res => {
-        if (res.status === 200) {
-          dispatch(login(res.data.user));
-          localStorage.setItem("insta-login-token", res.data.token);
-          console.log("로그인 성공! 오예에~~");
-
-          props.history.push("/");
-        }
+  const handleSubmit = async e => {
+    await dispatch(
+      login(username, password, user => {
+        console.log("로그인 성공", user);
+        props.history.push("/");
+        setDispatch({ type: "reset" });
       })
-      .catch(err => console.log(err));
+    );
+    // instaAPI
+    //   .post(`/api/users/login`, { username, password })
+    //   .then(res => {
+    //     if (res.status === 200) {
+    //       localStorage.setItem("insta-login-token", res.data.token);
+    //       console.log("로그인 성공! 오예에~~");
 
-    setDispatch({ type: "reset" });
+    //       props.history.push("/");
+    //     }
+    //   })
+    //   .catch(err => console.log(err));
+    // props.history.push("/");
+    // setDispatch({ type: "reset" });
   };
 
   const handleEnter = e => {

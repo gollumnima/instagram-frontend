@@ -1,12 +1,40 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import classNames from "classnames";
 import Wrapper from "Components/Wrapper";
 import Detail from "Pages/Detail";
 import Modal from "Components/Modal";
 import Profile from "Components/Profile";
 import PostList from "./PostList";
 import UploadTemplate from "./UploadTemplate";
-import "./mypage.scss";
+import css from "./mypage.scss";
+
+const cn = classNames.bind(css);
+
+const Tabs = ({ tabs, defaultActive }) => {
+  const [activeTab, setActiveTab] = useState(defaultActive ?? tabs[0].key);
+  return (
+    <>
+      <nav>
+        <ul>
+          {tabs.map(({ title }, index) => (
+            <li key={String(index)}>
+              <button
+                className={cn({
+                  active: index === activeTab
+                })}
+                onClick={() => setActiveTab(index)}
+              >
+                {title}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      <div>{tabs.find((_, i) => i === activeTab).render()}</div>
+    </>
+  );
+};
 
 const MyPage = () => {
   const user = useSelector(state => state?.user?.userInfo ?? null);
@@ -114,7 +142,28 @@ const MyPage = () => {
               ))}
             </ul>
           </div>
-          {getComponent()}
+          <Tabs
+            tabs={[
+              {
+                title: "업로드",
+                render: () => <UploadTemplate />
+              },
+              {
+                title: "게시물",
+                render: () => <PostList isOpen={false} />
+              },
+              {
+                title: "저장됨",
+                render: () => <UploadTemplate />
+              },
+              {
+                title: "태그됨",
+                render: () => <UploadTemplate />
+              }
+            ]}
+            active={0}
+            defaultActive={0}
+          />
           <footer>
             <span>소개</span>
             <span>블로그</span>
@@ -123,11 +172,11 @@ const MyPage = () => {
           </footer>
         </div>
         {/* {isOpen && ( */}
-        <Modal
+        {/* <Modal
         // open={modalOpen} close={() => closeModal()}
         >
           <Detail />
-        </Modal>
+        </Modal> */}
         {/* )} */}
       </Wrapper>
     </>

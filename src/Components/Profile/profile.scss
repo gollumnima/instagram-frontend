@@ -1,54 +1,55 @@
 @import 'styles/colorPalette';
 
-.profile-container {
+.profile {
   display: flex;
   justify-content: space-between;
   //\\justify-content: center; //이렇게 해야 스토리 중앙정렬 됨
 
-  .profile-left {
+  &__left {
     display: flex;
   }
 
-  .profile-right {
+  &__right {
     align-self: center;
-
-    .profile-btn {
-      font-size: 12px;
-      font-weight: bold;
-
-      color: $buttonBlue;
-    }
   }
-  .pf-img-container {
+
+  &__btn {
+    font-size: 12px;
+    font-weight: bold;
+    color: $buttonBlue;
+  }
+
+  &__img__container {
     width: 50px;
     margin-top: 4px;
   }
-  .pf-font-container {
+  &__font__container {
     align-self: center;
     margin-left: 15px;
     text-align: left;
+  }
 
-    .profile-id {
-      color: $black;
-      font-size: 14px;
-      font-weight: 700;
-    }
-    .profile-desc {
-      font-size: 14px;
-      margin-top: 3px;
-      color: $darkgray;
-    }
+  &__nickname {
+    color: $black;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  &__desc {
+    font-size: 14px;
+    margin-top: 3px;
+    color: $darkgray;
+  }
+
+  &__img {
+    height: 100%;
+    border-radius: 50%;
+    background-position: center;
+    background-size: cover;
   }
 }
 
-.nav-pf-container {
+// wrapper 컴포넌트에서 Profile을 감싸는 div
+.nav__pf__container {
   display: inline-block;
   margin-left: 15px;
-}
-
-.profile-img {
-  height: 100%;
-  border-radius: 50%;
-  background-position: center;
-  background-size: cover;
 }

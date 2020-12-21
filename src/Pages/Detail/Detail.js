@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Wrapper from "Components/Wrapper";
 import LayoutImgBox from "Components/Layout/LayoutImgBox";
 import LayoutCmtBox from "Components/Layout/LayoutCmtBox";
-import LayoutPfBox from "Components/Layout/LayoutPfBox";
+import LayoutHeader from "Components/Layout/LayoutHeader";
 import "../../Components/Layout/layout.scss";
 import "./detail.scss";
+import ModalDetail from "Components/Modal/ModalDetail";
+import { instaAPI } from "utils/axios.wrapper";
 
 const Detail = () => {
   return (
     <Wrapper>
-      <div className="detail-container">
+      {/* <div className="detail-container">
         <div className="detail-left">
           <LayoutImgBox
             name="feed-uploaded-img"
@@ -18,14 +20,15 @@ const Detail = () => {
           />
         </div>
         <div className="detail-right">
-          <LayoutPfBox />
+          <LayoutHeader />
           <LayoutCmtBox
             size="335"
             username="dooreplay"
             desc="조랭이떡 귀여운 우리 아인이"
           />
         </div>
-      </div>
+      </div> */}
+      <ModalDetail />
     </Wrapper>
   );
 };

@@ -1,0 +1,20 @@
+@import 'styles/colorPalette';
+
+.layout__header {
+  padding: 9px 16px;
+  display: flex;
+  justify-content: space-between;
+
+  &__wrapper {
+    //width: 132px;
+  }
+}
+
+.dots__container {
+  display: inline-block;
+  align-self: center;
+
+  img {
+    width: 30px;
+  }
+}

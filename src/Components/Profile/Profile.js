@@ -2,11 +2,14 @@ import React from "react";
 import "./profile.scss";
 
 const Profile = props => (
-  <div className="profile-container">
-    <div className="profile-left">
-      <div className="pf-img-container" style={{ width: `${props.size}px` }}>
+  <div className="profile">
+    <div className="profile__left">
+      <div
+        className="profile__img__container"
+        style={{ width: `${props.size}px` }}
+      >
         <div
-          className='profile-img"'
+          className="profile__img"
           style={{
             backgroundImage: `url(${props.url})`,
             backgroundPosition: "center",
@@ -18,11 +21,11 @@ const Profile = props => (
         />
       </div>
       {props.id && (
-        <div className="pf-font-container">
-          <p className="profile-id">{props.id}</p>
+        <div className="profile__font__container">
+          <p className="profile__nickname">{props.id}</p>
           {props.desc && (
             <p
-              className="profile-desc"
+              className="profile__desc"
               style={{ fontSize: `${props.descSize}px` }}
             >
               {props.desc}
@@ -31,8 +34,8 @@ const Profile = props => (
         </div>
       )}
     </div>
-    <div className="profile-right">
-      {props.btn && <span className="profile-btn">{props.btn}</span>}
+    <div className="profile__right">
+      {props.btn && <span className="profile__btn">{props.btn}</span>}
     </div>
   </div>
 );

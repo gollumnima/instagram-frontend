@@ -83,23 +83,6 @@
 
 .mypage-feed-property-container {
   margin-bottom: 15px;
-
-  > ul {
-    display: flex;
-    justify-content: center;
-    border-top: 1px solid $moregray;
-    color: $black;
-    > li {
-      margin-right: 60px;
-      padding-top: 15px;
-      font-size: 13px;
-
-      cursor: pointer;
-    }
-    // .active {
-    //   border-top: 1px solid $black;
-    // }
-  }
 }
 
 .mypage-feed-container {

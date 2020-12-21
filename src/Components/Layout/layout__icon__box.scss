@@ -1,0 +1,29 @@
+.layout__icon__box {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px;
+  font-size: 14px;
+
+  &__icons {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+
+    cursor: pointer;
+  }
+  &__left {
+    margin-left: 5px;
+    margin-bottom: 5px;
+  }
+}
+
+.feed__likes {
+  padding: 0px 7px;
+  margin-bottom: 10px;
+  text-align: left;
+
+  span {
+    margin-left: 5px;
+    font-weight: 600;
+  }
+}

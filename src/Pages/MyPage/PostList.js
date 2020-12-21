@@ -1,28 +1,32 @@
 import React, { useState, useEffect } from "react";
-import dummyApi from "utils/dummyApi";
+import { useSelector, useDispatch } from "react-redux";
 import { instaAPI } from "utils/axios.wrapper";
+import { getPostNumber } from "store/post";
 
 const PostList = props => {
+  const { onModal } = props;
+  const post = useSelector(state => state.post);
+  const dispatch = useDispatch();
+
   const [userList, setUserList] = useState([]);
+  const [modal, setModal] = useState(false);
 
   useEffect(() => {
-    // dummyApi().then(data => {
-    //   setUserList(data);
-    // });
     instaAPI.get(`/api/posts`).then(({ data }) => {
       setUserList(userList.concat(data.rows));
     });
   }, []);
 
-  console.log(userList[0] && userList[0].files);
+  const handleModal = id => {
+    setModal(!modal);
+    onModal(modal);
+    dispatch(getPostNumber(id));
+  };
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  console.log(props, "pppp");
   return (
     <div className="mypage-feed-container">
       <div className="my-card-wrapper">
-        {props.activeTab === "posts" &&
-          userList.length > 1 &&
+        {userList.length > 1 &&
           userList &&
           userList?.map(el => (
             <>
@@ -32,13 +36,13 @@ const PostList = props => {
                 // onMouseLeave={() => setOverlay(false)}
                 key={el?.files[0]?.post_id}
                 style={{ backgroundImage: `url(${el?.files[0]?.url})` }}
-                onClick={() => setIsModalOpen(!props.isOpen)}
+                onClick={() => handleModal(el.id)}
               >
                 {el?.files[0]?.url && (
                   <div className="overlay" key={`${el.image}-overlay`}>
-                    <ul className="overlay-flex">
-                      <li>♥︎ 하트개수</li>
-                      <li>☁︎ 댓개수</li>
+                    <ul className="overlay-flex" key={`${el.image}-shadow`}>
+                      <li key={`${el.image}-heart`}>♥︎ 하트개수</li>
+                      <li key={`${el.image}-comment`}>☁︎ 댓개수</li>
                     </ul>
                   </div>
                 )}

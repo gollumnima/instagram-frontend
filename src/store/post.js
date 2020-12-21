@@ -4,11 +4,15 @@ import { instaAPI } from "utils/axios.wrapper";
 const postSlice = createSlice({
   name: "post",
   initialState: {
-    postNumber: null
+    postNumber: null,
+    commentList: []
   },
   reducers: {
     setPostNumber: (state, action) => {
       state.postNumber = action.payload;
+    },
+    setComment: (state, action) => {
+      state.commentList.concat(action.payload);
     }
   }
 });

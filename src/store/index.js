@@ -4,13 +4,15 @@ import user from "./user";
 import counter from "./counter";
 import calculator from "./calculator";
 import post from "./post";
+import comment from "./comment";
 
 const reducer = combineReducers({
   // reducer 목록 추가
   user,
   counter,
   calculator,
-  post
+  post,
+  comment
 });
 
 const store = configureStore({

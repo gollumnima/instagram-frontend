@@ -10,7 +10,6 @@ const Recommend = () => {
       setUserList(data);
     });
   }, []);
-  console.log(userList);
 
   return (
     <div className="recommend-container">

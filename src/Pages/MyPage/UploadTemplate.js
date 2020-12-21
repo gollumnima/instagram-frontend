@@ -26,7 +26,6 @@ const UploadTemplate = props => {
         }
       })
       .then(({ data }) => {
-        dispatch(getPostNumber(data.post_id));
         setImageURL(data.url);
       });
   };

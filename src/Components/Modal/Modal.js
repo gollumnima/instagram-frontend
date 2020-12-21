@@ -1,8 +1,8 @@
-import React, { useLayoutEffect } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useState, useLayoutEffect } from "react";
 import "./modal.scss";
 
 const Modal = props => {
+  const { onModalClose } = props;
   const useLockBodyScroll = () => {
     useLayoutEffect(() => {
       const originalStyle = window.getComputedStyle(document.body).overflow;
@@ -11,10 +11,16 @@ const Modal = props => {
     }, []);
   };
 
+  const [modalClose, setModalClose] = useState(false);
+  const handleModalClose = () => {
+    setModalClose(true);
+    onModalClose(modalClose);
+  };
   useLockBodyScroll();
+
   return (
     <>
-      <div className="modal-overlay" />
+      <div className="modal-overlay" onClick={() => handleModalClose()} />
       <div className="modal-container">
         <div className="modal-inner-wrapper">{props.children}</div>
       </div>

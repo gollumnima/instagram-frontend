@@ -1,77 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import classNames from "classnames";
 import Wrapper from "Components/Wrapper";
 import Detail from "Pages/Detail";
+import Tabs from "Components/Tabs";
 import Modal from "Components/Modal";
 import Profile from "Components/Profile";
 import PostList from "./PostList";
 import UploadTemplate from "./UploadTemplate";
-import css from "./mypage.scss";
+import ModalDetail from "Components/Modal/ModalDetail";
+import { instaAPI } from "utils/axios.wrapper";
+import "./mypage.scss";
 
-const cn = classNames.bind(css);
-
-const Tabs = ({ tabs, defaultActive }) => {
-  const [activeTab, setActiveTab] = useState(defaultActive ?? tabs[0].key);
-  return (
-    <>
-      <nav>
-        <ul>
-          {tabs.map(({ title }, index) => (
-            <li key={String(index)}>
-              <button
-                className={cn({
-                  active: index === activeTab
-                })}
-                onClick={() => setActiveTab(index)}
-              >
-                {title}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </nav>
-      <div>{tabs.find((_, i) => i === activeTab).render()}</div>
-    </>
-  );
-};
-
-const MyPage = () => {
+const MyPage = props => {
   const user = useSelector(state => state?.user?.userInfo ?? null);
+  const postID = useSelector(state => state.post.postNumber);
+  const [img, setImg] = useState("");
+  const [modal, setModal] = useState(false);
+  console.log(postID);
 
-  const [activeTab, setActiveTab] = useState("posts");
+  // const handlePostingImg = id => {
+  //   instaAPI
+  //     .get(`/api/posts/${id}`)
+  //     .then(({ data }) => setImg(data.files[0].url));
+  // };
 
-  const tabList = [
-    {
-      name: "upload",
-      displayName: "업로드",
-      component: <UploadTemplate activeTab="upload" />
-    },
-    {
-      name: "posts",
-      displayName: "게시물",
-      component: <PostList activeTab="posts" isOpen={false} />
-    },
-    {
-      name: "saved",
-      displayName: "저장됨",
-      component: <UploadTemplate activeTab="saved" />
-    },
-    {
-      name: "tagged",
-      displayName: "태그됨",
-      component: <UploadTemplate activeTab="tagged" />
-    }
-  ];
+  useEffect(() => {
+    //  postID && handlePostingImg(postID);
+    postID !== null &&
+      instaAPI
+        .get(`/api/posts/${postID}`, {
+          headers: {
+            "content-type": "multipart/form-data"
+          }
+        })
+        .then(res => console.log(res, "이백오케"))
+        .catch(err => console.log(err));
+  }, []);
 
-  const getComponent = () => {
-    const result = tabList
-      .filter(tab => tab.name === activeTab)
-      .concat(tabList[0])[0].component;
-    return result;
-  };
-
-  const [isOpen, setIsOpen] = useState(false);
+  console.log(img, "imimimimimi");
 
   return (
     <>
@@ -130,54 +96,36 @@ const MyPage = () => {
             </div>
           </div>
           <div className="mypage-feed-property-container">
-            <ul>
-              {tabList.map(el => (
-                <li
-                  key={el.name}
-                  onClick={() => setActiveTab(el.name)}
-                  // className={`${activeTab && `active`}`}
-                >
-                  {el.displayName}
-                </li>
-              ))}
-            </ul>
+            <Tabs
+              tabs={[
+                {
+                  title: "업로드",
+                  render: () => <UploadTemplate />
+                },
+                {
+                  title: "게시물",
+                  render: () => <PostList onModal={setModal} />
+                },
+                {
+                  title: "저장됨",
+                  render: () => <UploadTemplate />
+                },
+                {
+                  title: "태그됨",
+                  render: () => <UploadTemplate />
+                }
+              ]}
+              active={0}
+              defaultActive={1}
+            />
           </div>
-          <Tabs
-            tabs={[
-              {
-                title: "업로드",
-                render: () => <UploadTemplate />
-              },
-              {
-                title: "게시물",
-                render: () => <PostList isOpen={false} />
-              },
-              {
-                title: "저장됨",
-                render: () => <UploadTemplate />
-              },
-              {
-                title: "태그됨",
-                render: () => <UploadTemplate />
-              }
-            ]}
-            active={0}
-            defaultActive={0}
-          />
-          <footer>
-            <span>소개</span>
-            <span>블로그</span>
-            <span>인기 계정</span>
-            <span>© 2020 Instagram from Doori Kim</span>
-          </footer>
         </div>
-        {/* {isOpen && ( */}
-        {/* <Modal
-        // open={modalOpen} close={() => closeModal()}
-        >
-          <Detail />
-        </Modal> */}
-        {/* )} */}
+        {modal && (
+          <Modal onModalClose={() => setModal(false)}>
+            {/* <ModalDetail /> */}
+            <ModalDetail />
+          </Modal>
+        )}
       </Wrapper>
     </>
   );

@@ -11,7 +11,6 @@ const LiveStories = () => {
     });
   }, []);
 
-  console.log(profileData, "ddd");
   return (
     <div className="live-story-container">
       {profileData.map(el => (

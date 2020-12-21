@@ -1,0 +1,24 @@
+@import 'styles/colorPalette';
+
+.mypage-tabs-nav-container {
+  ul {
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid $moregray;
+    color: $black;
+
+    li {
+      margin-right: 60px;
+      font-size: 13px;
+
+      cursor: pointer;
+    }
+    button {
+      all: unset;
+      padding: 20px 5px;
+    }
+    .active {
+      border-top: 1px solid $black;
+    }
+  }
+}

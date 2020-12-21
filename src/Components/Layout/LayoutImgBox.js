@@ -1,15 +1,14 @@
 import React from "react";
-import "./layout.scss";
+import "./layout__img__box.scss";
 
 const LayoutImgBox = props => {
   return (
     <>
-      <div className="feed-img-container">
+      <div className="layout__img__Box">
         <img
-          className="feed-uploaded-img"
+          className="layout__img__Box__uploaded"
           alt={props.name}
           src={props.url}
-          size={`${props.size}px`}
           style={{ width: `${props.size}px` }}
         ></img>
       </div>

@@ -1,6 +1,7 @@
 .layout__img__box {
   display: inline-block;
   &__uploaded {
-    width: 100%;
+    background-position: center;
+    background-size: cover;
   }
 }

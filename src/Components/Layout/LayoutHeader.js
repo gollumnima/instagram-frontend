@@ -5,8 +5,7 @@ import "./layout__header.scss";
 
 const LayoutHeader = props => {
   const user = useSelector(state => state.user);
-  console.log(user, "uuuuuuuu");
-  console.log(props, "ppppppppppppp");
+
   return (
     <header className="layout__header">
       <div className="layout__header__wrapper">

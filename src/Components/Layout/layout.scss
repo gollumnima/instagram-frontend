@@ -1,10 +1,14 @@
 @import 'styles/colorPalette';
 
-.layout__container {
+.layout {
   border: 1px solid $moregray;
   border-radius: 4px;
   width: 600px;
   margin-bottom: 50px;
 
   background-color: $white;
+
+  section {
+    text-align: left;
+  }
 }

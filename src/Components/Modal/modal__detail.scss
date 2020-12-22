@@ -1,4 +1,8 @@
 .modal__detail {
   display: flex;
-  width: 939px;
+  width: 935px;
+
+  &__right {
+    width: 335px;
+  }
 }

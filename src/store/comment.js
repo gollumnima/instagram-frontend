@@ -4,24 +4,37 @@ import { instaAPI } from "utils/axios.wrapper";
 const commentSlice = createSlice({
   name: "comment",
   initialState: {
-    commentList: []
+    commentList: [],
+    commentID: null
   },
   reducers: {
     setComment: (state, action) => {
-      state.commentList.concat(action.payload);
+      state.commentList = action.payload;
+    },
+    setCommentID: (state, action) => {
+      state.commentID = action.payload;
     }
   }
 });
 export default commentSlice.reducer;
 
-const { setComment } = commentSlice.actions;
+const { setComment, setCommentID } = commentSlice.actions;
 
-export const postComment = (comment, postID) => dispatch => {
-  instaAPI.post(`/api/comments/${postID}`).then(res => console.log(res));
-
-  // dispatch(setComment(list));
+export const getCommentID = commentID => async dispatch => {
+  await dispatch(setCommentID(commentID));
 };
 
-export const getComment = list => dispatch => {
-  dispatch();
+export const getComments = postId => async dispatch => {
+  const { data } = await instaAPI.get(`/api/comments/${postId}`);
+  await dispatch(setComment(data.rows));
+};
+
+export const createComment = (comment, postID) => async dispatch => {
+  await instaAPI.post(`/api/comments/${postID}`, { content: comment });
+  await dispatch(getComments(postID));
+};
+
+export const changeComment = (comment, commentID) => async dispatch => {
+  await instaAPI.put(`/api/comments/${commentID}`, { content: comment });
+  await dispatch(getComments(commentID));
 };

@@ -1,21 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import classNames from "classnames";
 import css from "./layout.scss";
-import { postComment } from "store/comment";
-import { instaAPI } from "utils/axios.wrapper";
+import { createComment } from "store/comment";
 import "./layout__cmt__input.scss";
 
 const cn = classNames.bind(css);
 
 const LayoutCmtInput = props => {
   const { onChild } = props;
+  const dispatch = useDispatch();
   const postID = useSelector(state => state.post.postNumber);
-  const commentArr = useSelector(state => state.comment);
-  console.log(commentArr);
-
+  const commentArr = useSelector(state => state.comment.commentList);
   const [comment, setComment] = useState("");
-  const [commentList, setCommentList] = useState([]);
 
   const handleChange = e => {
     const commentValue = e.target.value;
@@ -23,10 +20,9 @@ const LayoutCmtInput = props => {
   };
 
   const handleSubmit = () => {
-    setCommentList(commentList.concat(comment));
+    dispatch(createComment(comment, postID));
     setComment("");
-    onChild(commentList);
-    postComment(commentList, postID);
+    // onChild(commentList);
   };
 
   const handleEnter = e => {
@@ -35,15 +31,7 @@ const LayoutCmtInput = props => {
       handleSubmit();
     }
   };
-  console.log(comment, "com");
-  useEffect(() => {
-    instaAPI.post(`/api/comments/${postID}`, comment).then(res => {
-      if (res.status === 200) {
-        console.log("코멘트 달기 성공");
-      }
-    });
-  }, []);
-  console.log(postID, " po");
+
   return (
     <section className="comment__input">
       <div className="comment__input__wrapper">

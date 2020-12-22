@@ -34,11 +34,11 @@ const PostList = props => {
                 className="my-img-card"
                 // onMouseEnter={() => setOverlay(true)}
                 // onMouseLeave={() => setOverlay(false)}
-                key={el?.files[0]?.post_id}
-                style={{ backgroundImage: `url(${el?.files[0]?.url})` }}
+                key={el?.images[0]?.post_id}
+                style={{ backgroundImage: `url(${el?.images[0]?.url})` }}
                 onClick={() => handleModal(el.id)}
               >
-                {el?.files[0]?.url && (
+                {el?.images[0]?.url && (
                   <div className="overlay" key={`${el.image}-overlay`}>
                     <ul className="overlay-flex" key={`${el.image}-shadow`}>
                       <li key={`${el.image}-heart`}>♥︎ 하트개수</li>

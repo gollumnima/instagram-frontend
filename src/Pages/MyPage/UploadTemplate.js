@@ -16,7 +16,7 @@ const UploadTemplate = props => {
 
   const handleFileChange = e => {
     e.preventDefault();
-    const file = e.target.files[0];
+    const file = e.target.images[0];
     const fd = new FormData();
     fd.append("file", file);
     instaAPI

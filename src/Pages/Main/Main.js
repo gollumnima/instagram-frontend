@@ -1,14 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Wrapper from "Components/Wrapper";
 import Layout from "Components/Layout/Layout";
 import Profile from "Components/Profile";
 import Recommend from "Components/Recommend";
 import LiveStories from "Components/LiveStories";
 import { useSelector } from "react-redux";
+import { instaAPI } from "utils/axios.wrapper";
 import "./main.scss";
 
 const Main = props => {
   const user = useSelector(state => state.user);
+  const [feed, setFeed] = useState([]);
+
+  // 나중에 메인 피드에 뿌릴 데이터 따로 만들기! 지금은 test1의 것으로..!
+  // 피드에 나오는 데이터는 어떤 기준으로 선정해야 할까?!
+  useEffect(() => {
+    instaAPI
+      .get(`/api/posts`, {
+        params: {
+          offset: 1,
+          limit: 5
+        }
+      })
+      .then(({ data }) => {
+        setFeed(data.rows);
+      });
+  }, []);
 
   return (
     <>
@@ -17,8 +34,13 @@ const Main = props => {
           <div className="main-inner">
             <div className="main-left">
               <LiveStories />
-              <Layout />
-              <Layout />
+              {feed.map(el => (
+                <Layout
+                  img={el?.images[0]?.url}
+                  content={el.content}
+                  username={el.User?.username}
+                />
+              ))}
             </div>
             <div className="main-right">
               <div className="my-pf-container">

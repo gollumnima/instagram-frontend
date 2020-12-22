@@ -1,13 +1,25 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { createLike } from "store/like";
 import "./layout__icon__box.scss";
 
-const LayoutIconBox = props => {
+const LayoutIconBox = () => {
   const [heart, setHeart] = useState(false);
   const [like, setLike] = useState(0);
+  const dispatch = useDispatch();
+  const userID = useSelector(state => state.user.userInfo.id);
+  const postID = useSelector(state => state.post.postNumber);
+  const storedLike = useSelector(state => state.like.likeList);
 
   const handleHeart = () => {
     setHeart(!heart);
-    setLike(like + 1);
+    dispatch(createLike(userID, postID));
+
+    if (!heart) {
+      setLike(like + 1);
+    } else {
+      setLike(like - 1);
+    }
   };
 
   return (

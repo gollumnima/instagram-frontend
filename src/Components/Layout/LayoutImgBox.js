@@ -4,13 +4,15 @@ import "./layout__img__box.scss";
 const LayoutImgBox = props => {
   return (
     <>
-      <div className="layout__img__Box">
-        <img
-          className="layout__img__Box__uploaded"
-          alt={props.name}
-          src={props.url}
-          style={{ width: `${props.size}px` }}
-        ></img>
+      <div className="layout__img__box">
+        <div
+          className="layout__img__box__uploaded"
+          style={{
+            width: `${props.size}px`,
+            height: `${props.size}px`,
+            backgroundImage: `url(${props.url}`
+          }}
+        ></div>
       </div>
     </>
   );

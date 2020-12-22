@@ -28,4 +28,27 @@
     font-weight: bold;
     margin-right: 5px;
   }
+
+  &__left {
+    padding: 0 11px;
+  }
+
+  &__content {
+    span {
+    }
+
+    &__remove {
+      margin-left: 10px;
+      color: $deepblue;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    input {
+      all: unset;
+      &::placeholder {
+        font-size: 14px;
+      }
+    }
+  }
 }

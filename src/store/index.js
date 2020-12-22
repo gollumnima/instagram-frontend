@@ -5,6 +5,7 @@ import counter from "./counter";
 import calculator from "./calculator";
 import post from "./post";
 import comment from "./comment";
+import like from "./like";
 
 const reducer = combineReducers({
   // reducer 목록 추가
@@ -12,7 +13,8 @@ const reducer = combineReducers({
   counter,
   calculator,
   post,
-  comment
+  comment,
+  like
 });
 
 const store = configureStore({

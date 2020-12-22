@@ -16,7 +16,6 @@ const MyPage = props => {
   const postID = useSelector(state => state.post.postNumber);
   const [img, setImg] = useState("");
   const [modal, setModal] = useState(false);
-  console.log(postID);
 
   // const handlePostingImg = id => {
   //   instaAPI
@@ -36,8 +35,6 @@ const MyPage = props => {
         .then(res => console.log(res, "이백오케"))
         .catch(err => console.log(err));
   }, []);
-
-  console.log(img, "imimimimimi");
 
   return (
     <>

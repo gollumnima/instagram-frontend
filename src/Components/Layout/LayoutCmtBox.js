@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import LayoutContent from "./LayoutContent";
-import { getComments, changeComment } from "store/comment";
+import {
+  getComments,
+  changeComment,
+  getCommentID,
+  deleteComment
+} from "store/comment";
 
 import "./layout__cmt__box.scss";
+import LayoutCmtEditable from "./LayoutCmtEditable";
 
 const LayoutCmtBox = props => {
   const dispatch = useDispatch();
@@ -12,41 +18,33 @@ const LayoutCmtBox = props => {
   const comment = useSelector(state => state.comment);
 
   const [editable, setEditable] = useState(false);
-  const [commentEdit, setCommentEdit] = useState("");
-  const [commentID, getCommentID] = useState(0);
-
-  const handleChange = e => {
-    setCommentEdit(e.target.value);
-  };
+  const [commentID, setCommentID] = useState(0);
+  const [enter, setEnter] = useState(false);
 
   const handleDoubleClick = id => {
     setEditable(!editable);
+    // setCommentID(id);
     dispatch(getCommentID(id));
-
-    console.log(id, "id");
-    console.log(comment, "dsf");
   };
 
-  const handleEnter = e => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      dispatch(changeComment(commentEdit, comment.commentID));
-      setEditable(!editable);
-      setCommentEdit("");
-    }
+  const handleMouseEnter = id => {
+    dispatch(getCommentID(id));
+  };
+
+  const removeComment = () => {
+    dispatch(deleteComment(comment.commentID));
   };
 
   useEffect(() => {
     dispatch(getComments(postID));
   }, []);
 
-  console.log(comment.commentID, "cococo");
   return (
     <div className="comment__box" style={{ width: `${props.size}px` }}>
       <section className="comment__box__feed">
         <div className="comment__box__feed__yours"></div>
         <div className="comment__box__wrapper">
-          {comment.commentList.length ? (
+          {comment?.commentList.length ? (
             <span className="comment__box__all">
               댓글 {comment.commentList.length ?? 0}개 모두보기
             </span>
@@ -54,7 +52,7 @@ const LayoutCmtBox = props => {
             <></>
           )}
 
-          {comment.commentList?.map(el => (
+          {comment?.commentList?.map(el => (
             <div className="comment__box__group">
               <span className="comment__box__nickname">{el.User.name}</span>
               <div className="comment__box__content">
@@ -63,15 +61,24 @@ const LayoutCmtBox = props => {
                     <span onDoubleClick={() => handleDoubleClick(el.id)}>
                       {el.content}
                     </span>
-                    <span className="comment__box__content__remove">x</span>
+                    <span
+                      className="comment__box__content__remove"
+                      onMouseEnter={() => handleMouseEnter(el.id)}
+                      onClick={() => removeComment()}
+                    >
+                      x
+                    </span>
                   </>
                 ) : (
-                  <input
+                  // <input
+                  //   placeholder={el.content}
+                  //   onChange={e => handleChange(e)}
+                  //   onKeyPress={e => handleEnter(e)}
+                  //   value={commentEdit}
+                  // />
+                  <LayoutCmtEditable
                     placeholder={el.content}
-                    // onDoubleClick={() => handleDoubleClick()}
-                    onChange={e => handleChange(e)}
-                    onKeyPress={e => handleEnter(e)}
-                    value={commentEdit}
+                    editable={editable}
                   />
                 )}
               </div>

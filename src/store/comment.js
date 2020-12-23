@@ -13,12 +13,17 @@ const commentSlice = createSlice({
     },
     setCommentID: (state, action) => {
       state.commentID = action.payload;
+    },
+    removeComment: (state, action) => {
+      const target = state.commentList.find(el => el.id === state.commentID);
+      const idx = state.commentList.indexOf(target);
+      state.commentList.splice(idx, 1);
     }
   }
 });
 export default commentSlice.reducer;
 
-const { setComment, setCommentID } = commentSlice.actions;
+const { setComment, setCommentID, removeComment } = commentSlice.actions;
 
 export const getCommentID = commentID => async dispatch => {
   await dispatch(setCommentID(commentID));
@@ -37,4 +42,9 @@ export const createComment = (comment, postID) => async dispatch => {
 export const changeComment = (comment, commentID) => async dispatch => {
   await instaAPI.put(`/api/comments/${commentID}`, { content: comment });
   await dispatch(getComments(commentID));
+};
+
+export const deleteComment = commentID => async dispatch => {
+  await instaAPI.delete(`/api/comments/${commentID}`);
+  await dispatch(removeComment(commentID));
 };

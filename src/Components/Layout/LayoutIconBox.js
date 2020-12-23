@@ -7,9 +7,9 @@ const LayoutIconBox = () => {
   const [heart, setHeart] = useState(false);
   const [like, setLike] = useState(0);
   const dispatch = useDispatch();
-  const userID = useSelector(state => state.user.userInfo.id);
-  const postID = useSelector(state => state.post.postNumber);
-  const storedLike = useSelector(state => state.like.likeList);
+  const userID = useSelector(state => state?.user?.userInfo?.id);
+  const postID = useSelector(state => state?.post?.postNumber);
+  const storedLike = useSelector(state => state?.like?.likeList);
 
   const handleHeart = () => {
     setHeart(!heart);

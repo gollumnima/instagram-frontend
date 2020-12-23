@@ -13,17 +13,21 @@ const commentSlice = createSlice({
     },
     setCommentID: (state, action) => {
       state.commentID = action.payload;
-    },
-    removeComment: (state, action) => {
-      const target = state.commentList.find(el => el.id === state.commentID);
-      const idx = state.commentList.indexOf(target);
-      state.commentList.splice(idx, 1);
     }
+    // removeComment: (state, action) => {
+    //   const target = state.commentList.find(el => el.id === state.commentID);
+    //   const idx = state.commentList.indexOf(target);
+    //   state.commentList.splice(idx, 1);
+    // }
+    // 댓글 생성 api 호출하고나서 --> get 해서 덮어쓰지
+    // 댓글 수정 하고나서 --> get
+    // 댓글 삭제 하고나서 -->
   }
 });
+
 export default commentSlice.reducer;
 
-const { setComment, setCommentID, removeComment } = commentSlice.actions;
+const { setComment, setCommentID } = commentSlice.actions;
 
 export const getCommentID = commentID => async dispatch => {
   await dispatch(setCommentID(commentID));
@@ -34,17 +38,17 @@ export const getComments = postId => async dispatch => {
   await dispatch(setComment(data.rows));
 };
 
-export const createComment = (comment, postID) => async dispatch => {
-  await instaAPI.post(`/api/comments/${postID}`, { content: comment });
+export const createComment = (postID, content) => async dispatch => {
+  await instaAPI.post(`/api/comments/${postID}`, { content });
   await dispatch(getComments(postID));
 };
 
-export const changeComment = (comment, commentID) => async dispatch => {
-  await instaAPI.put(`/api/comments/${commentID}`, { content: comment });
-  await dispatch(getComments(commentID));
+export const changeComment = (postID, commentID, content) => async dispatch => {
+  await instaAPI.put(`/api/comments/${commentID}`, { content });
+  await dispatch(getComments(postID));
 };
 
-export const deleteComment = commentID => async dispatch => {
+export const deleteComment = (postID, commentID) => async dispatch => {
   await instaAPI.delete(`/api/comments/${commentID}`);
-  await dispatch(removeComment(commentID));
+  await dispatch(getComments(postID));
 };

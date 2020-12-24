@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createLike } from "store/like";
 import "./layout__icon__box.scss";
@@ -9,24 +9,29 @@ const LayoutIconBox = () => {
   const dispatch = useDispatch();
   const userID = useSelector(state => state?.user?.userInfo?.id);
   const postID = useSelector(state => state?.post?.postNumber);
+  const currentPost = useSelector(state => state?.post?.currentPost);
   const storedLike = useSelector(state => state?.like?.likeList);
 
+  console.log(currentPost, "currneeeee");
+  console.log(storedLike, "저장된 라잌");
   const handleHeart = () => {
-    setHeart(!heart);
-    dispatch(createLike(userID, postID));
-
-    if (!heart) {
-      setLike(like + 1);
-    } else {
-      setLike(like - 1);
+    if (currentPost.Likes.filter(el => el.user_id === userID)) {
+      setLike(storedLike.length);
+      setHeart(!heart);
+      console.log(like, "lilililililiil");
+      dispatch(createLike(userID, postID));
     }
   };
+
+  useEffect(() => {
+    dispatch(createLike(userID, postID)); // 이걸 하면 storedLike가 생겨야 하고...
+  }, []);
 
   return (
     <>
       <section className="layout__icon__box">
         <div className="layout__icon__box__left">
-          {!heart ? (
+          {!!heart ? (
             <svg
               className="layout__icon__box__icons"
               viewBox="0 -28 512.001 512"

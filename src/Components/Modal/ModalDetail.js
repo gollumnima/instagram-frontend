@@ -17,8 +17,6 @@ const ModalDetail = props => {
   const [content, setContent] = useState("");
   const [commentList, setCommentList] = useState([]);
 
-  console.log(useSelector(state => state.post));
-
   useEffect(() => {
     instaAPI
       .get(`/api/posts/${postID}`, {

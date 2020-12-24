@@ -20,7 +20,7 @@ const LayoutCmtInput = props => {
   };
 
   const handleSubmit = () => {
-    dispatch(createComment(comment, postID));
+    dispatch(createComment(postID, comment));
     setComment("");
     // onChild(commentList);
   };

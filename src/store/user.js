@@ -42,5 +42,6 @@ export const login = (username, password, callback) => async dispatch => {
 export const getSelf = () => dispatch => {
   instaAPI.get(`/api/users/self`).then(({ data }) => {
     dispatch(setUserInfo(data));
+    console.log(data);
   });
 };

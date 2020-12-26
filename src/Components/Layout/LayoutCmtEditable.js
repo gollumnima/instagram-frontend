@@ -4,9 +4,9 @@ import { getComments, changeComment, getCommentID } from "store/comment";
 import "./layout__cmt__box.scss";
 
 const LayoutCmtEditable = props => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const { comment, onSubmit } = props;
-  const postID = useSelector(state => state.post.postNumber);
+  // const postID = useSelector(state => state.post.postNumber);
 
   const [content, setContent] = useState(comment.content);
 
@@ -18,8 +18,8 @@ const LayoutCmtEditable = props => {
     if (e.key === "Enter") {
       e.preventDefault();
       setContent("");
-      dispatch(changeComment(props.postNumber, comment.id, content));
-      onSubmit();
+      // dispatch(changeComment(props.postNumber, comment.id, content));
+      onSubmit(comment.id, content);
     }
   };
 

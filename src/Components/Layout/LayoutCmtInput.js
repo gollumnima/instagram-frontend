@@ -8,8 +8,9 @@ import "./layout__cmt__input.scss";
 const cn = classNames.bind(css);
 
 const LayoutCmtInput = props => {
-  const dispatch = useDispatch();
-  const postID = useSelector(state => state.post.postNumber);
+  const { createComment } = props;
+  // const dispatch = useDispatch();
+  // const postID = useSelector(state => state.post.postNumber);
   const [comment, setComment] = useState("");
 
   const handleChange = e => {
@@ -18,7 +19,7 @@ const LayoutCmtInput = props => {
   };
 
   const handleSubmit = () => {
-    dispatch(createComment(props.postNumber, comment));
+    createComment(props.postNumber, comment);
     setComment("");
   };
 

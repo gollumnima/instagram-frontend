@@ -5,38 +5,37 @@ import { createLike, deleteLike } from "store/like";
 import "./layout__icon__box.scss";
 
 const LayoutIconBox = props => {
-  const { selectedPost } = props;
-  const dispatch = useDispatch();
-  const likes = useSelector(state => state.like.likeList);
+  const { post, likePost, unlikePost } = props;
+  // const dispatch = useDispatch();
+  // const likes = useSelector(state => state.like.likeList);
   const userID = useSelector(state => state?.user?.userInfo?.id);
-  const likeList = selectedPost.Likes;
+  const likes = post?.Likes ?? [];
+  const hasLikedThisPost = likes.find(e => e.User.id === userID);
+  // const likeList = selectedPost.Likes;
 
-  const createHeart = () => {
-    dispatch(createLike(userID, props.postNumber));
-  };
+  // const createHeart = () => {
+  //   dispatch(createLike(userID, props.postNumber));
+  // };
 
-  const deleteHeart = () => {
-    dispatch(deleteLike(userID, props.postNumber));
-  };
+  // const deleteHeart = () => {
+  //   dispatch(deleteLike(userID, props.postNumber));
+  // };
 
   const handleHeart = () => {
-    if (likeList.length && likeList.map(el => el.user_id === userID)) {
-      deleteHeart();
-    } else {
-      createHeart();
-    }
+    const action = hasLikedThisPost ? unlikePost : likePost;
+    action();
   };
 
-  useEffect(() => {
-    // 기존 좋아요 불러오기
-    dispatch(createLike(userID, props.postNumber));
-  }, []);
+  // useEffect(() => {
+  //   // 기존 좋아요 불러오기
+  //   // dispatch(createLike(userID, props.postNumber));
+  // }, []);
 
   return (
     <>
       <section className="layout__icon__box">
         <div className="layout__icon__box__left">
-          {!!likeList?.length ? (
+          {hasLikedThisPost ? (
             <svg
               className="layout__icon__box__icons"
               viewBox="0 -28 512.00001 512"
@@ -89,7 +88,7 @@ const LayoutIconBox = props => {
         </div>
       </section>
       <section className="feed__likes">
-        <span>좋아요 {likeList.length}개</span>
+        <span>좋아요 {likes.length}개</span>
       </section>
     </>
   );

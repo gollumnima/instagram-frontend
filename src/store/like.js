@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { instaAPI } from "utils/axios.wrapper";
+import * as postActions from "./post";
 
 const likeSlice = createSlice({
   name: "like",

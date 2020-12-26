@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { instaAPI } from "utils/axios.wrapper";
-import { getPostNumber, getCurrentPost, getAllPost } from "store/post";
+import { getPostNumber, getPost, getAllPost } from "store/post";
 import { getComments } from "store/comment";
 import { createLike } from "store/like";
 
@@ -23,15 +23,15 @@ const PostList = props => {
     });
   }, []);
 
-  const handleModal = postList => {
+  const handleModal = post => {
     setModal(!modal);
     onModal(modal);
-    dispatch(getCurrentPost(postList));
+    dispatch(getPost(post.id));
   };
 
   const handleMouse = id => {
     setNumber(id);
-    dispatch(createLike(user.userInfo.id, id));
+    // dispatch(createLike(user?.userInfo?.id, id));
     dispatch(getComments(id));
   };
 

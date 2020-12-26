@@ -6,7 +6,7 @@ import { getPostNumber, getPost, getPosts } from "store/post";
 // import { createLike } from "store/like";
 
 const PostList = props => {
-  const { onModal, setNumber } = props;
+  const { onModal } = props;
   const dispatch = useDispatch();
   // const post = useSelector(state => state?.post) ?? null;
   const postList = useSelector(state => state?.post?.postList) ?? [];
@@ -25,17 +25,17 @@ const PostList = props => {
     // });
   }, []);
 
-  const handleModal = post => {
+  const setCurrentPost = postID => {
     // setModal(true);
-    dispatch(getPost(post.id));
-    onModal(true);
+    // dispatch(getPost(post.id));
+    onModal(postID);
   };
 
-  const handleMouse = id => {
-    setNumber(id);
-    // dispatch(createLike(user?.userInfo?.id, id));
-    // dispatch(getComments(id));
-  };
+  // const handleMouse = id => {
+  // setNumber(id);
+  // dispatch(createLike(user?.userInfo?.id, id));
+  // dispatch(getComments(id));
+  // };
 
   return (
     <div className="mypage-feed-container">
@@ -48,8 +48,8 @@ const PostList = props => {
               // onMouseLeave={() => setOverlay(false)}
               key={post?.images[0]?.post_id}
               style={{ backgroundImage: `url(${post?.images[0]?.url})` }}
-              onClick={() => handleModal(post)}
-              onMouseEnter={() => handleMouse(post.id)}
+              onClick={() => setCurrentPost(post.id)}
+              // onMouseEnter={() => handleMouse(post.id)}
             >
               {post?.images[0]?.url && (
                 <div className="overlay" key={`${post.image}-overlay`}>

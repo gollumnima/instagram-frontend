@@ -103,7 +103,12 @@ const MyPage = props => {
                 {
                   title: "게시물",
                   render: () => (
-                    <PostList onModal={setModal} setNumber={setPostNumber} />
+                    <PostList
+                      onModal={postID => {
+                        setPostNumber(postID);
+                        setModal(true);
+                      }}
+                    />
                   )
                 },
                 {

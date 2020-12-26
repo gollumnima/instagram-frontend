@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import classNames from "classnames";
 import css from "./layout.scss";
-import { createComment } from "store/comment";
+// import { createComment } from "store/comment";
 import "./layout__cmt__input.scss";
 
 const cn = classNames.bind(css);
@@ -19,7 +19,7 @@ const LayoutCmtInput = props => {
   };
 
   const handleSubmit = () => {
-    createComment(props.postNumber, comment);
+    createComment(comment);
     setComment("");
   };
 

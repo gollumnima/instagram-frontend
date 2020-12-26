@@ -36,7 +36,7 @@ const LayoutCmtBox = props => {
   useEffect(() => {
     getComments && getComments();
     // dispatch(getComments(props.postNumber));
-  }, []);
+  }, [post.id]);
 
   return (
     <div className="comment__box" style={{ width: `${props.size}px` }}>

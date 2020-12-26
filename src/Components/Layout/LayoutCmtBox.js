@@ -33,10 +33,10 @@ const LayoutCmtBox = props => {
     // dispatch(deleteComment(props.postNumber, commentID));
   };
 
-  useEffect(() => {
-    getComments && getComments();
-    // dispatch(getComments(props.postNumber));
-  }, [post.id]);
+  // useEffect(() => {
+  //   // getComments && getComments();
+  //   // dispatch(getComments(props.postNumber));
+  // }, [post.id]);
 
   return (
     <div className="comment__box" style={{ width: `${props.size}px` }}>

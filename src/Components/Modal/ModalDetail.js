@@ -24,37 +24,38 @@ const ModalDetail = props => {
 
   // 지금 자식이 부모가 주는 함수 호출할때, postID 없이 호출하고있어~
   // 그래서 모든 함수가 다 인자가 하나씩 줄어들어
-  const getComments = () => {
-    // ㄴ자식이 주는 인자
-    dispatch(commentAction.getComments(post?.id));
-    // ㄴ실제 리덕스엔 부모가 이렇게 주고있음
-  };
+  // const getComments = () => {
+  //   // ㄴ자식이 주는 인자
+  //   dispatch(commentAction.getComments(postID));
+  //   // ㄴ실제 리덕스엔 부모가 이렇게 주고있음
+  // };
 
   const createComment = content => {
-    dispatch(commentAction.createComment(post?.id, content));
+    dispatch(commentAction.createComment(postID, content));
   };
 
   const updateComment = (commentID, content) => {
     // ㄴ자식이 주는 인자
-    dispatch(commentAction.changeComment(post?.id, commentID, content));
+    dispatch(commentAction.changeComment(postID, commentID, content));
     // ㄴ실제 리덕스엔 부모가 이렇게 주고있음
   };
 
   const deleteComment = commentID => {
-    dispatch(commentAction.deleteComment(post?.id, commentID));
+    dispatch(commentAction.deleteComment(postID, commentID));
   };
 
   const likePost = () => {
-    dispatch(postAction.likePost(post?.id));
+    dispatch(postAction.likePost(postID));
   };
 
   const unlikePost = () => {
-    dispatch(postAction.unlikePost(post?.id));
+    dispatch(postAction.unlikePost(postID));
   };
 
   useEffect(() => {
     dispatch(postAction.getPost(postID));
-  }, []);
+    dispatch(commentAction.getComments(postID));
+  }, [postID]);
 
   // useEffect 안에서 params.id 받아서 포스트넘버 저장하기!
 
@@ -73,7 +74,7 @@ const ModalDetail = props => {
         <LayoutContent post={post} />
         <LayoutCmtBox
           post={post}
-          getComments={getComments}
+          // getComments={getComments}
           updateComment={updateComment}
           deleteComment={deleteComment} // <-- OK
           // deleteComment={(param) => deleteComment(param)} <-- OK (진짜로 인자가 하나가 맞다면)

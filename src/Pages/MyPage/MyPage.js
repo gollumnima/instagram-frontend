@@ -13,29 +13,29 @@ import "./mypage.scss";
 
 const MyPage = props => {
   const user = useSelector(state => state?.user?.userInfo ?? null);
-  const postList = useSelector(state => state.post.postList);
-  const [img, setImg] = useState("");
+  // const postList = useSelector(state => state.post.postList);
+  // const [img, setImg] = useState("");
   const [modal, setModal] = useState(false);
   const [postNumber, setPostNumber] = useState(null);
-  const selectedPost = postList.find(el => el.id === postNumber);
+  // const selectedPost = postList.find(el => el.id === postNumber);
   // const handlePostingImg = id => {
   //   instaAPI
   //     .get(`/api/posts/${id}`)
   //     .then(({ data }) => setImg(data.files[0].url));
   // };
 
-  useEffect(() => {
-    //  postID && handlePostingImg(postID);
-    postNumber !== null &&
-      instaAPI
-        .get(`/api/posts/${postNumber}`, {
-          headers: {
-            "content-type": "multipart/form-data"
-          }
-        })
-        .then(res => console.log(res, "이백오케"))
-        .catch(err => console.log(err));
-  }, []);
+  // useEffect(() => {
+  //  postID && handlePostingImg(postID);
+  // postNumber !== null &&
+  //   instaAPI
+  //     .get(`/api/posts/${postNumber}`, {
+  //       headers: {
+  //         "content-type": "multipart/form-data"
+  //       }
+  //     })
+  //     .then(res => console.log(res, "이백오케"))
+  //     .catch(err => console.log(err));
+  // }, []);
 
   return (
     <>
@@ -122,7 +122,7 @@ const MyPage = props => {
         </div>
         {modal && (
           <Modal onModalClose={() => setModal(false)}>
-            <ModalDetail postNumber={postNumber} selectedPost={selectedPost} />
+            <ModalDetail postID={postNumber} />
           </Modal>
         )}
       </Wrapper>

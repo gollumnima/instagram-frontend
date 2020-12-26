@@ -10,7 +10,7 @@ const LayoutIconBox = props => {
   // const likes = useSelector(state => state.like.likeList);
   const userID = useSelector(state => state?.user?.userInfo?.id);
   const likes = post?.Likes ?? [];
-  const hasLikedThisPost = likes.find(e => e.User.id === userID);
+  const hasLikedThisPost = !!likes.find(e => e.User.id === userID);
   // const likeList = selectedPost.Likes;
 
   // const createHeart = () => {

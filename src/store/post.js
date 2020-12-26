@@ -15,7 +15,7 @@ const postSlice = createSlice({
     setPost: (state, action) => {
       state.post = action.payload;
     },
-    setAllPost: (state, action) => {
+    setPostList: (state, action) => {
       state.postList = action.payload;
     }
   }
@@ -23,10 +23,19 @@ const postSlice = createSlice({
 
 export default postSlice.reducer;
 
-const { setPostNumber, setPost, setAllPost } = postSlice.actions;
+const { setPostNumber, setPost, setPostList } = postSlice.actions;
 
 export const getPostNumber = postNum => dispatch => {
   dispatch(setPostNumber(postNum));
+};
+
+export const getPosts = () => async dispatch => {
+  try {
+    const { data } = await instaAPI.get(`/api/posts`);
+    dispatch(setPostList(data.rows));
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 export const getPost = postId => async dispatch => {
@@ -44,9 +53,9 @@ export const getPost = postId => async dispatch => {
   }
 };
 
-export const getAllPost = postList => async dispatch => {
-  await dispatch(setAllPost(postList));
-};
+// export const getAllPost = postList => async dispatch => {
+//   await dispatch(setAllPost(postList));
+// };
 
 export const likePost = postID => async dispatch => {
   await instaAPI.post(`/api/posts/${postID}/like`);

@@ -13,10 +13,11 @@ import "./mypage.scss";
 
 const MyPage = props => {
   const user = useSelector(state => state?.user?.userInfo ?? null);
-  const postID = useSelector(state => state.post.postNumber);
+  const postList = useSelector(state => state.post.postList);
   const [img, setImg] = useState("");
   const [modal, setModal] = useState(false);
-
+  const [postNumber, setPostNumber] = useState(null);
+  const selectedPost = postList.find(el => el.id === postNumber);
   // const handlePostingImg = id => {
   //   instaAPI
   //     .get(`/api/posts/${id}`)
@@ -25,9 +26,9 @@ const MyPage = props => {
 
   useEffect(() => {
     //  postID && handlePostingImg(postID);
-    postID !== null &&
+    postNumber !== null &&
       instaAPI
-        .get(`/api/posts/${postID}`, {
+        .get(`/api/posts/${postNumber}`, {
           headers: {
             "content-type": "multipart/form-data"
           }
@@ -101,7 +102,9 @@ const MyPage = props => {
                 },
                 {
                   title: "게시물",
-                  render: () => <PostList onModal={setModal} />
+                  render: () => (
+                    <PostList onModal={setModal} setNumber={setPostNumber} />
+                  )
                 },
                 {
                   title: "저장됨",
@@ -119,8 +122,7 @@ const MyPage = props => {
         </div>
         {modal && (
           <Modal onModalClose={() => setModal(false)}>
-            {/* <ModalDetail /> */}
-            <ModalDetail />
+            <ModalDetail postNumber={postNumber} selectedPost={selectedPost} />
           </Modal>
         )}
       </Wrapper>

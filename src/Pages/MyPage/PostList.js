@@ -1,42 +1,46 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { instaAPI } from "utils/axios.wrapper";
-import { getPostNumber, getCurrentPost } from "store/post";
+import { getPostNumber, getCurrentPost, getAllPost } from "store/post";
 import { getComments } from "store/comment";
+import { createLike } from "store/like";
 
 const PostList = props => {
-  const { onModal } = props;
-  const post = useSelector(state => state.post);
-  const commentList = useSelector(state => state.comment.commentList);
-
+  const { onModal, setNumber } = props;
   const dispatch = useDispatch();
+  const post = useSelector(state => state.post);
+  const user = useSelector(state => state.user);
+  const commentList = useSelector(state => state.comment.commentList);
+  const likeList = useSelector(state => state.like.likeList);
 
-  const [userList, setUserList] = useState([]);
+  const [postList, setPostList] = useState([]);
   const [modal, setModal] = useState(false);
 
   useEffect(() => {
     instaAPI.get(`/api/posts`).then(({ data }) => {
-      setUserList(userList.concat(data.rows));
+      dispatch(getAllPost(data.rows));
+      setPostList(postList.concat(data.rows));
     });
   }, []);
 
-  const handleModal = userList => {
+  const handleModal = postList => {
     setModal(!modal);
     onModal(modal);
-    dispatch(getCurrentPost(userList));
+    dispatch(getCurrentPost(postList));
   };
 
   const handleMouse = id => {
-    dispatch(getPostNumber(id));
+    setNumber(id);
+    dispatch(createLike(user.userInfo.id, id));
     dispatch(getComments(id));
   };
 
   return (
     <div className="mypage-feed-container">
       <div className="my-card-wrapper">
-        {userList.length > 1 &&
-          userList &&
-          userList?.map(el => (
+        {postList.length > 1 &&
+          postList &&
+          postList?.map(el => (
             <>
               <section
                 className="my-img-card"
@@ -50,7 +54,9 @@ const PostList = props => {
                 {el?.images[0]?.url && (
                   <div className="overlay" key={`${el.image}-overlay`}>
                     <ul className="overlay-flex" key={`${el.image}-shadow`}>
-                      <li key={`${el.image}-heart`}>♥︎ {el.Likes.length}</li>
+                      <li key={`${el.image}-heart`}>
+                        ♥︎ {el.Likes?.length ?? 0}
+                      </li>
                       <li key={`${el.image}-comment`}>
                         ☁︎ {commentList.length}
                       </li>

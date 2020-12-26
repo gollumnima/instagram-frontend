@@ -24,7 +24,10 @@ export const createLike = (user_id, post_id) => async dispatch => {
   await dispatch(setLike(data.rows));
 };
 
-export const deleteLike = (comment, postID) => async dispatch => {
-  const { data } = await instaAPI.post(`/api/comments/${postID}`);
-  // splice??
+export const deleteLike = (user_id, post_id) => async dispatch => {
+  const { data } = await instaAPI.delete(`/api/posts/${post_id}/like`, {
+    user_id,
+    post_id
+  });
+  await dispatch(setLike(data.rows));
 };

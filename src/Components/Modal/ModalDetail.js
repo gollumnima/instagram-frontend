@@ -19,7 +19,7 @@ const ModalDetail = props => {
 
   useEffect(() => {
     instaAPI
-      .get(`/api/posts/${postID}`, {
+      .get(`/api/posts/${props.postNumber}`, {
         headers: {
           "content-type": "multipart/form-data"
         }
@@ -46,9 +46,12 @@ const ModalDetail = props => {
           // img={imgURL}
         />
         <LayoutContent content={content} username={userID} />
-        <LayoutCmtBox commentList={commentList} />
-        <LayoutIconBox />
-        <LayoutCmtInput />
+        <LayoutCmtBox commentList={commentList} postNumber={props.postNumber} />
+        <LayoutIconBox
+          postNumber={props.postNumber}
+          selectedPost={props.selectedPost}
+        />
+        <LayoutCmtInput postNumber={props.postNumber} />
       </div>
     </article>
   );

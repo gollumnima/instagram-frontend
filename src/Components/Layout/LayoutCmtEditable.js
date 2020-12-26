@@ -18,9 +18,8 @@ const LayoutCmtEditable = props => {
     if (e.key === "Enter") {
       e.preventDefault();
       setContent("");
-      dispatch(changeComment(postID, comment.id, content));
+      dispatch(changeComment(props.postNumber, comment.id, content));
       onSubmit();
-      // setEditable(!editable);
     }
   };
 

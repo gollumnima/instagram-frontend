@@ -1,59 +1,56 @@
 import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { instaAPI } from "utils/axios.wrapper";
-import { getPostNumber } from "store/post";
 
 const UploadTemplate = props => {
-  const post = useSelector(state => state.post);
-  const dispatch = useDispatch();
-
+  const history = useHistory();
+  const [postID, setPostID] = useState(null);
   const [content, setContent] = useState("");
+  const [imageURL, setImageURL] = useState("");
+
   const handleChange = e => {
     setContent(e.target.value);
   };
 
-  const [imageURL, setImageURL] = useState("");
-
-  const handleFileChange = e => {
-    e.preventDefault();
-    const file = e.target.images[0];
-    const fd = new FormData();
-    fd.append("file", file);
-    instaAPI
-      .post(`/api/posts/${postID}/image`, fd, {
+  const handleFileChange = async ev => {
+    ev.preventDefault();
+    const [file] = ev.target.files;
+    const formData = new FormData();
+    formData.append("file", file);
+    const { data } = await instaAPI.post(
+      `/api/posts/${postID}/image`,
+      formData,
+      {
         headers: {
           "content-type": "multipart/form-data"
         }
-      })
-      .then(({ data }) => {
-        setImageURL(data.url);
-      });
+      }
+    );
+    setImageURL(data.url);
   };
 
-  const [postID, setPostID] = useState(null);
-  const [userList, setUserList] = useState([]);
-
-  const handleTempPost = () => {
-    instaAPI.post(`/api/posts`, { content: "" }).then(({ data }) => {
-      setPostID(data.id);
-    });
+  const handleTempPost = async () => {
+    const { data } = await instaAPI.post(`/api/posts`);
+    console.log("data", data);
+    setPostID(data.id);
   };
 
   useEffect(() => {
     handleTempPost();
-    instaAPI.get(`/api/posts`).then(({ data }) => {
-      userList.concat(data.rows);
-    });
   }, []);
 
-  const handleSubmit = () => {
-    instaAPI.put(`/api/posts/${postID}`, { content, status: "PUBLISHED" });
+  const handleSubmit = async () => {
+    await instaAPI.put(`/api/posts/${postID}`, {
+      content,
+      status: "PUBLISHED"
+    });
+    history.push(`/p/${postID}`);
   };
 
   return (
     <div className="ut-container">
       <div className="ut-wrapper">
-        <input type="file" onChange={e => handleFileChange(e)} />
+        <input type="file" onChange={ev => handleFileChange(ev)} />
         {imageURL && (
           <div
             className="ut-img-preview"

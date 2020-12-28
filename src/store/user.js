@@ -23,6 +23,19 @@ export default userSlice.reducer;
 // Action
 const { setUserInfo } = userSlice.actions;
 
+export const signUp = (username, name, password) => async dispatch => {
+  try {
+    const { data } = await instaAPI.post(`/api/users`, {
+      username,
+      name,
+      password
+    });
+    console.log(data, "데이터 잘 찍히나?");
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 export const login = (username, password, callback) => async dispatch => {
   try {
     const { data } = await instaAPI.post(`/api/users/login`, {

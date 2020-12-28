@@ -16,7 +16,7 @@ const Layout = props => {
     <div className="layout">
       <LayoutHeader username={props.username} />
       <LayoutImgBox name="feed-uploaded-img" url={props.img} size="600" />
-      <section classNames="layout__bottom">
+      <section className="layout__bottom">
         <LayoutIconBox />
         <LayoutContent desc={props.content} username={props.username} />
         <LayoutCmtBox username={props.username} />

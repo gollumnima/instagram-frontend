@@ -1,8 +1,7 @@
-import React, { useReducer, useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useReducer } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { login } from "store/user";
-import { instaAPI } from "utils/axios.wrapper";
 import { usernameCheck, passwordCheck } from "utils/validation";
 import "./login.scss";
 
@@ -11,26 +10,33 @@ const initialState = { username: "", password: "" };
 const reducer = (state, action) => {
   if (action.type === "reset") return initialState;
   const result = { ...state };
+  console.log(state, "sta");
 
   result[action.type] = action.value;
   return result;
 };
 
 const Login = props => {
+  const signedName = props.location.state.username;
   const [state, setDispatch] = useReducer(reducer, initialState);
   const dispatch = useDispatch();
-  const user = useSelector(state => state.user);
 
   const handleChange = e => {
     const { name, value } = e.target;
-    setDispatch({ type: name, value });
+    if (signedName) {
+      setDispatch({ username: signedName });
+    } else {
+      setDispatch({ type: name, value });
+    }
   };
 
-  const handleSubmit = async e => {
+  const handleSubmit = async () => {
     await dispatch(
       login(username, password, user => {
         console.log("로그인 성공", user);
+        props.history.replace("", null);
         props.history.push("/");
+
         setDispatch({ type: "reset" });
       })
     );
@@ -61,6 +67,7 @@ const Login = props => {
 
   const { username, password } = state;
 
+  console.log({ username });
   return (
     <div className="login-container">
       <div>
@@ -69,11 +76,10 @@ const Login = props => {
             <img src="/instalogo.png" alt="insta-logo" />
           </Link>
           <div className="login-input-box">
-            {/* <Counter /> */}
             <input
               className="input-id"
               name="username"
-              value={username}
+              value={signedName ? signedName : username}
               placeholder="  전화번호, 사용자 이름 또는 이메일"
               onChange={handleChange}
             />
@@ -97,7 +103,9 @@ const Login = props => {
         <div className="login-box down">
           <p>
             계정이 없으신가요?
-            <span> 가입하기</span>
+            <Link to="/signUp">
+              <span> 가입하기</span>
+            </Link>
           </p>
         </div>
       </div>

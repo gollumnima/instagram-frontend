@@ -14,6 +14,7 @@ const UploadTemplate = props => {
 
   const handleFileChange = async ev => {
     ev.preventDefault();
+    console.log(ev.target, "여길 봐바@@@@@@@@");
     const [file] = ev.target.files;
     const formData = new FormData();
     formData.append("file", file);

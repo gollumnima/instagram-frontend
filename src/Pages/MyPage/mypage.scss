@@ -190,3 +190,15 @@ footer {
     }
   }
 }
+
+.delete-x {
+  float: right;
+  margin-top: 8px;
+  margin-right: 8px;
+  font-size: 18px;
+  font-weight: 900;
+
+  &:hover {
+    color: $black;
+  }
+}

@@ -4,14 +4,10 @@ import { instaAPI } from "utils/axios.wrapper";
 const postSlice = createSlice({
   name: "post",
   initialState: {
-    postNumber: null,
     post: null,
     postList: []
   },
   reducers: {
-    setPostNumber: (state, action) => {
-      state.postNumber = action.payload;
-    },
     setPost: (state, action) => {
       state.post = action.payload;
     },
@@ -23,11 +19,7 @@ const postSlice = createSlice({
 
 export default postSlice.reducer;
 
-const { setPostNumber, setPost, setPostList } = postSlice.actions;
-
-export const getPostNumber = postNum => dispatch => {
-  dispatch(setPostNumber(postNum));
-};
+const { setPost, setPostList } = postSlice.actions;
 
 export const getPosts = () => async dispatch => {
   try {
@@ -51,6 +43,13 @@ export const getPost = postId => async dispatch => {
   } catch (err) {
     console.error(err);
   }
+};
+
+export const deletePost = postId => async dispatch => {
+  await instaAPI.delete(`/api/posts/${postId}`);
+  await dispatch(getPost(postId));
+  //const { data } = instaAPI.delete(`/api/posts/${postId}`);
+  //await dispatch(getPost(data));
 };
 
 // export const getAllPost = postList => async dispatch => {

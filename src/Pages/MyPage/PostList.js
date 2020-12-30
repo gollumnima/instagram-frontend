@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { instaAPI } from "utils/axios.wrapper";
-import { getPostNumber, getPost, getPosts } from "store/post";
+import { getPost, getPosts, deletePost } from "store/post";
 // import { getComments } from "store/comment";
 // import { createLike } from "store/like";
 
@@ -37,6 +37,7 @@ const PostList = props => {
   // dispatch(getComments(id));
   // };
 
+  console.log(postList, "포스트 리스트 pppp");
   return (
     <div className="mypage-feed-container">
       <div className="my-card-wrapper">
@@ -53,12 +54,18 @@ const PostList = props => {
             >
               {post?.images[0]?.url && (
                 <div className="overlay" key={`${post.image}-overlay`}>
+                  <span
+                    className="delete-x"
+                    onClick={() => dispatch(deletePost(post.id))}
+                  >
+                    X
+                  </span>
                   <ul className="overlay-flex" key={`${post.image}-shadow`}>
                     <li key={`${post.image}-heart`}>
-                      ♥︎ {post.Likes?.length ?? 0}
+                      ♥︎ {post.Likes?.length || 0}
                     </li>
                     <li key={`${post.image}-comment`}>
-                      ☁︎ {post.Comments?.length ?? 0}
+                      ☁︎ {post.Comments?.length || 0}
                     </li>
                   </ul>
                 </div>

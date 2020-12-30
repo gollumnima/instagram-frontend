@@ -58,6 +58,8 @@ const ModalDetail = props => {
   }, [postID]);
 
   // useEffect 안에서 params.id 받아서 포스트넘버 저장하기!
+  console.log(post, "디테일 pppp");
+  console.log(postID, "postID in modal Detail");
 
   if (!post) return <>게시물 불러오는중...</>;
 

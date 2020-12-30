@@ -5,36 +5,33 @@ import { login } from "store/user";
 import { usernameCheck, passwordCheck } from "utils/validation";
 import "./login.scss";
 
-const initialState = { username: "", password: "" };
-
-const reducer = (state, action) => {
-  if (action.type === "reset") return initialState;
-  const result = { ...state };
-  console.log(state, "sta");
-
-  result[action.type] = action.value;
-  return result;
-};
-
 const Login = props => {
-  const signedName = props.location.state.username;
+  // const signedName = props.location.state.username;
+  // const signedPw = props.location.state.password;
+
+  const initialState = { username: "", password: "" };
+
+  const reducer = (state, action) => {
+    if (action.type === "reset") return initialState;
+    const result = { ...state };
+
+    result[action.type] = action.value;
+    return result;
+  };
   const [state, setDispatch] = useReducer(reducer, initialState);
   const dispatch = useDispatch();
 
   const handleChange = e => {
     const { name, value } = e.target;
-    if (signedName) {
-      setDispatch({ username: signedName });
-    } else {
-      setDispatch({ type: name, value });
-    }
+
+    setDispatch({ type: name, value });
   };
 
   const handleSubmit = async () => {
     await dispatch(
       login(username, password, user => {
         console.log("로그인 성공", user);
-        props.history.replace("", null);
+        // props.history.replace("", null);
         props.history.push("/");
 
         setDispatch({ type: "reset" });
@@ -67,7 +64,6 @@ const Login = props => {
 
   const { username, password } = state;
 
-  console.log({ username });
   return (
     <div className="login-container">
       <div>
@@ -79,7 +75,7 @@ const Login = props => {
             <input
               className="input-id"
               name="username"
-              value={signedName ? signedName : username}
+              value={username}
               placeholder="  전화번호, 사용자 이름 또는 이메일"
               onChange={handleChange}
             />

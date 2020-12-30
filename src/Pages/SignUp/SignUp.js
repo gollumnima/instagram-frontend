@@ -30,7 +30,8 @@ const SignUp = props => {
     const { username, name, password } = state;
 
     await dispatch(signUp(username, name, password));
-    props.history.push({ pathname: "/login", state: { username } });
+    props.history.push("/login");
+    // props.history.push({ pathname: "/login", state: { username, password } });
   };
 
   const handleEnter = e => {

@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { instaAPI } from "utils/axios.wrapper";
+import { getPost } from "store/post";
 
 const UploadTemplate = props => {
   const history = useHistory();
+  const dispatch = useDispatch();
+  const post = useSelector(state => state?.post?.post);
   const [postID, setPostID] = useState(null);
   const [content, setContent] = useState("");
   const [imageURL, setImageURL] = useState("");
@@ -14,7 +18,6 @@ const UploadTemplate = props => {
 
   const handleFileChange = async ev => {
     ev.preventDefault();
-    console.log(ev.target, "여길 봐바@@@@@@@@");
     const [file] = ev.target.files;
     const formData = new FormData();
     formData.append("file", file);
@@ -32,8 +35,9 @@ const UploadTemplate = props => {
 
   const handleTempPost = async () => {
     const { data } = await instaAPI.post(`/api/posts`);
-    console.log("data", data);
     setPostID(data.id);
+    dispatch(getPost(data.id));
+    console.log(data, "data in upload");
   };
 
   useEffect(() => {
@@ -48,6 +52,7 @@ const UploadTemplate = props => {
     history.push(`/p/${postID}`);
   };
 
+  console.log(post, "post in template");
   return (
     <div className="ut-container">
       <div className="ut-wrapper">

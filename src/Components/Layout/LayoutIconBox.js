@@ -31,6 +31,8 @@ const LayoutIconBox = props => {
   //   // dispatch(createLike(userID, props.postNumber));
   // }, []);
 
+  console.log(post, "아이콘 pppppp");
+
   return (
     <>
       <section className="layout__icon__box">

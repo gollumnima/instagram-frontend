@@ -6,21 +6,17 @@ import LayoutContent from "./LayoutContent";
 import LayoutIconBox from "./LayoutIconBox";
 import LayoutCmtInput from "./LayoutCmtInput";
 import { useSelector } from "react-redux";
-// import dummyApi from "utils/dummyApi";
 
 const Layout = props => {
-  const commentList = useSelector(state => state.comment.commentList);
-  // const [commentList, setCommentList] = useState([]);
-
   return (
     <div className="layout">
       <LayoutHeader username={props.username} />
       <LayoutImgBox name="feed-uploaded-img" url={props.img} size="600" />
       <section className="layout__bottom">
         <LayoutIconBox />
-        <LayoutContent desc={props.content} username={props.username} />
+        <LayoutContent content={props.content} username={props.username} />
         <LayoutCmtBox username={props.username} />
-        <LayoutCmtInput />
+        <LayoutCmtInput size={540} />
       </section>
     </div>
   );

@@ -30,7 +30,6 @@ export const signUp = (username, name, password) => async dispatch => {
       name,
       password
     });
-    console.log(data, "데이터 잘 찍히나?");
   } catch (err) {
     console.error(err);
   }

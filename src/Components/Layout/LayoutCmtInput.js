@@ -38,6 +38,7 @@ const LayoutCmtInput = props => {
           onChange={e => handleChange(e)}
           onKeyPress={e => handleEnter(e)}
           value={comment}
+          style={{ width: `${props.size}px` }}
         ></input>
         <button className="comment__input__btn" onClick={handleSubmit}>
           <span

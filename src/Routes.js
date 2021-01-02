@@ -11,12 +11,12 @@ import Detail from "./Pages/Detail";
 import ModalDetail from "Components/Modal/ModalDetail";
 import "./styles/reset.scss";
 
-const Routes = () => {
+const Routes = props => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getSelf());
   }, []);
-
+  console.log(props, "prop in router");
   return (
     <Router>
       <Switch>
@@ -26,7 +26,8 @@ const Routes = () => {
         <Route exact path="/myPage" component={MyPage} />
         <Route exact path="/detail" component={Detail} />
         <Route exact path="/counter" component={Counter} />
-        <Route excat path="/p/:id" component={ModalDetail} />
+        <Route exact path="/p/:id" component={ModalDetail} />
+        <Route path="/p/:id" children={<ModalDetail />} />
         {/* // 추후 /p/:post_id 로 변경하기 */}
       </Switch>
     </Router>

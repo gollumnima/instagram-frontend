@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Wrapper from "Components/Wrapper";
-import Detail from "Pages/Detail";
 import Tabs from "Components/Tabs";
 import Modal from "Components/Modal";
 import Profile from "Components/Profile";
 import PostList from "./PostList";
 import UploadTemplate from "./UploadTemplate";
+import SaveList from "./SaveList";
 import ModalDetail from "Components/Modal/ModalDetail";
 import { instaAPI } from "utils/axios.wrapper";
 import "./mypage.scss";
@@ -17,6 +17,9 @@ const MyPage = props => {
   // const [img, setImg] = useState("");
   const [modal, setModal] = useState(false);
   const [postNumber, setPostNumber] = useState(null);
+  const saves = useSelector(state => state?.save?.savedList);
+
+  console.log(saves, "save in Mypage");
   // const selectedPost = postList.find(el => el.id === postNumber);
   // const handlePostingImg = id => {
   //   instaAPI
@@ -113,7 +116,7 @@ const MyPage = props => {
                 },
                 {
                   title: "저장됨",
-                  render: () => <UploadTemplate />
+                  render: () => <SaveList />
                 },
                 {
                   title: "태그됨",

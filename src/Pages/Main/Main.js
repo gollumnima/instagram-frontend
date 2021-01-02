@@ -36,9 +36,9 @@ const Main = props => {
               <LiveStories />
               {feed.map(el => (
                 <Layout
+                  username={el.User?.username}
                   img={el?.images[0]?.url}
                   content={el.content}
-                  username={el.User?.username}
                 />
               ))}
             </div>

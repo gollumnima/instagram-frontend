@@ -47,7 +47,7 @@ export const getPost = postId => async dispatch => {
 
 export const deletePost = postId => async dispatch => {
   await instaAPI.delete(`/api/posts/${postId}`);
-  await dispatch(getPost(postId));
+  await dispatch(getPosts());
   //const { data } = instaAPI.delete(`/api/posts/${postId}`);
   //await dispatch(getPost(data));
 };
@@ -59,9 +59,11 @@ export const deletePost = postId => async dispatch => {
 export const likePost = postID => async dispatch => {
   await instaAPI.post(`/api/posts/${postID}/like`);
   await dispatch(getPost(postID));
+  await dispatch(getPosts());
 };
 
 export const unlikePost = postID => async dispatch => {
   await instaAPI.delete(`/api/posts/${postID}/like`);
   await dispatch(getPost(postID));
+  await dispatch(getPosts());
 };

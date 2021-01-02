@@ -1,16 +1,21 @@
 import { current } from "@reduxjs/toolkit";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createLike, deleteLike } from "store/like";
+// import { createLike, deleteLike } from "store/like";
+import { getSaves } from "store/save";
 import "./layout__icon__box.scss";
 
 const LayoutIconBox = props => {
   const { post, likePost, unlikePost } = props;
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   // const likes = useSelector(state => state.like.likeList);
   const userID = useSelector(state => state?.user?.userInfo?.id);
   const likes = post?.Likes ?? [];
   const hasLikedThisPost = !!likes.find(e => e.User.id === userID);
+  const saves = useSelector(state => state?.save?.savedList);
+  console.log(post, "props");
+  console.log(saves, "sssss");
+  //const hasSavedThisPost =
   // const likeList = selectedPost.Likes;
 
   // const createHeart = () => {
@@ -30,8 +35,6 @@ const LayoutIconBox = props => {
   //   // 기존 좋아요 불러오기
   //   // dispatch(createLike(userID, props.postNumber));
   // }, []);
-
-  console.log(post, "아이콘 pppppp");
 
   return (
     <>
@@ -84,8 +87,12 @@ const LayoutIconBox = props => {
             className="layout__icon__box__icons"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 32 32"
+            onClick={() => dispatch(getSaves(post))}
           >
-            <path d="M7 5v23l1.594-1.188L16 21.25l7.406 5.563L25 28V5H7zm2 2h14v17l-6.406-4.813L16 18.75l-.594.438L9 24V7z" />
+            <path
+              // save 리스트도 백앤드에 저장해놨다가 있으면 path에 fill을 btnBlue로 줄 수 있도록 className 주기
+              d="M7 5v23l1.594-1.188L16 21.25l7.406 5.563L25 28V5H7zm2 2h14v17l-6.406-4.813L16 18.75l-.594.438L9 24V7z"
+            />
           </svg>
         </div>
       </section>

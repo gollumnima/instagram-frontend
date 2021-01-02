@@ -6,9 +6,7 @@ import LayoutContent from "Components/Layout/LayoutContent";
 import LayoutCmtBox from "Components/Layout/LayoutCmtBox";
 import LayoutCmtInput from "Components/Layout/LayoutCmtInput";
 import LayoutIconBox from "Components/Layout/LayoutIconBox";
-import { instaAPI } from "utils/axios.wrapper";
 import * as postAction from "store/post";
-// import { getComments, changeComment, getCommentID, deleteComment } from "store/comment";
 import * as commentAction from "store/comment";
 import "./modal__detail.scss";
 
@@ -57,10 +55,6 @@ const ModalDetail = props => {
     dispatch(commentAction.getComments(postID));
   }, [postID]);
 
-  // useEffect 안에서 params.id 받아서 포스트넘버 저장하기!
-  console.log(post, "디테일 pppp");
-  console.log(postID, "postID in modal Detail");
-
   if (!post) return <>게시물 불러오는중...</>;
 
   return (
@@ -93,6 +87,7 @@ const ModalDetail = props => {
         />
         <LayoutCmtInput
           // postNumber={props.postNumber}
+          size={280}
           createComment={createComment}
         />
       </div>

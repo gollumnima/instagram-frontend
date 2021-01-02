@@ -37,7 +37,6 @@ const UploadTemplate = props => {
     const { data } = await instaAPI.post(`/api/posts`);
     setPostID(data.id);
     dispatch(getPost(data.id));
-    console.log(data, "data in upload");
   };
 
   useEffect(() => {
@@ -52,7 +51,6 @@ const UploadTemplate = props => {
     history.push(`/p/${postID}`);
   };
 
-  console.log(post, "post in template");
   return (
     <div className="ut-container">
       <div className="ut-wrapper">

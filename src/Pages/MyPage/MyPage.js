@@ -19,7 +19,6 @@ const MyPage = props => {
   const [postNumber, setPostNumber] = useState(null);
   const saves = useSelector(state => state?.save?.savedList);
 
-  console.log(saves, "save in Mypage");
   // const selectedPost = postList.find(el => el.id === postNumber);
   // const handlePostingImg = id => {
   //   instaAPI
@@ -128,11 +127,12 @@ const MyPage = props => {
             />
           </div>
         </div>
-        {modal && (
+        {postNumber && <Modal onModalClose={() => setModal(false)} />}
+        {/* {modal && (
           <Modal onModalClose={() => setModal(false)}>
             <ModalDetail postID={postNumber} />
           </Modal>
-        )}
+        )} */}
       </Wrapper>
     </>
   );

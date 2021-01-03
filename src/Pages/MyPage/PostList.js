@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Link, useLocation } from "react-router-dom";
 import { instaAPI } from "utils/axios.wrapper";
 import { getPost, getPosts, deletePost } from "store/post";
 // import { getComments } from "store/comment";
@@ -38,39 +39,48 @@ const PostList = props => {
   // };
 
   console.log(postList, "포스트 리스트 pppp");
+  const location = useLocation();
+
   return (
     <div className="mypage-feed-container">
       <div className="my-card-wrapper">
         {postList?.map(post => (
           <>
-            <section
-              className="my-img-card"
-              // onMouseEnter={() => setOverlay(true)}
-              // onMouseLeave={() => setOverlay(false)}
-              key={post?.images[0]?.post_id}
-              style={{ backgroundImage: `url(${post?.images[0]?.url})` }}
-              onClick={() => setCurrentPost(post.id)}
-              // onMouseEnter={() => handleMouse(post.id)}
+            <Link
+              to={{
+                pathname: `/p/${post.id}`,
+                state: { background: location }
+              }}
             >
-              {post?.images[0]?.url && (
-                <div className="overlay" key={`${post.image}-overlay`}>
-                  <span
-                    className="delete-x"
-                    onClick={() => dispatch(deletePost(post.id))}
-                  >
-                    X
-                  </span>
-                  <ul className="overlay-flex" key={`${post.image}-shadow`}>
-                    <li key={`${post.image}-heart`}>
-                      ♥︎ {post.Likes?.length || 0}
-                    </li>
-                    <li key={`${post.image}-comment`}>
-                      ☁︎ {post.Comments?.length || 0}
-                    </li>
-                  </ul>
-                </div>
-              )}
-            </section>
+              <section
+                className="my-img-card"
+                // onMouseEnter={() => setOverlay(true)}
+                // onMouseLeave={() => setOverlay(false)}
+                key={post?.images[0]?.post_id}
+                style={{ backgroundImage: `url(${post?.images[0]?.url})` }}
+                onClick={() => setCurrentPost(post.id)}
+                // onMouseEnter={() => handleMouse(post.id)}
+              >
+                {post?.images[0]?.url && (
+                  <div className="overlay" key={`${post.image}-overlay`}>
+                    <span
+                      className="delete-x"
+                      onClick={() => dispatch(deletePost(post.id))}
+                    >
+                      X
+                    </span>
+                    <ul className="overlay-flex" key={`${post.image}-shadow`}>
+                      <li key={`${post.image}-heart`}>
+                        ♥︎ {post.Likes?.length || 0}
+                      </li>
+                      <li key={`${post.image}-comment`}>
+                        ☁︎ {post.Comments?.length || 0}
+                      </li>
+                    </ul>
+                  </div>
+                )}
+              </section>
+            </Link>
           </>
         ))}
       </div>

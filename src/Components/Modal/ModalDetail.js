@@ -13,6 +13,8 @@ import "./modal__detail.scss";
 const ModalDetail = props => {
   const { postID } = props;
   const dispatch = useDispatch();
+  console.log(postID, "postID in md");
+  console.log(props.postID, "postID in md 투우!");
   // const postID = useSelector(state => state.post.postNumber);
   const post = useSelector(state => state?.post?.post);
   // const [imgURL, setImgURL] = useState("");
@@ -29,6 +31,8 @@ const ModalDetail = props => {
   // };
 
   const createComment = content => {
+    console.log({ postID });
+    console.log(post.id, "post iddd");
     dispatch(commentAction.createComment(postID, content));
   };
 
@@ -56,7 +60,8 @@ const ModalDetail = props => {
   }, [postID]);
 
   if (!post) return <>게시물 불러오는중...</>;
-
+  console.log(post, ";;[[[[p[[ppppp");
+  console.log(post.id, "ididididid");
   return (
     <article className="modal__detail">
       <div className="modal__detail__left">

@@ -36,7 +36,7 @@ const Routes = props => {
   }, [history]);
 
   return (
-    <Router>
+    <>
       <Switch location={background ?? location}>
         <Route exact path="/" component={Main} />
         <Route exact path="/login" component={Login} />
@@ -49,7 +49,7 @@ const Routes = props => {
       {background && (
         <Route path="/p/:id" render={() => <Modal location={background} />} />
       )}
-    </Router>
+    </>
   );
 };
 

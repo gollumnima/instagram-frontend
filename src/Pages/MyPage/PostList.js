@@ -30,6 +30,7 @@ const PostList = props => {
     // setModal(true);
     // dispatch(getPost(post.id));
     onModal(postID);
+    console.log(postID, "postlist에서의 post ID 어디 변하나 보자!");
   };
 
   // const handleMouse = id => {
@@ -38,7 +39,6 @@ const PostList = props => {
   // dispatch(getComments(id));
   // };
 
-  console.log(postList, "포스트 리스트 pppp");
   const location = useLocation();
 
   return (

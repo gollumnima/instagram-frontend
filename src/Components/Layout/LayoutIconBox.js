@@ -13,8 +13,7 @@ const LayoutIconBox = props => {
   const likes = post?.Likes ?? [];
   const hasLikedThisPost = !!likes.find(e => e.User.id === userID);
   const saves = useSelector(state => state?.save?.savedList);
-  console.log(post, "props");
-  console.log(saves, "sssss");
+
   //const hasSavedThisPost =
   // const likeList = selectedPost.Likes;
 

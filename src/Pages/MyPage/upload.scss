@@ -1,0 +1,40 @@
+@import 'styles/colorPalette';
+
+.upload {
+  &__container {
+    input,
+    button {
+      all: unset;
+      cursor: pointer;
+    }
+
+    button {
+      border: 1px solid $moregray;
+      border-radius: 4px;
+      padding: 5px 10px;
+    }
+  }
+  &__wrapper {
+    text-align: center;
+    margin-top: 30px;
+  }
+  &__img__preview {
+    width: 400px;
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+  }
+  &__input {
+    width: 100%;
+    height: 150px;
+    border: 1px solid $deepgray;
+    border-radius: 4px;
+    padding: 10px 10px;
+    text-align: left;
+    resize: none;
+
+    &::placeholder {
+      font-size: 16px;
+    }
+  }
+}

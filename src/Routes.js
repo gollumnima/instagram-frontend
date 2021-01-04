@@ -47,7 +47,10 @@ const Routes = props => {
         <Route exact path="/p/:id" component={ModalDetail} />
       </Switch>
       {background && (
-        <Route path="/p/:id" render={() => <Modal location={background} />} />
+        <Route
+          path="/p/:postId"
+          render={() => <Modal location={background} />}
+        />
       )}
     </>
   );

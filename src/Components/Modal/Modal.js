@@ -1,13 +1,13 @@
 import React, { useState, useLayoutEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import "./modal.scss";
+import { useDispatch, useSelector } from "react-redux";
 import ModalDetail from "./ModalDetail";
+import "./modal.scss";
 
 const Modal = props => {
-  const { onModalClose } = props;
-  const { location } = props;
-  const { postNumber } = useParams();
+  const { onModalClose, postNumber, location } = props;
   const history = useHistory();
+  const post = useSelector(state => state?.post?.post);
   const useLockBodyScroll = () => {
     useLayoutEffect(() => {
       const originalStyle = window.getComputedStyle(document.body).overflow;
@@ -32,7 +32,6 @@ const Modal = props => {
 
   useLockBodyScroll();
 
-  // const [postNumber, setPostNumber] = useState(null);
   const NavButton = ({ text, id }) =>
     id && (
       <div

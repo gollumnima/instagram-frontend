@@ -13,6 +13,7 @@ import "./mypage.scss";
 
 const MyPage = props => {
   const user = useSelector(state => state?.user?.userInfo ?? null);
+  const post = useSelector(state => state?.post?.post);
   // const postList = useSelector(state => state.post.postList);
   // const [img, setImg] = useState("");
   const [modal, setModal] = useState(false);
@@ -127,7 +128,9 @@ const MyPage = props => {
             />
           </div>
         </div>
-        {postNumber && <Modal onModalClose={() => setModal(false)} />}
+        {postNumber && (
+          <Modal onModalClose={() => setModal(false)} postNumber={postNumber} />
+        )}
         {/* {modal && (
           <Modal onModalClose={() => setModal(false)}>
             <ModalDetail postID={postNumber} />

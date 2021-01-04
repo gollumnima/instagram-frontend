@@ -3,11 +3,11 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { instaAPI } from "utils/axios.wrapper";
 import { getPost } from "store/post";
+import "./upload.scss";
 
-const UploadTemplate = props => {
+const UploadTemplate = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const post = useSelector(state => state?.post?.post);
   const [postID, setPostID] = useState(null);
   const [content, setContent] = useState("");
   const [imageURL, setImageURL] = useState("");
@@ -48,21 +48,21 @@ const UploadTemplate = props => {
       content,
       status: "PUBLISHED"
     });
-    history.push(`/p/${postID}`);
+    history.push("/myPage");
   };
 
   return (
-    <div className="ut-container">
-      <div className="ut-wrapper">
+    <div className="upload__container">
+      <div className="upload__wrapper">
         <input type="file" onChange={ev => handleFileChange(ev)} />
         {imageURL && (
           <div
-            className="ut-img-preview"
+            className="upload__img__preview"
             style={{ backgroundImage: `url(${imageURL})` }}
           />
         )}
         <textarea
-          className="ut-input-area"
+          className="upload__input"
           placeholder="문구 입력..."
           value={content}
           onChange={e => handleChange(e)}

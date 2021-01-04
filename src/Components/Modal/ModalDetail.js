@@ -9,13 +9,10 @@ import LayoutIconBox from "Components/Layout/LayoutIconBox";
 import * as postAction from "store/post";
 import * as commentAction from "store/comment";
 import "./modal__detail.scss";
+import { useParams } from "react-router-dom";
 
-const ModalDetail = props => {
-  const { postID } = props;
+const ModalDetail = ({ postId }) => {
   const dispatch = useDispatch();
-  console.log(postID, "postID in md");
-  console.log(props.postID, "postID in md 투우!");
-  // const postID = useSelector(state => state.post.postNumber);
   const post = useSelector(state => state?.post?.post);
   // const [imgURL, setImgURL] = useState("");
   // const [userID, setUserID] = useState("");
@@ -29,39 +26,35 @@ const ModalDetail = props => {
   //   dispatch(commentAction.getComments(postID));
   //   // ㄴ실제 리덕스엔 부모가 이렇게 주고있음
   // };
-
   const createComment = content => {
-    console.log({ postID });
-    console.log(post.id, "post iddd");
-    dispatch(commentAction.createComment(postID, content));
+    dispatch(commentAction.createComment(postId, content));
   };
 
   const updateComment = (commentID, content) => {
     // ㄴ자식이 주는 인자
-    dispatch(commentAction.changeComment(postID, commentID, content));
+    dispatch(commentAction.changeComment(postId, commentID, content));
     // ㄴ실제 리덕스엔 부모가 이렇게 주고있음
   };
 
   const deleteComment = commentID => {
-    dispatch(commentAction.deleteComment(postID, commentID));
+    dispatch(commentAction.deleteComment(postId, commentID));
   };
 
   const likePost = () => {
-    dispatch(postAction.likePost(postID));
+    dispatch(postAction.likePost(postId));
   };
 
   const unlikePost = () => {
-    dispatch(postAction.unlikePost(postID));
+    dispatch(postAction.unlikePost(postId));
   };
 
   useEffect(() => {
-    dispatch(postAction.getPost(postID));
-    dispatch(commentAction.getComments(postID));
-  }, [postID]);
+    dispatch(postAction.getPost(postId));
+    dispatch(commentAction.getComments(postId));
+  }, [postId]);
 
   if (!post) return <>게시물 불러오는중...</>;
-  console.log(post, ";;[[[[p[[ppppp");
-  console.log(post.id, "ididididid");
+
   return (
     <article className="modal__detail">
       <div className="modal__detail__left">

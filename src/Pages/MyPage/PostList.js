@@ -1,49 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
-import { instaAPI } from "utils/axios.wrapper";
 import { getPost, getPosts, deletePost } from "store/post";
-// import { getComments } from "store/comment";
-// import { createLike } from "store/like";
+import "./postlist.scss";
 
-const PostList = props => {
-  const { onModal } = props;
+const PostList = () => {
   const dispatch = useDispatch();
-  // const post = useSelector(state => state?.post) ?? null;
   const postList = useSelector(state => state?.post?.postList) ?? [];
-  // const user = useSelector(state => state.user);
-  // const commentList = useSelector(state => state.comment.commentList);
-  // const likeList = useSelector(state => state.like.likeList);
-
-  // const [postList, setPostList] = useState([]);
-  // const [modal, setModal] = useState(false);
 
   useEffect(() => {
     dispatch(getPosts());
-    // instaAPI.get(`/api/posts`).then(({ data }) => {
-    //   dispatch(getAllPost(data.rows));
-    //   setPostList(postList.concat(data.rows));
-    // });
   }, []);
-
-  const setCurrentPost = postID => {
-    // setModal(true);
-    // dispatch(getPost(post.id));
-    onModal(postID);
-    console.log(postID, "postlist에서의 post ID 어디 변하나 보자!");
-  };
-
-  // const handleMouse = id => {
-  // setNumber(id);
-  // dispatch(createLike(user?.userInfo?.id, id));
-  // dispatch(getComments(id));
-  // };
 
   const location = useLocation();
 
   return (
-    <div className="mypage-feed-container">
-      <div className="my-card-wrapper">
+    <div className="feed__container">
+      <div className="feed__card__wrapper">
         {postList?.map(post => (
           <>
             <Link
@@ -53,13 +26,9 @@ const PostList = props => {
               }}
             >
               <section
-                className="my-img-card"
-                // onMouseEnter={() => setOverlay(true)}
-                // onMouseLeave={() => setOverlay(false)}
+                className="feed__card__img"
                 key={post?.images[0]?.post_id}
                 style={{ backgroundImage: `url(${post?.images[0]?.url})` }}
-                onClick={() => setCurrentPost(post.id)}
-                // onMouseEnter={() => handleMouse(post.id)}
               >
                 {post?.images[0]?.url && (
                   <div className="overlay" key={`${post.image}-overlay`}>
@@ -69,7 +38,7 @@ const PostList = props => {
                     >
                       X
                     </span>
-                    <ul className="overlay-flex" key={`${post.image}-shadow`}>
+                    <ul className="overlay__flex" key={`${post.image}-shadow`}>
                       <li key={`${post.image}-heart`}>
                         ♥︎ {post.Likes?.length || 0}
                       </li>

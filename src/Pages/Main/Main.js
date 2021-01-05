@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Wrapper from "Components/Wrapper";
+import Wrapper from "Components/Wrapper/Wrapper";
 import Layout from "Components/Layout/Layout";
 import Profile from "Components/Profile";
 import Recommend from "Components/Recommend";

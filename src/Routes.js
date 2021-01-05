@@ -6,7 +6,7 @@ import {
   useHistory,
   useLocation
 } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getSelf } from "store/user";
 import Main from "./Pages/Main";
 import Login from "./Pages/Login";
@@ -19,10 +19,12 @@ import Modal from "Components/Modal";
 
 import "./styles/reset.scss";
 
-const Routes = props => {
+const Routes = () => {
   const history = useHistory();
   const location = useLocation();
   const background = location.state?.background;
+
+  const username = useSelector(state => state?.user?.userInfo?.username);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -41,7 +43,12 @@ const Routes = props => {
         <Route exact path="/" component={Main} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={SignUp} />
-        <Route exact path="/myPage" component={MyPage} />
+        <Route exact path="/:username" component={MyPage} />
+        {/* <Route
+          exact
+          path="/:username/saved"
+          render={() => <MyPage location="2" />}
+        /> */}
         <Route exact path="/detail" component={Detail} />
         <Route exact path="/counter" component={Counter} />
         <Route exact path="/p/:id" component={ModalDetail} />

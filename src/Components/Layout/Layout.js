@@ -5,7 +5,6 @@ import LayoutCmtBox from "./LayoutCmtBox";
 import LayoutContent from "./LayoutContent";
 import LayoutIconBox from "./LayoutIconBox";
 import LayoutCmtInput from "./LayoutCmtInput";
-import { useSelector } from "react-redux";
 
 const Layout = props => {
   return (

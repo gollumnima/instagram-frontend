@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import Wrapper from "Components/Wrapper";
+import Wrapper from "Components/Wrapper/Wrapper";
 import Tabs from "Components/Tabs";
 import Profile from "Components/Profile";
 import PostList from "./PostList";
@@ -10,11 +11,11 @@ import "./mypage.scss";
 
 const MyPage = props => {
   const user = useSelector(state => state?.user?.userInfo ?? null);
-
+  const postList = useSelector(state => state?.post?.postList ?? null);
   const [modal, setModal] = useState(false);
   const [postNumber, setPostNumber] = useState(null);
   const saves = useSelector(state => state?.save?.savedList);
-
+  console.log(props, "ppppp");
   return (
     <>
       <Wrapper>
@@ -41,19 +42,21 @@ const MyPage = props => {
                   <li className="mypage__profile__flex">
                     <span className="mypage__profile__flex__title">
                       게시물
-                      <span className="mypage__profile__flex__nums">3</span>
+                      <span className="mypage__profile__flex__nums">
+                        {postList.length}
+                      </span>
                     </span>
                   </li>
                   <li className="mypage__profile__flex">
                     <span className="mypage__profile__flex__title">
                       팔로워
-                      <span className="mypage__profile__flex__nums">1090</span>
+                      <span className="mypage__profile__flex__nums">0</span>
                     </span>
                   </li>
                   <li className="mypage__profile__flex">
                     <span className="mypage__profile__flex__title">
                       팔로우
-                      <span className="mypage__profile__flex__nums">99</span>
+                      <span className="mypage__profile__flex__nums">0</span>
                     </span>
                   </li>
                 </ul>
@@ -87,7 +90,11 @@ const MyPage = props => {
                 },
                 {
                   title: "저장됨",
-                  render: () => <SaveList />
+                  render: () => (
+                    <Link to={{ pathname: `/${user?.username}/saved` }}>
+                      <SaveList active="2" />
+                    </Link>
+                  )
                 },
                 {
                   title: "태그됨",

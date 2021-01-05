@@ -1,16 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
 import classNames from "classnames";
 import css from "./layout.scss";
-// import { createComment } from "store/comment";
 import "./layout__cmt__input.scss";
 
 const cn = classNames.bind(css);
 
 const LayoutCmtInput = props => {
   const { createComment } = props;
-  // const dispatch = useDispatch();
-  // const postID = useSelector(state => state.post.postNumber);
+
   const [comment, setComment] = useState("");
 
   const handleChange = e => {

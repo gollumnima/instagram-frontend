@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Wrapper from "Components/Wrapper";
+import Wrapper from "Components/Wrapper/Wrapper";
 import LayoutImgBox from "Components/Layout/LayoutImgBox";
 import LayoutCmtBox from "Components/Layout/LayoutCmtBox";
 import LayoutHeader from "Components/Layout/LayoutHeader";

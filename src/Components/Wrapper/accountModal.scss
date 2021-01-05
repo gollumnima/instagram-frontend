@@ -1,0 +1,66 @@
+@import 'styles/colorPalette';
+
+.account {
+  &__container {
+    position: absolute;
+    top: 53px;
+    right: 339px;
+    background-color: $white;
+    box-shadow: 0 0 5px 1px rgba(var(--jb7, 0, 0, 0), 0.0975);
+  }
+
+  &__top__shape {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    top: -6px;
+    right: 25px;
+    bottom: 0;
+    transform: rotate(45deg);
+    background-color: $white;
+    border-top: 1px solid $moregray;
+    box-shadow: 0 0 5px 1px rgba(var(--jb7, 0, 0, 0), 0.0975);
+    z-index: 3;
+  }
+
+  &__bottom {
+    border-radius: 6px;
+    background-color: $white;
+    z-index: 10;
+
+    svg {
+      width: 16px;
+      margin-left: 10px;
+    }
+    &__row {
+      display: flex;
+      padding-bottom: 8px;
+      padding-top: 10px;
+
+      &:hover {
+        background-color: $lightgray;
+      }
+    }
+
+    &__title__wrapper {
+      span {
+        font-size: 14px;
+        text-align: left;
+        margin-left: 9px;
+        padding: 5px 155px 20px 3px;
+      }
+    }
+
+    &__last {
+      padding-top: 5px;
+      padding-bottom: 10px;
+    }
+
+    hr {
+      width: 100%;
+      height: 1px;
+      background-color: $moregray;
+      border: 0;
+    }
+  }
+}

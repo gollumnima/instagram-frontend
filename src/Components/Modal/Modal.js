@@ -10,6 +10,7 @@ const Modal = ({ location }) => {
 
   //  const { onModalClose, postNumber, location } = props;
   const post = useSelector(state => state?.post?.post);
+  const username = useSelector(state => state?.user?.userInfo?.username);
   const useLockBodyScroll = () => {
     useLayoutEffect(() => {
       const originalStyle = window.getComputedStyle(document.body).overflow;
@@ -28,24 +29,32 @@ const Modal = ({ location }) => {
 
   useLockBodyScroll();
 
-  const NavButton = ({ text, id }) =>
-    id && (
-      <div
-        type="button"
-        onClick={() => history.push(`/p/${id}`, { background: location })}
-      >
-        {text}
-      </div>
-    );
+  const NavButton = ({ text, id }) => (
+    // id &&
+    <div
+      className="modal__nav__btn"
+      type="button"
+      onClick={() => history.push(`/p/${id}`, { background: location })}
+    >
+      {text}
+    </div>
+  );
 
   return (
     <>
-      <div className="modal-overlay" onClick={() => history.push("/myPage")} />
-      <div className="modal-container">
-        <div className="modal-inner-wrapper">
-          <NavButton history={history} id={state.next_id}>{`<`}</NavButton>
-          <ModalDetail postId={postId} />
-          <NavButton history={history} id={state.next_id}>{`>`}</NavButton>
+      <div
+        className="modal__overlay"
+        onClick={() => history.push(`/:${username}`)}
+      />
+      <div className="modal__container">
+        <div className="modal__inner">
+          <div className="modal__detail__wrapper">
+            <ModalDetail postId={postId} />
+          </div>
+          <div className="modal__nav__wrapper">
+            <NavButton history={history} id={state.next_id} text="<" />
+            <NavButton history={history} id={state.next_id} text=">" />
+          </div>
         </div>
       </div>
     </>

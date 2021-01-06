@@ -5,9 +5,7 @@ import css from "./tabs.scss";
 const cn = classNames.bind(css);
 
 const Tabs = ({ tabs, defaultActive }) => {
-  console.log({ tabs });
   const [activeTab, setActiveTab] = useState(defaultActive ?? tabs[0].key);
-  console.log({ activeTab });
   return (
     <>
       <nav className="mypage-tabs-nav-container">

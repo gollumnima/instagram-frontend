@@ -1,14 +1,12 @@
-import React, { useState, useLayoutEffect } from "react";
+import React, { useLayoutEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import ModalDetail from "./ModalDetail";
 import "./modal.scss";
 
 const Modal = ({ location }) => {
   const { postId } = useParams();
   const history = useHistory();
-
-  //  const { onModalClose, postNumber, location } = props;
   const post = useSelector(state => state?.post?.post);
   const username = useSelector(state => state?.user?.userInfo?.username);
   const useLockBodyScroll = () => {
@@ -51,10 +49,10 @@ const Modal = ({ location }) => {
           <div className="modal__detail__wrapper">
             <ModalDetail postId={postId} />
           </div>
-          <div className="modal__nav__wrapper">
+          {/* <div className="modal__nav__wrapper">
             <NavButton history={history} id={state.next_id} text="<" />
             <NavButton history={history} id={state.next_id} text=">" />
-          </div>
+          </div> */}
         </div>
       </div>
     </>

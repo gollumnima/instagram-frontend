@@ -9,7 +9,6 @@ import LayoutIconBox from "Components/Layout/LayoutIconBox";
 import * as postAction from "store/post";
 import * as commentAction from "store/comment";
 import "./modal__detail.scss";
-import { useParams } from "react-router-dom";
 
 const ModalDetail = ({ postId }) => {
   const dispatch = useDispatch();

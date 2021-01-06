@@ -1,0 +1,71 @@
+@import 'styles/colorPalette';
+
+.img__upload__modal {
+  width: 372px;
+  height: 220px;
+  background-color: $white;
+  margin: auto;
+
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  align-items: center;
+  -ms-flex-align: center;
+
+  justify-content: center;
+  -ms-flex-pack: justify;
+
+  border-radius: 10px;
+  z-index: 100;
+
+  h3 {
+    font-size: 18px;
+    font-weight: 900;
+    padding: 20px;
+    margin-top: 32px;
+  }
+
+  h2 {
+    font-size: 15px;
+    font-weight: 900;
+    padding: 15px 0px;
+  }
+
+  &__inner {
+    position: relative;
+    width: 100%;
+    top: 38%;
+    margin: 0 auto;
+    transform: translateY(-50%);
+    text-align: center;
+  }
+  &__divider {
+    border-bottom: 1px solid $moregray;
+
+    // input {
+    //   display: none;
+    // }
+  }
+
+  &__red {
+    color: $red;
+  }
+
+  &__blue {
+    color: $buttonBlue;
+  }
+  &__undo {
+    padding-top: 10px;
+
+    span {
+      font-size: 15px;
+    }
+  }
+}
+
+.clickable {
+  cursor: pointer;
+}

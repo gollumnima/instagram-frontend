@@ -8,6 +8,8 @@ import "./upload.scss";
 const UploadTemplate = () => {
   const history = useHistory();
   const dispatch = useDispatch();
+  const username = useSelector(state => state?.user?.userInfo?.username);
+
   const [postID, setPostID] = useState(null);
   const [content, setContent] = useState("");
   const [imageURL, setImageURL] = useState("");
@@ -48,7 +50,7 @@ const UploadTemplate = () => {
       content,
       status: "PUBLISHED"
     });
-    history.push("/myPage");
+    history.push(`/${username}`);
   };
 
   return (

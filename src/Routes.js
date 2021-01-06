@@ -16,15 +16,13 @@ import MyPage from "./Pages/MyPage/MyPage";
 import Detail from "./Pages/Detail";
 import ModalDetail from "Components/Modal/ModalDetail";
 import Modal from "Components/Modal";
-
+import ProfileImgUpload from "Pages/ProfileImgUpload/ProfileImgUpload";
 import "./styles/reset.scss";
 
 const Routes = () => {
   const history = useHistory();
   const location = useLocation();
   const background = location.state?.background;
-
-  const username = useSelector(state => state?.user?.userInfo?.username);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -44,14 +42,15 @@ const Routes = () => {
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/:username" component={MyPage} />
-        {/* <Route
+        <Route
           exact
           path="/:username/saved"
-          render={() => <MyPage location="2" />}
-        /> */}
+          render={() => <MyPage activeTab={2} />}
+        />
         <Route exact path="/detail" component={Detail} />
         <Route exact path="/counter" component={Counter} />
         <Route exact path="/p/:id" component={ModalDetail} />
+        <Route exact path="/accounts/edit" component={ProfileImgUpload} />
       </Switch>
       {background && (
         <Route

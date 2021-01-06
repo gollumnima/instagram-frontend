@@ -12,6 +12,7 @@ const Profile = props => (
           className="profile__img"
           style={{
             backgroundImage: `url(${props.url})`,
+            backgroundColor: `${props.url || `black`}`,
             backgroundPosition: "center",
             backgroundSize: "cover",
             width: `${props.size}px`,

@@ -23,20 +23,17 @@ const MyPage = props => {
           <div className="mypage__container__top">
             <div className="mypage__container__upper">
               <section className="mypage__container__pf__container">
-                <Profile
-                  url={
-                    user?.image_url ??
-                    "https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-19/s320x320/125803772_1165915217177196_1415869914155524541_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&_nc_ohc=IxtLOijkWxgAX-v66v1&tp=1&oh=ec27dc5ce5ffe4afeee410a245f6037e&oe=5FFEC0CB"
-                  }
-                  size="150"
-                />
+                <Profile url={user?.image_url} size="150" />
               </section>
               <section className="mypage__profile">
                 <div className="mypage__profile__username">
-                  <span>{user?.username ?? "dooreplay"} </span>
+                  <span>{user?.username ?? undefined} </span>
+                  {/* <Link to="/accounts/edit"> */}
+                  {/* // 이거 살리면 글씨가 갑자기 커져벌임..! */}
                   <button>
                     <span>프로필 편집</span>
                   </button>
+                  {/* </Link> */}
                 </div>
                 <ul className="mypage__profile__follows">
                   <li className="mypage__profile__flex">

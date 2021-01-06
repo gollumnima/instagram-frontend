@@ -11,9 +11,6 @@ const userSlice = createSlice({
   reducers: {
     setUserInfo: (state, action) => {
       state.userInfo = action.payload;
-    },
-    logout: (state, action) => {
-      state.userInfo = [];
     }
   }
 });
@@ -54,6 +51,15 @@ export const login = (username, password, callback) => async dispatch => {
 export const getSelf = () => dispatch => {
   instaAPI.get(`/api/users/self`).then(({ data }) => {
     dispatch(setUserInfo(data));
-    console.log(data);
+    console.log(data.name, "로그인된 유저");
   });
+};
+
+export const logout = () => dispatch => {
+  authToken.remove();
+  dispatch(setUserInfo(null));
+};
+
+export const deleteProfile = () => () => {
+  instaAPI.delete(`/api/users/self/persona`);
 };

@@ -12,14 +12,15 @@ const Main = props => {
   const user = useSelector(state => state.user);
   const [feed, setFeed] = useState([]);
 
+  console.log(feed);
   // 나중에 메인 피드에 뿌릴 데이터 따로 만들기! 지금은 test1의 것으로..!
   // 피드에 나오는 데이터는 어떤 기준으로 선정해야 할까?!
   useEffect(() => {
     instaAPI
       .get(`/api/posts`, {
         params: {
-          offset: 1,
-          limit: 5
+          offset: 0,
+          limit: 7
         }
       })
       .then(({ data }) => {
@@ -36,6 +37,7 @@ const Main = props => {
               <LiveStories />
               {feed.map(el => (
                 <Layout
+                  id={el?.User?.id}
                   username={el.User?.username}
                   img={el?.images[0]?.url}
                   content={el.content}
@@ -44,13 +46,15 @@ const Main = props => {
             </div>
             <div className="main-right">
               <div className="my-pf-container">
-                <Profile
-                  url={user.userInfo?.image_url}
-                  id={user.userInfo?.username ?? "dooreplay"}
-                  desc={user.userInfo?.description ?? "Doori Kim"}
-                  //btn="전환"
-                  size="56"
-                />
+                {user.userInfo && (
+                  <Profile
+                    url={user.userInfo?.image_url}
+                    id={user.userInfo?.username}
+                    desc={user.userInfo?.description}
+                    //btn="전환"
+                    size="56"
+                  />
+                )}
               </div>
               <Recommend />
             </div>

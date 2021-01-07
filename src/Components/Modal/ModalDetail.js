@@ -8,11 +8,21 @@ import LayoutCmtInput from "Components/Layout/LayoutCmtInput";
 import LayoutIconBox from "Components/Layout/LayoutIconBox";
 import * as postAction from "store/post";
 import * as commentAction from "store/comment";
+import { findUser } from "store/user";
 import "./modal__detail.scss";
 
 const ModalDetail = ({ postId }) => {
   const dispatch = useDispatch();
   const post = useSelector(state => state?.post?.post);
+  const userInfo = useSelector(state => state?.user?.foundUser);
+  const handleUser = () => {
+    dispatch(findUser(post?.User?.id || 1));
+    //userInfo null 나올때 방지턱 마련하기
+  };
+
+  useEffect(() => {
+    handleUser();
+  }, []);
   // const [imgURL, setImgURL] = useState("");
   // const [userID, setUserID] = useState("");
   // const [content, setContent] = useState("");
@@ -60,10 +70,7 @@ const ModalDetail = ({ postId }) => {
         <LayoutImgBox url={post.images?.[0]?.url ?? null} size="600" />
       </div>
       <div className="modal__detail__right">
-        <LayoutHeader
-          username={post.User.username}
-          // img={imgURL}
-        />
+        <LayoutHeader username={post.User.username} url={userInfo?.image_url} />
         <LayoutContent post={post} />
         <LayoutCmtBox
           post={post}

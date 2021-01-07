@@ -1,6 +1,10 @@
+@import 'styles/colorPalette';
+
 .modal__detail {
   display: flex;
   width: 935px;
+  background-color: $white;
+  border: 1px solid $moregray;
 
   &__right {
     width: 335px;

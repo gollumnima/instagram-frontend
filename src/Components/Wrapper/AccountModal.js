@@ -1,12 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "store/user";
 import "./accountModal.scss";
 
 const AccountModal = () => {
+  const history = useHistory();
   const username = useSelector(state => state.user?.userInfo?.username);
   const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(logout());
+    history.push("/login");
+  };
 
   return (
     <nav className="account__container">
@@ -55,7 +60,7 @@ const AccountModal = () => {
         <div
           role="button"
           className="account__bottom__title__wrapper account__bottom__last"
-          onClick={() => dispatch(logout())}
+          onClick={() => handleLogout()}
         >
           <span>로그아웃</span>
         </div>

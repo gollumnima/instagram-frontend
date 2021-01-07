@@ -3,16 +3,12 @@ import Profile from "Components/Profile";
 import { useSelector } from "react-redux";
 import "./layout__header.scss";
 
-const LayoutHeader = props => {
+const LayoutHeader = ({ url, username }) => {
   const user = useSelector(state => state.user);
   return (
     <header className="layout__header">
       <div className="layout__header__wrapper">
-        <Profile
-          url={user.userInfo?.image_url}
-          id={props.username ?? "통신불량"}
-          size="32"
-        />
+        <Profile url={url} id={username ?? "통신불량"} size="32" />
       </div>
       <div className="dots__container">
         <img

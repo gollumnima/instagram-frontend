@@ -45,9 +45,10 @@
   &__divider {
     border-bottom: 1px solid $moregray;
 
-    // input {
-    //   display: none;
-    // }
+    input {
+      position: fixed;
+      left: -5000px;
+    }
   }
 
   &__red {

@@ -49,7 +49,7 @@ const Routes = () => {
         />
         <Route exact path="/detail" component={Detail} />
         <Route exact path="/counter" component={Counter} />
-        <Route exact path="/p/:id" component={ModalDetail} />
+        <Route exact path="/p/:id" component={Detail} />
         <Route exact path="/accounts/edit" component={ProfileImgUpload} />
       </Switch>
       {background && (

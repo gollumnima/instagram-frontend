@@ -6,11 +6,15 @@ import { authToken } from "utils/localStorage.wrapper";
 const userSlice = createSlice({
   name: "user",
   initialState: {
-    userInfo: null
+    userInfo: null,
+    foundUser: null
   },
   reducers: {
     setUserInfo: (state, action) => {
       state.userInfo = action.payload;
+    },
+    setFoundUser: (state, action) => {
+      state.foundUser = action.payload;
     }
   }
 });
@@ -18,7 +22,7 @@ const userSlice = createSlice({
 export default userSlice.reducer;
 
 // Action
-const { setUserInfo } = userSlice.actions;
+const { setUserInfo, setFoundUser } = userSlice.actions;
 
 export const signUp = (username, name, password) => async dispatch => {
   try {
@@ -62,4 +66,9 @@ export const logout = () => dispatch => {
 
 export const deleteProfile = () => () => {
   instaAPI.delete(`/api/users/self/persona`);
+};
+
+export const findUser = userID => async dispatch => {
+  const { data } = await instaAPI.get(`/api/users/${userID}`);
+  dispatch(setFoundUser(data));
 };

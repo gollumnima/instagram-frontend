@@ -42,7 +42,7 @@ const Modal = ({ location }) => {
     <>
       <div
         className="modal__overlay"
-        onClick={() => history.push(`/:${username}`)}
+        onClick={() => history.push(`/${username}`)}
       />
       <div className="modal__container">
         <div className="modal__inner">

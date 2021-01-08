@@ -1,18 +1,23 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useHistory } from "react-router-dom";
 import { getPost, getPosts, deletePost } from "store/post";
 import "./postlist.scss";
 
-const PostList = () => {
+const PostList = ({ postList, saved }) => {
   const dispatch = useDispatch();
-  const postList = useSelector(state => state?.post?.postList) ?? [];
+  const history = useHistory();
+  const location = useLocation();
+  const username = useSelector(state => state?.user?.userInfo?.username);
 
   useEffect(() => {
     dispatch(getPosts());
   }, []);
 
-  const location = useLocation();
+  useEffect(() => {
+    if (saved) history.push(`/${username}/saved`);
+    if (saved === undefined) history.push(`/${username}`);
+  }, [saved]);
 
   return (
     <div className="feed__container">

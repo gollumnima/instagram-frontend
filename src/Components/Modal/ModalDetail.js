@@ -74,26 +74,15 @@ const ModalDetail = ({ postId }) => {
         <LayoutContent post={post} />
         <LayoutCmtBox
           post={post}
-          // getComments={getComments}
           updateComment={updateComment}
-          deleteComment={deleteComment} // <-- OK
-          // deleteComment={(param) => deleteComment(param)} <-- OK (진짜로 인자가 하나가 맞다면)
-          // deleteComment={(param1, param2) => deleteComment(param1, param2)} <-- OK (진짜로 인자가 두개가 맞다면)
-          // deleteComment={(...params) => deleteComment(...params)} <-- OK 첫번째꺼랑 똑같은 뜻
-          // deleteComment={deleteComment()} <-- 이게 커리함수가 아니라면 에러
+          deleteComment={deleteComment}
         />
         <LayoutIconBox
           post={post}
           likePost={likePost}
           unlikePost={unlikePost}
-          // postNumber={props.postNumber}
-          // selectedPost={props.selectedPost}
         />
-        <LayoutCmtInput
-          // postNumber={props.postNumber}
-          size={280}
-          createComment={createComment}
-        />
+        <LayoutCmtInput size={280} createComment={createComment} />
       </div>
     </article>
   );

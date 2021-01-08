@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-const SaveList = () => {
+const SaveList = props => {
   const saves = useSelector(state => state?.save?.savedList);
 
   return (

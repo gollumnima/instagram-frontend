@@ -2,13 +2,9 @@ import React, { useReducer } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { login } from "store/user";
-import { usernameCheck, passwordCheck } from "utils/validation";
 import "./login.scss";
 
 const Login = props => {
-  // const signedName = props.location.state.username;
-  // const signedPw = props.location.state.password;
-
   const initialState = { username: "", password: "" };
 
   const reducer = (state, action) => {
@@ -30,26 +26,11 @@ const Login = props => {
   const handleSubmit = async () => {
     await dispatch(
       login(username, password, user => {
-        console.log("로그인 성공", user);
-        // props.history.replace("", null);
         props.history.push("/");
 
         setDispatch({ type: "reset" });
       })
     );
-    // instaAPI
-    //   .post(`/api/users/login`, { username, password })
-    //   .then(res => {
-    //     if (res.status === 200) {
-    //       localStorage.setItem("insta-login-token", res.data.token);
-    //       console.log("로그인 성공! 오예에~~");
-
-    //       props.history.push("/");
-    //     }
-    //   })
-    //   .catch(err => console.log(err));
-    // props.history.push("/");
-    // setDispatch({ type: "reset" });
   };
 
   const handleEnter = e => {
@@ -57,10 +38,6 @@ const Login = props => {
       handleSubmit();
     }
   };
-
-  const regExpId = /^[0-9a-z]+$/;
-  const regExpPw = /(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{2,50}).{8,50}$/;
-  // : 숫자, 특문 각 1회 이상, 영문은 2개 이상 사용하여 8자리 이상 입력
 
   const { username, password } = state;
 

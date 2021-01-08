@@ -1,4 +1,4 @@
-import React, { useReducer, useState, useEffect } from "react";
+import React, { useReducer } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { signUp } from "store/user";
@@ -22,7 +22,7 @@ const SignUp = props => {
   const user = useSelector(state => state.user);
 
   const handleChange = e => {
-    const { name, value, password } = e.target;
+    const { name, value } = e.target;
     setDispatch({ type: name, value });
   };
 

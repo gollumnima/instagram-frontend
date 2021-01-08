@@ -4,7 +4,7 @@
   display: flex;
   width: 935px;
   background-color: $white;
-  border: 1px solid $moregray;
+  box-shadow: 0 0 5px 1px rgba(var(--jb7, 0, 0, 0), 0.0975);
 
   &__right {
     width: 335px;

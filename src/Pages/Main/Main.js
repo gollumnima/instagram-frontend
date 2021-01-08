@@ -8,11 +8,10 @@ import { useSelector } from "react-redux";
 import { instaAPI } from "utils/axios.wrapper";
 import "./main.scss";
 
-const Main = props => {
+const Main = () => {
   const user = useSelector(state => state.user);
   const [feed, setFeed] = useState([]);
 
-  console.log(feed);
   // 나중에 메인 피드에 뿌릴 데이터 따로 만들기! 지금은 test1의 것으로..!
   // 피드에 나오는 데이터는 어떤 기준으로 선정해야 할까?!
   useEffect(() => {
@@ -31,20 +30,22 @@ const Main = props => {
   return (
     <>
       <Wrapper>
-        <div className="main-container">
-          <div className="main-inner">
-            <div className="main-left">
+        <div className="main__container">
+          <div className="main__inner">
+            <div className="main__left">
               <LiveStories />
               {feed.map(el => (
                 <Layout
-                  id={el?.User?.id}
-                  username={el.User?.username}
-                  img={el?.images[0]?.url}
-                  content={el.content}
+                  // id={el?.User?.id}
+                  // username={el.User?.username}
+                  // img={el?.images[0]?.url}
+                  // content={el.content}
+                  post={el}
+                  postId={el?.id}
                 />
               ))}
             </div>
-            <div className="main-right">
+            <div className="main__right">
               <div className="my-pf-container">
                 {user.userInfo && (
                   <Profile
@@ -58,7 +59,7 @@ const Main = props => {
               </div>
               <Recommend />
             </div>
-            <div className="main-right-guard" />
+            <div className="main__right__guard" />
           </div>
         </div>
       </Wrapper>

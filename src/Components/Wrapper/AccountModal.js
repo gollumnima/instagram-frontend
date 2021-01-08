@@ -40,9 +40,11 @@ const AccountModal = () => {
             >
               <path d="M7 5v23l1.594-1.188L16 21.25l7.406 5.563L25 28V5H7zm2 2h14v17l-6.406-4.813L16 18.75l-.594.438L9 24V7z" />
             </svg>
-            <div className="account__bottom__title__wrapper">
-              <span>저장됨</span>
-            </div>
+            <Link to={{ pathname: `/${username}/saved` }}>
+              <div className="account__bottom__title__wrapper">
+                <span>저장됨</span>
+              </div>
+            </Link>
           </div>
         </Link>
         <Link to="/accounts/edit">

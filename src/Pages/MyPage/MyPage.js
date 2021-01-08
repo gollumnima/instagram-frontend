@@ -15,7 +15,9 @@ const MyPage = props => {
   const [modal, setModal] = useState(false);
   const [postNumber, setPostNumber] = useState(null);
   const saves = useSelector(state => state?.save?.savedList);
-  console.log(props, "ppppp");
+
+  const userFeed = postList.filter(e => e.User?.username === user?.username);
+
   return (
     <>
       <Wrapper>
@@ -40,7 +42,7 @@ const MyPage = props => {
                     <span className="mypage__profile__flex__title">
                       게시물
                       <span className="mypage__profile__flex__nums">
-                        {postList.length}
+                        {userFeed.length}
                       </span>
                     </span>
                   </li>
@@ -59,7 +61,7 @@ const MyPage = props => {
                 </ul>
                 <div className="mypage__profile__desc">
                   <span className="mypage__profile__words username">
-                    {user?.name ?? "Doori Kim"}
+                    {user?.name ?? "이름 없음"}
                   </span>
                   <span className="mypage__profile__words">
                     {user?.description ?? "Girls support girls💪💪"}
@@ -79,24 +81,22 @@ const MyPage = props => {
               tabs={[
                 {
                   title: "업로드",
-                  render: () => <UploadTemplate />
+                  render: () => <UploadTemplate upload="upload" />
                 },
                 {
                   title: "게시물",
-                  render: () => <PostList />
+                  render: () => <PostList postList={userFeed} />
                 },
                 {
                   title: "저장됨",
                   render: () => (
-                    <Link to={{ pathname: `/${user?.username}/saved` }}>
-                      <SaveList active="2" />
-                    </Link>
+                    <PostList active="2" postList={saves} saved="saved" />
                   )
-                },
-                {
-                  title: "태그됨",
-                  render: () => <UploadTemplate />
                 }
+                // {
+                //   title: "태그됨",
+                //   render: () => <PostList />
+                // }
               ]}
               active={0}
               defaultActive={1}

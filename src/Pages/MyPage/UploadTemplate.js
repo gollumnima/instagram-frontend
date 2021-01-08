@@ -5,7 +5,7 @@ import { instaAPI } from "utils/axios.wrapper";
 import { getPost } from "store/post";
 import "./upload.scss";
 
-const UploadTemplate = () => {
+const UploadTemplate = ({ upload }) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const username = useSelector(state => state?.user?.userInfo?.username);
@@ -17,6 +17,11 @@ const UploadTemplate = () => {
   const handleChange = e => {
     setContent(e.target.value);
   };
+
+  useEffect(() => {
+    if (upload) history.push(`/${username}/upload`);
+    if (upload === undefined) history.push(`/${username}`);
+  }, [upload]);
 
   const handleFileChange = async ev => {
     ev.preventDefault();
@@ -50,7 +55,7 @@ const UploadTemplate = () => {
       content,
       status: "PUBLISHED"
     });
-    history.push(`/${username}`);
+    history.push(`/`);
   };
 
   return (

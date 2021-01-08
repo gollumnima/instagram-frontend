@@ -1,7 +1,5 @@
-import { current } from "@reduxjs/toolkit";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { createLike, deleteLike } from "store/like";
 import { getSaves } from "store/save";
 import "./layout__icon__box.scss";
 
@@ -12,6 +10,7 @@ const LayoutIconBox = props => {
   const likes = post?.Likes ?? [];
   const hasLikedThisPost = !!likes.find(e => e.User.id === userID);
   const saves = useSelector(state => state?.save?.savedList);
+  // saved property가 생기면 그때 책갈피 색깔 바뀌게 하기
 
   const handleHeart = () => {
     const action = hasLikedThisPost ? unlikePost : likePost;

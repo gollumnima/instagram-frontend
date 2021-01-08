@@ -6,7 +6,6 @@ import { findUser } from "store/user";
 import "./detail.scss";
 
 const Detail = props => {
-  console.log(props);
   const dispatch = useDispatch();
   const userInfo = useSelector(state => state.user?.foundUser);
   const handleUser = () => {

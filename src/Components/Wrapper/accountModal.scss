@@ -1,10 +1,13 @@
 @import 'styles/colorPalette';
 
 .account {
+  &__shell {
+    margin-left: -180px;
+  }
   &__container {
     position: absolute;
     top: 53px;
-    right: 339px;
+    // right: 339px;
     background-color: $white;
     box-shadow: 0 0 5px 1px rgba(var(--jb7, 0, 0, 0), 0.0975);
   }
@@ -14,19 +17,18 @@
     width: 14px;
     height: 14px;
     top: -6px;
-    right: 25px;
+    left: 184px;
     bottom: 0;
     transform: rotate(45deg);
     background-color: $white;
     border-top: 1px solid $moregray;
     box-shadow: 0 0 5px 1px rgba(var(--jb7, 0, 0, 0), 0.0975);
-    z-index: 3;
   }
 
   &__bottom {
+    position: relative;
     border-radius: 6px;
     background-color: $white;
-    z-index: 10;
 
     svg {
       width: 16px;

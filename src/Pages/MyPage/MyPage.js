@@ -1,23 +1,28 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { Link, Route, useLocation } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import Wrapper from "Components/Wrapper/Wrapper";
 import Tabs from "Components/Tabs";
 import Profile from "Components/Profile";
 import PostList from "./PostList";
 import UploadTemplate from "./UploadTemplate";
+import { findUser } from "store/user";
 import SaveList from "./SaveList";
 import "./mypage.scss";
 
 const MyPage = props => {
+  const location = useLocation();
+  const dispatch = useDispatch();
   const user = useSelector(state => state?.user?.userInfo ?? null);
   const postList = useSelector(state => state?.post?.postList ?? null);
   const [modal, setModal] = useState(false);
   const [postNumber, setPostNumber] = useState(null);
   const saves = useSelector(state => state?.save?.savedList);
+  const linkedName = location.pathname.slice(1);
 
-  const userFeed = postList.filter(e => e.User?.username === user?.username);
-
+  const userFeed = postList.filter(el => el.User?.username === user?.username);
+  const linkedFeed = postList.filter(el => el.User?.username === linkedName);
+  console.log(user);
   return (
     <>
       <Wrapper>
@@ -61,10 +66,10 @@ const MyPage = props => {
                 </ul>
                 <div className="mypage__profile__desc">
                   <span className="mypage__profile__words username">
-                    {user?.name ?? "이름 없음"}
+                    {user?.name ?? null}
                   </span>
                   <span className="mypage__profile__words">
-                    {user?.description ?? "Girls support girls💪💪"}
+                    {user?.description ?? null}
                   </span>
                 </div>
               </section>
@@ -85,7 +90,13 @@ const MyPage = props => {
                 },
                 {
                   title: "게시물",
-                  render: () => <PostList postList={userFeed} />
+                  render: () => (
+                    <PostList
+                      postList={
+                        user?.username === linkedName ? userFeed : linkedFeed
+                      }
+                    />
+                  )
                 },
                 {
                   title: "저장됨",
@@ -102,6 +113,7 @@ const MyPage = props => {
               defaultActive={1}
             />
           </div>
+          {/* <Route path="/:username/upload" component={UploadTemplate} /> */}
         </div>
       </Wrapper>
     </>

@@ -49,7 +49,7 @@ a {
 
     cursor: pointer;
 
-    > p > span {
+    p span {
       color: $buttonBlue;
     }
   }
@@ -60,6 +60,9 @@ a {
     input {
       @include inputFamily;
       margin-bottom: 6px;
+      &::placeholder {
+        font-size: 14px;
+      }
     }
 
     button {
@@ -94,6 +97,10 @@ a {
     font-weight: 900;
   }
 }
+
+// .blue-highlight {
+//   color: $buttonBlue;
+// }
 
 // .input-pw {
 //   font-size: 16px;

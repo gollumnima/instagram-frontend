@@ -14,10 +14,11 @@ const PostList = ({ postList, saved }) => {
     dispatch(getPosts());
   }, []);
 
-  useEffect(() => {
-    if (saved) history.push(`/${username}/saved`);
-    if (saved === undefined) history.push(`/${username}`);
-  }, [saved]);
+  // useEffect(() => {
+  //   if (saved) history.push(`/${username}/saved`);
+  //   if (saved === undefined) history.push(`/${username}`);
+  // }, [saved]);
+  console.log(postList);
 
   return (
     <div className="feed__container">

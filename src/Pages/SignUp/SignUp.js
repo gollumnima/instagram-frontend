@@ -92,7 +92,7 @@ const SignUp = props => {
           <p>
             계정이 있으신가요?
             <Link to="/login">
-              <span> 로그인</span>
+              <span className="blue-highlight"> 로그인</span>
             </Link>
           </p>
         </div>

@@ -13,12 +13,10 @@ const PostList = ({ postList, saved }) => {
   useEffect(() => {
     dispatch(getPosts());
   }, []);
-
   // useEffect(() => {
   //   if (saved) history.push(`/${username}/saved`);
   //   if (saved === undefined) history.push(`/${username}`);
   // }, [saved]);
-  console.log(postList);
 
   return (
     <div className="feed__container">
@@ -38,12 +36,14 @@ const PostList = ({ postList, saved }) => {
               >
                 {post?.images[0]?.url && (
                   <div className="overlay" key={`${post.image}-overlay`}>
-                    <span
-                      className="delete-x"
-                      onClick={() => dispatch(deletePost(post.id))}
-                    >
-                      X
-                    </span>
+                    {post.User?.username === username && (
+                      <span
+                        className="delete-x"
+                        onClick={() => dispatch(deletePost(post.id))}
+                      >
+                        X
+                      </span>
+                    )}
                     <ul className="overlay__flex" key={`${post.image}-shadow`}>
                       <li key={`${post.image}-heart`}>
                         ♥︎ {post.Likes?.length || 0}

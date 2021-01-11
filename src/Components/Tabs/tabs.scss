@@ -13,12 +13,16 @@
 
       cursor: pointer;
     }
-    button {
-      all: unset;
+    a {
+      display: inline-block;
       padding: 20px 5px;
     }
     .active {
       border-top: 1px solid $black;
     }
   }
+}
+
+.mypage__nav__link:active {
+  border-top: 1px solid $black;
 }

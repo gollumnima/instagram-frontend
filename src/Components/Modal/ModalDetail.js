@@ -16,7 +16,7 @@ const ModalDetail = ({ postId }) => {
   const post = useSelector(state => state?.post?.post);
   const userInfo = useSelector(state => state?.user?.foundUser);
   const handleUser = () => {
-    dispatch(findUser(post?.User?.id || 1));
+    dispatch(findUser(post?.User?.username || 1));
     //userInfo null 나올때 방지턱 마련하기
   };
 

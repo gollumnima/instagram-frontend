@@ -21,23 +21,35 @@
   font-size: 28px;
 
   &__username {
-    display: flex;
-    > button {
+    margin-top: 3px;
+    &__wrapper {
+      display: flex;
+    }
+  }
+  &__btn {
+    &__shell {
       all: unset;
       margin-left: 19px;
 
       cursor: pointer;
-
-      > span {
-        border: 1px solid $moregray;
+      span {
         border-radius: 4px;
-        color: $black;
-        padding: 5px 9px;
         font-size: 14px;
         font-weight: 600;
       }
     }
+    &__white {
+      padding: 5px 9px;
+      color: $black;
+      border: 1px solid $moregray;
+    }
+    &__blue {
+      color: $white;
+      background-color: $buttonBlue;
+      padding: 5px 25px;
+    }
   }
+
   &__follows {
     display: flex;
     margin-top: 20px;
@@ -50,6 +62,7 @@
     }
     &__nums {
       font-weight: 900;
+      margin-left: 5px;
     }
   }
 

@@ -13,10 +13,10 @@ import * as commentAction from "store/comment";
 const Layout = props => {
   const { post, postId } = props;
   const dispatch = useDispatch();
-  const userInfo = useSelector(state => state.user?.foundUser);
+  const foundUser = useSelector(state => state.user?.foundUser);
 
   const handleUser = () => {
-    dispatch(findUser(post?.User?.id));
+    dispatch(findUser(post?.User?.username));
   };
 
   useEffect(() => {
@@ -52,7 +52,7 @@ const Layout = props => {
 
   return (
     <div className="layout">
-      <LayoutHeader username={post?.User.username} url={userInfo?.image_url} />
+      <LayoutHeader username={post?.User.username} url={foundUser?.image_url} />
       <LayoutImgBox url={post.images?.[0]?.url ?? null} size="600" />
       <section className="layout__bottom">
         <LayoutIconBox

@@ -7,7 +7,7 @@ import "./detail.scss";
 
 const Detail = props => {
   const dispatch = useDispatch();
-  const userInfo = useSelector(state => state.user?.foundUser);
+  const foundUser = useSelector(state => state.user?.foundUser);
   const handleUser = () => {
     //dispatch(findUser(post?.User?.id));
   };

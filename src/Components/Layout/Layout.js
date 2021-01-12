@@ -28,9 +28,7 @@ const Layout = props => {
   };
 
   const updateComment = (commentID, content) => {
-    // ㄴ자식이 주는 인자
     dispatch(commentAction.changeComment(postId, commentID, content));
-    // ㄴ실제 리덕스엔 부모가 이렇게 주고있음
   };
 
   const deleteComment = commentID => {
@@ -62,7 +60,7 @@ const Layout = props => {
         />
         <LayoutContent post={post} />
         <LayoutCmtBox
-          // 메인에서 댓글 달 때 문제가 생기는데 문제를 모르겠음..
+          // 메인에서 댓글 달 때 문제가 생기는데 문제 파악중
           post={post}
           updateComment={updateComment}
           deleteComment={deleteComment}

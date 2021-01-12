@@ -17,32 +17,18 @@ const ModalDetail = ({ postId }) => {
   const userInfo = useSelector(state => state?.user?.foundUser);
   const handleUser = () => {
     dispatch(findUser(post?.User?.username || 1));
-    //userInfo null 나올때 방지턱 마련하기
   };
 
   useEffect(() => {
     handleUser();
   }, []);
-  // const [imgURL, setImgURL] = useState("");
-  // const [userID, setUserID] = useState("");
-  // const [content, setContent] = useState("");
-  // const [commentList, setCommentList] = useState([]);
 
-  // 지금 자식이 부모가 주는 함수 호출할때, postID 없이 호출하고있어~
-  // 그래서 모든 함수가 다 인자가 하나씩 줄어들어
-  // const getComments = () => {
-  //   // ㄴ자식이 주는 인자
-  //   dispatch(commentAction.getComments(postID));
-  //   // ㄴ실제 리덕스엔 부모가 이렇게 주고있음
-  // };
   const createComment = content => {
     dispatch(commentAction.createComment(postId, content));
   };
 
   const updateComment = (commentID, content) => {
-    // ㄴ자식이 주는 인자
     dispatch(commentAction.changeComment(postId, commentID, content));
-    // ㄴ실제 리덕스엔 부모가 이렇게 주고있음
   };
 
   const deleteComment = commentID => {

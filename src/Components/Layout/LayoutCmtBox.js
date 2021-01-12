@@ -37,8 +37,6 @@ const LayoutCmtBox = props => {
                 {editingComment === comment.id ? (
                   <LayoutCmtEditable
                     comment={comment}
-                    //이게 post로 넘어와도 postNumber로 넘어와도 둘다 작동함. 왜지?!
-                    // postNumber={props.postNumber}
                     onSubmit={(commentId, content) => {
                       updateComment(commentId, content);
                       setEditingComment(null);

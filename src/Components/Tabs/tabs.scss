@@ -1,6 +1,6 @@
 @import 'styles/colorPalette';
 
-.mypage-tabs-nav-container {
+.mypage__tabs {
   ul {
     display: flex;
     justify-content: center;
@@ -17,12 +17,5 @@
       display: inline-block;
       padding: 20px 5px;
     }
-    .active {
-      border-top: 1px solid $black;
-    }
   }
-}
-
-.mypage__nav__link:active {
-  border-top: 1px solid $black;
 }

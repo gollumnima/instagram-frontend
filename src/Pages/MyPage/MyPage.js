@@ -10,7 +10,7 @@ import { findUser, follow, getFollowers, getFollowings } from "store/user";
 import SaveList from "./SaveList";
 import "./mypage.scss";
 
-const MyPage = props => {
+const MyPage = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const userInfo = useSelector(state => state?.user?.userInfo ?? null);
@@ -129,14 +129,16 @@ const MyPage = props => {
             </section> */}
           </div>
           <div className="mypage__feed">
-            <nav className="mypage-tabs-nav-container">
+            <nav className="mypage__tabs">
               <ul>
                 <li>
                   <NavLink
                     to={`/${foundUser?.username}/upload`}
                     className="mypage__nav__link"
-                    // activeClassName="active"
-                    // activeStyle={{ borderTop: "1px solid black" }}
+                    activeClassName="activeRoute"
+                    isActive={() =>
+                      location?.pathname === `/${foundUser?.username}/upload`
+                    }
                   >
                     업로드
                   </NavLink>
@@ -145,8 +147,10 @@ const MyPage = props => {
                   <NavLink
                     to={`/${foundUser?.username}`}
                     className="mypage__nav__link"
-                    // activeClassName="active"
-                    // activeStyle={{ borderTop: "1px solid black" }}
+                    activeClassName="activeRoute"
+                    isActive={() =>
+                      location?.pathname === `/${foundUser?.username}`
+                    }
                   >
                     게시물
                   </NavLink>
@@ -155,8 +159,10 @@ const MyPage = props => {
                   <NavLink
                     to={`/${foundUser?.username}/saved`}
                     className="mypage__nav__link"
-                    // activeClassName="active"
-                    // activeStyle={{ borderTop: "1px solid black" }}
+                    activeClassName="activeRoute"
+                    isActive={() =>
+                      location?.pathname === `/${foundUser?.username}/saved`
+                    }
                   >
                     저장됨
                   </NavLink>

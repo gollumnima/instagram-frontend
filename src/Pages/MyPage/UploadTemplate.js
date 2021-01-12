@@ -18,11 +18,6 @@ const UploadTemplate = ({ upload }) => {
     setContent(e.target.value);
   };
 
-  // useEffect(() => {
-  //   if (upload) history.push(`/${username}/upload`);
-  //   if (upload === undefined) history.push(`/${username}`);
-  // }, [upload]);
-
   const handleFileChange = async ev => {
     ev.preventDefault();
     const [file] = ev.target.files;

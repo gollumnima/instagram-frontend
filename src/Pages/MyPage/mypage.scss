@@ -90,3 +90,26 @@ footer {
     font-weight: 400;
   }
 }
+
+.mypage__tabs {
+  ul {
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid $moregray;
+    color: $black;
+
+    li {
+      margin-right: 60px;
+      font-size: 13px;
+
+      cursor: pointer;
+    }
+    a {
+      display: inline-block;
+      padding: 20px 5px;
+    }
+  }
+  a.activeRoute {
+    border-top: 1px solid $black;
+  }
+}

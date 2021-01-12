@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import { instaAPI } from "utils/axios.wrapper";
 import { authToken } from "utils/localStorage.wrapper";
 
-// Slice
 const userSlice = createSlice({
   name: "user",
   initialState: {

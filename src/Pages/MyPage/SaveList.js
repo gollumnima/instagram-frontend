@@ -11,12 +11,8 @@ const SaveList = props => {
           <>
             <section
               className="my-img-card"
-              // onMouseEnter={() => setOverlay(true)}
-              // onMouseLeave={() => setOverlay(false)}
               key={post?.images[0]?.post_id}
               style={{ backgroundImage: `url(${post?.images[0]?.url})` }}
-              // onClick={() => setCurrentPost(post.id)}
-              // onMouseEnter={() => handleMouse(post.id)}
             >
               {post?.images[0]?.url && (
                 <div className="overlay" key={`${post.image}-overlay`}>

@@ -34,9 +34,7 @@ const Routes = () => {
         <Route exact path="/" component={Main} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={SignUp} />
-        <Route exact path="/:username" component={MyPage} />
-        <Route exact path="/:username/upload" component={MyPage} />
-        <Route exact path="/:username/saved" component={MyPage} />
+        <Route path="/:username" component={MyPage} />
         <Route exact path="/detail" component={Detail} />
         <Route exact path="/counter" component={Counter} />
         <Route exact path="/p/:id" component={Detail} />

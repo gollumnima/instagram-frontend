@@ -9,7 +9,6 @@ import like from "./like";
 import save from "./save";
 
 const reducer = combineReducers({
-  // reducer 목록 추가
   user,
   counter,
   calculator,

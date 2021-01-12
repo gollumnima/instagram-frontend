@@ -12,7 +12,6 @@ const Main = () => {
   const user = useSelector(state => state.user);
   const [feed, setFeed] = useState([]);
 
-  // 나중에 메인 피드에 뿌릴 데이터 따로 만들기! 지금은 test1의 것으로..!
   // 피드에 나오는 데이터는 어떤 기준으로 선정해야 할까?!
   useEffect(() => {
     instaAPI

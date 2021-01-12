@@ -4,7 +4,7 @@ import { Link, useLocation, useHistory } from "react-router-dom";
 import { getPost, getPosts, deletePost } from "store/post";
 import "./postlist.scss";
 
-const PostList = ({ postList, saved }) => {
+const PostList = ({ postList }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
@@ -13,10 +13,6 @@ const PostList = ({ postList, saved }) => {
   useEffect(() => {
     dispatch(getPosts());
   }, []);
-  // useEffect(() => {
-  //   if (saved) history.push(`/${username}/saved`);
-  //   if (saved === undefined) history.push(`/${username}`);
-  // }, [saved]);
 
   return (
     <div className="feed__container">

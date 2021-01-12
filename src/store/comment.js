@@ -14,14 +14,6 @@ const commentSlice = createSlice({
     setCommentID: (state, action) => {
       state.commentID = action.payload;
     }
-    // removeComment: (state, action) => {
-    //   const target = state.commentList.find(el => el.id === state.commentID);
-    //   const idx = state.commentList.indexOf(target);
-    //   state.commentList.splice(idx, 1);
-    // }
-    // 댓글 생성 api 호출하고나서 --> get 해서 덮어쓰지
-    // 댓글 수정 하고나서 --> get
-    // 댓글 삭제 하고나서 -->
   }
 });
 

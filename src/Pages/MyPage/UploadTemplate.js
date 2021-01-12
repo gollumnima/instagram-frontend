@@ -5,7 +5,7 @@ import { instaAPI } from "utils/axios.wrapper";
 import { getPost } from "store/post";
 import "./upload.scss";
 
-const UploadTemplate = ({ upload }) => {
+const UploadTemplate = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const username = useSelector(state => state?.user?.userInfo?.username);

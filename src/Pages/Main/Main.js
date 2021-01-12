@@ -11,21 +11,46 @@ import "./main.scss";
 const Main = () => {
   const user = useSelector(state => state.user);
   const [feed, setFeed] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [limit, setLimit] = useState(5);
 
-  // 피드에 나오는 데이터는 어떤 기준으로 선정해야 할까?!
+  const handleScroll = () => {
+    let bodyScrollTop =
+      window.pageYOffset ||
+      document.documentElement.scrollTop ||
+      document.body.scrollTop;
+
+    if (
+      window.innerHeight + bodyScrollTop !==
+      document.documentElement.offsetHeight
+    )
+      return;
+    setLoading(true);
+    setLimit(limit + 5);
+  };
+
   useEffect(() => {
     instaAPI
       .get(`/api/posts`, {
         params: {
           offset: 0,
-          limit: 7
+          limit: limit
         }
       })
       .then(({ data }) => {
         setFeed(data.rows);
       });
-  }, []);
+  }, [limit]);
 
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [limit]);
+
+  console.log({ limit });
+  console.log({ loading });
   return (
     <>
       <Wrapper>
@@ -43,6 +68,7 @@ const Main = () => {
                   postId={el?.id}
                 />
               ))}
+              {loading && <h1>더 불러오는 중</h1>}
             </div>
             <div className="main__right">
               <div className="my-pf-container">

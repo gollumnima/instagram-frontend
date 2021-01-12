@@ -50,7 +50,11 @@ const Layout = props => {
 
   return (
     <div className="layout">
-      <LayoutHeader username={post?.User.username} url={foundUser?.image_url} />
+      <LayoutHeader
+        username={post?.User.username}
+        url={foundUser?.image_url}
+        link="true"
+      />
       <LayoutImgBox url={post.images?.[0]?.url ?? null} size="600" />
       <section className="layout__bottom">
         <LayoutIconBox

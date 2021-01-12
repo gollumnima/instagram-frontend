@@ -23,5 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 
 # api 보호하기!
-/utils/config.js
+/src/utils/config.js
 

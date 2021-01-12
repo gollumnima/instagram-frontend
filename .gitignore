@@ -25,6 +25,3 @@ yarn-error.log*
 # api 보호하기!
 /utils/config.js
 
-
-package-lock.json
-yarn.lock

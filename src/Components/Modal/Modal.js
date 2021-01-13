@@ -1,14 +1,20 @@
-import React, { useLayoutEffect } from "react";
+import React, { useLayoutEffect, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import ModalDetail from "./ModalDetail";
+import { findUser } from "store/user";
 import "./modal.scss";
 
 const Modal = ({ location }) => {
+  const dispatch = useDispatch();
   const { postId } = useParams();
   const history = useHistory();
   const post = useSelector(state => state?.post?.post);
-  const username = useSelector(state => state?.user?.userInfo?.username);
+  const linkedName = location.pathname.slice(1);
+  const foundUser = useSelector(
+    state => state?.user?.foundUser?.username ?? null
+  );
+
   const useLockBodyScroll = () => {
     useLayoutEffect(() => {
       const originalStyle = window.getComputedStyle(document.body).overflow;
@@ -16,6 +22,10 @@ const Modal = ({ location }) => {
       return () => (document.body.style.overflow = originalStyle);
     }, []);
   };
+
+  useEffect(() => {
+    dispatch(findUser(linkedName));
+  }, []);
 
   const [state, setState] = React.useReducer(
     (prev, next) => ({ ...prev, ...next }),
@@ -38,11 +48,12 @@ const Modal = ({ location }) => {
     </div>
   );
 
+  console.log(foundUser);
   return (
     <>
       <div
         className="modal__overlay"
-        onClick={() => history.push(`/${username}`)}
+        onClick={() => history.push(`/${foundUser}`)}
       />
       <div className="modal__container">
         <div className="modal__inner">

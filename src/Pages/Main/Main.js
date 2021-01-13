@@ -6,6 +6,7 @@ import Recommend from "Components/Recommend";
 import LiveStories from "Components/LiveStories";
 import { useSelector } from "react-redux";
 import { instaAPI } from "utils/axios.wrapper";
+import { throttle } from "lodash";
 import "./main.scss";
 
 const Main = () => {
@@ -15,16 +16,17 @@ const Main = () => {
   const [limit, setLimit] = useState(5);
 
   const handleScroll = () => {
+    const windowHeight = "innerHeight" in window;
     let bodyScrollTop =
       window.pageYOffset ||
       document.documentElement.scrollTop ||
       document.body.scrollTop;
 
     if (
-      window.innerHeight + bodyScrollTop !==
+      window.innerHeight + bodyScrollTop >=
       document.documentElement.offsetHeight
     )
-      return;
+      console.log("바닥쓰");
     setLoading(true);
     setLimit(limit + 5);
   };
@@ -44,13 +46,14 @@ const Main = () => {
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
+
+    // throttle(handleScroll, 300000));
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [limit]);
 
-  console.log({ limit });
-  console.log({ loading });
+  console.log(feed);
   return (
     <>
       <Wrapper>
@@ -66,6 +69,7 @@ const Main = () => {
                   // content={el.content}
                   post={el}
                   postId={el?.id}
+                  user={el?.User}
                 />
               ))}
               {loading && <h1>더 불러오는 중</h1>}

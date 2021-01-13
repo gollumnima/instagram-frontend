@@ -7,8 +7,14 @@ const userSlice = createSlice({
   initialState: {
     userInfo: null,
     foundUser: null,
-    followers: null,
-    followings: null
+    followers: {
+      rows: [],
+      count: 0
+    },
+    followings: {
+      rows: [],
+      count: 0
+    }
   },
   reducers: {
     setUserInfo: (state, action) => {
@@ -17,11 +23,13 @@ const userSlice = createSlice({
     setFoundUser: (state, action) => {
       state.foundUser = action.payload;
     },
-    setFollowers: (state, action) => {
-      state.followers = action.payload;
+    setFollowers: (state, { payload = {} }) => {
+      const { rows, count } = payload;
+      state.followers = { rows, count };
     },
-    setFollowings: (state, action) => {
-      state.followings = action.payload;
+    setFollowings: (state, { payload = {} }) => {
+      const { rows, count } = payload;
+      state.followings = { rows, count };
     }
   }
 });
@@ -87,8 +95,20 @@ export const findUser = username => async dispatch => {
 
 // 해당 id를 가진 유저 follow
 export const follow = id => async dispatch => {
-  const { data } = await instaAPI.post(`/api/users/${id}/followers`);
-  dispatch(setFollowers(data));
+  try {
+    await dispatch(
+      setFollowers({
+        rows: [],
+        count: 0
+      })
+    );
+    const { data } = await instaAPI.post(`/api/users/${id}/followers`);
+    const { rows, count } = data;
+    await dispatch(setFollowers({ rows, count }));
+    return data;
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 // 해당 id를 가진 유저 unfollow
@@ -99,12 +119,36 @@ export const unfollow = id => async dispatch => {
 
 // 해당 id를 가진 유저의 follower 목록
 export const getFollowers = id => async dispatch => {
-  const { data } = await instaAPI.get(`/api/users/${id}/followers`);
-  dispatch(setFollowers(data.rows));
+  try {
+    await dispatch(
+      setFollowers({
+        rows: [],
+        count: 0
+      })
+    );
+    const { data } = await instaAPI.get(`/api/users/${id}/followers`);
+    const { rows, count } = data;
+    await dispatch(setFollowers({ rows, count }));
+    return data;
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 // 해당 id를 가진 유저의 following 목록
 export const getFollowings = id => async dispatch => {
-  const { data } = await instaAPI.get(`/api/users/${id}/followings`);
-  dispatch(setFollowings(data.rows));
+  try {
+    await dispatch(
+      setFollowers({
+        rows: [],
+        count: 0
+      })
+    );
+    const { data } = await instaAPI.get(`/api/users/${id}/followings`);
+    const { rows, count } = data;
+    await dispatch(setFollowings({ rows, count }));
+    return data;
+  } catch (err) {
+    console.error(err);
+  }
 };

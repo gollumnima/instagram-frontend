@@ -39,7 +39,7 @@ const MyPage = () => {
   const handleFollow = id => {
     dispatch(follow(id));
   };
-
+  console.log(followings.rows);
   return (
     <>
       <Wrapper>
@@ -65,8 +65,8 @@ const MyPage = () => {
                   ) : (
                     <button className="mypage__profile__btn__shell">
                       {/* effect 때문에 빈 배열일 경우가 있어서 length 조건을 넣어줘야.. */}
-                      {followers?.length > 0 &&
-                      followers?.filter(
+                      {followers?.count > 0 &&
+                      followers?.rows?.filter(
                         el => el?.username === userInfo?.username
                       ) ? (
                         <span className="mypage__profile__btn__white">
@@ -98,7 +98,7 @@ const MyPage = () => {
                     <span className="mypage__profile__flex__title">
                       팔로워
                       <span className="mypage__profile__flex__nums">
-                        {followers?.length ?? null}
+                        {followers?.count ?? null}
                       </span>
                     </span>
                   </li>
@@ -106,7 +106,7 @@ const MyPage = () => {
                     <span className="mypage__profile__flex__title">
                       팔로우
                       <span className="mypage__profile__flex__nums">
-                        {followings?.length ?? null}
+                        {followings?.count ?? null}
                       </span>
                     </span>
                   </li>
@@ -131,18 +131,20 @@ const MyPage = () => {
           <div className="mypage__feed">
             <nav className="mypage__tabs">
               <ul>
-                <li>
-                  <NavLink
-                    to={`/${foundUser?.username}/upload`}
-                    className="mypage__nav__link"
-                    activeClassName="activeRoute"
-                    isActive={() =>
-                      location?.pathname === `/${foundUser?.username}/upload`
-                    }
-                  >
-                    업로드
-                  </NavLink>
-                </li>
+                {userInfo?.username === linkedName && (
+                  <li>
+                    <NavLink
+                      to={`/${foundUser?.username}/upload`}
+                      className="mypage__nav__link"
+                      activeClassName="activeRoute"
+                      isActive={() =>
+                        location?.pathname === `/${foundUser?.username}/upload`
+                      }
+                    >
+                      업로드
+                    </NavLink>
+                  </li>
+                )}
                 <li>
                   <NavLink
                     to={`/${foundUser?.username}`}
@@ -155,18 +157,20 @@ const MyPage = () => {
                     게시물
                   </NavLink>
                 </li>
-                <li>
-                  <NavLink
-                    to={`/${foundUser?.username}/saved`}
-                    className="mypage__nav__link"
-                    activeClassName="activeRoute"
-                    isActive={() =>
-                      location?.pathname === `/${foundUser?.username}/saved`
-                    }
-                  >
-                    저장됨
-                  </NavLink>
-                </li>
+                {userInfo?.username === linkedName && (
+                  <li>
+                    <NavLink
+                      to={`/${foundUser?.username}/saved`}
+                      className="mypage__nav__link"
+                      activeClassName="activeRoute"
+                      isActive={() =>
+                        location?.pathname === `/${foundUser?.username}/saved`
+                      }
+                    >
+                      저장됨
+                    </NavLink>
+                  </li>
+                )}
               </ul>
             </nav>
             {/* <Tabs

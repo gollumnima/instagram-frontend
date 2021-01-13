@@ -11,9 +11,10 @@ import * as postAction from "store/post";
 import * as commentAction from "store/comment";
 
 const Layout = props => {
-  const { post, postId } = props;
+  const { post, postId, user } = props;
   const dispatch = useDispatch();
   const foundUser = useSelector(state => state.user?.foundUser);
+  const [userList, setUserList] = useState([]);
 
   const handleUser = () => {
     dispatch(findUser(post?.User?.username));
@@ -51,8 +52,8 @@ const Layout = props => {
   return (
     <div className="layout">
       <LayoutHeader
-        username={post?.User.username}
-        url={foundUser?.image_url}
+        username={user?.username}
+        url={user?.image_url}
         link="true"
       />
       <LayoutImgBox url={post.images?.[0]?.url ?? null} size="600" />

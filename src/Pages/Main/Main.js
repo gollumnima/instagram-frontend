@@ -13,10 +13,10 @@ const Main = () => {
   const user = useSelector(state => state.user);
   const [feed, setFeed] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [offset, setOffset] = useState(0);
   const [limit, setLimit] = useState(5);
 
   const handleScroll = () => {
-    const windowHeight = "innerHeight" in window;
     let bodyScrollTop =
       window.pageYOffset ||
       document.documentElement.scrollTop ||
@@ -26,32 +26,62 @@ const Main = () => {
       window.innerHeight + bodyScrollTop >=
       document.documentElement.offsetHeight
     )
-      console.log("바닥쓰");
-    setLoading(true);
-    setLimit(limit + 5);
+      return;
+    else {
+      setLoading(true);
+    }
   };
 
   useEffect(() => {
+    if (loading) {
+      console.log("fetching datas");
+    }
+  }, [loading]);
+
+  const loadData = () => {
     instaAPI
       .get(`/api/posts`, {
         params: {
-          offset: 0,
+          offset: offset,
           limit: limit
         }
       })
       .then(({ data }) => {
         setFeed(data.rows);
       });
-  }, [limit]);
+  };
+
+  const moreData = () => {
+    instaAPI
+      .get(`/api/posts`, {
+        params: {
+          offset: offset,
+          limit: limit
+        }
+      })
+      .then(({ data }) => {
+        setFeed(data.rows);
+      });
+
+    setLoading(false);
+    setOffset(limit);
+    setLimit(limit + 5);
+  };
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
+    loadData();
+    window.addEventListener("scroll", throttle(handleScroll, 2000));
 
-    // throttle(handleScroll, 300000));
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", throttle(handleScroll, 2000));
     };
-  }, [limit]);
+  }, []);
+
+  useEffect(() => {
+    if (loading) {
+      moreData();
+    }
+  }, [loading]);
 
   console.log(feed);
   return (
@@ -72,7 +102,7 @@ const Main = () => {
                   user={el?.User}
                 />
               ))}
-              {loading && <h1>더 불러오는 중</h1>}
+              {/* {loading && <h1>더 불러오는 중</h1>} */}
             </div>
             <div className="main__right">
               <div className="my-pf-container">

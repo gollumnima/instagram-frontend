@@ -12,76 +12,40 @@ import "./main.scss";
 const Main = () => {
   const user = useSelector(state => state.user);
   const [feed, setFeed] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [offset, setOffset] = useState(0);
-  const [limit, setLimit] = useState(5);
 
-  const handleScroll = () => {
-    let bodyScrollTop =
-      window.pageYOffset ||
-      document.documentElement.scrollTop ||
-      document.body.scrollTop;
-
-    if (
-      window.innerHeight + bodyScrollTop >=
-      document.documentElement.offsetHeight
-    )
-      return;
-    else {
-      setLoading(true);
-    }
-  };
-
-  useEffect(() => {
-    if (loading) {
-      console.log("fetching datas");
-    }
-  }, [loading]);
-
-  const loadData = () => {
-    instaAPI
+  const loadData = offset => {
+    return instaAPI
       .get(`/api/posts`, {
         params: {
-          offset: offset,
-          limit: limit
+          offset,
+          limit: 5
         }
       })
       .then(({ data }) => {
-        setFeed(data.rows);
+        setFeed(feed.concat(data.rows));
       });
-  };
-
-  const moreData = () => {
-    instaAPI
-      .get(`/api/posts`, {
-        params: {
-          offset: offset,
-          limit: limit
-        }
-      })
-      .then(({ data }) => {
-        setFeed(data.rows);
-      });
-
-    setLoading(false);
-    setOffset(limit);
-    setLimit(limit + 5);
   };
 
   useEffect(() => {
-    loadData();
-    window.addEventListener("scroll", throttle(handleScroll, 2000));
+    loadData(feed.length);
 
+    const handleScroll = throttle(() => {
+      const bodyScrollTop =
+        window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop;
+
+      const currentPosition = window.innerHeight + bodyScrollTop;
+      const currentLength = document.documentElement.offsetHeight;
+
+      if (currentPosition < currentLength) return;
+    }, 100);
+
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener("scroll", throttle(handleScroll, 2000));
+      window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
-
-  useEffect(() => {
-    if (loading) {
-      moreData();
-    }
-  }, [loading]);
+  }, [feed.length]);
 
   console.log(feed);
   return (
@@ -93,6 +57,7 @@ const Main = () => {
               <LiveStories />
               {feed.map(el => (
                 <Layout
+                  key={el.id}
                   // id={el?.User?.id}
                   // username={el.User?.username}
                   // img={el?.images[0]?.url}

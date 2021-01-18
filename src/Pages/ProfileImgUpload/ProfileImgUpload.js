@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { withRouter } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { instaAPI } from "utils/axios.wrapper";
 import Wrapper from "Components/Wrapper/Wrapper";
@@ -22,6 +23,7 @@ const ProfileImgUpload = () => {
     });
   };
 
+  console.log(userInfo, "sakljdf;lakjsdf;ljasdf");
   return (
     <Wrapper>
       <main className="profile__img__upload">
@@ -86,4 +88,4 @@ const ProfileImgUpload = () => {
     </Wrapper>
   );
 };
-export default ProfileImgUpload;
+export default withRouter(ProfileImgUpload);

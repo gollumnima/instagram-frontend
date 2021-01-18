@@ -1,12 +1,12 @@
 import React from "react";
-import { Link, useLocation, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Profile from "Components/Profile";
 import { useSelector } from "react-redux";
 import "./layout__header.scss";
 
 const LayoutHeader = ({ url, username, link }) => {
   const history = useHistory();
-  const user = useSelector(state => state.user);
+  //const user = useSelector(state => state.user);
   const moveToUserPage = () => {
     link && history.push(`/${username}`);
     // 이렇게 할 경우 해당 유저의 마이페이지로 이동은 가능하나

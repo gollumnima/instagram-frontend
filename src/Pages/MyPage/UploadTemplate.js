@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { instaAPI } from "utils/axios.wrapper";
 import { getPost } from "store/post";
 import "./upload.scss";
@@ -8,7 +8,7 @@ import "./upload.scss";
 const UploadTemplate = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const username = useSelector(state => state?.user?.userInfo?.username);
+  //const username = useSelector(state => state?.user?.userInfo?.username);
 
   const [postID, setPostID] = useState(null);
   const [content, setContent] = useState("");

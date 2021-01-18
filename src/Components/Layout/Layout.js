@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import LayoutHeader from "./LayoutHeader";
 import LayoutImgBox from "./LayoutImgBox";
 import LayoutCmtBox from "./LayoutCmtBox";
@@ -13,8 +13,8 @@ import * as commentAction from "store/comment";
 const Layout = props => {
   const { post, postId, user } = props;
   const dispatch = useDispatch();
-  const foundUser = useSelector(state => state.user?.foundUser);
-  const [userList, setUserList] = useState([]);
+  //const foundUser = useSelector(state => state.user?.foundUser);
+  //const [userList, setUserList] = useState([]);
 
   const handleUser = () => {
     dispatch(findUser(post?.User?.username));

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Link, Route, useLocation, NavLink } from "react-router-dom";
+import { Link, Route, useLocation, NavLink, Switch } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Wrapper from "Components/Wrapper/Wrapper";
 import Tabs from "Components/Tabs";
 import Profile from "Components/Profile";
 import PostList from "./PostList";
 import UploadTemplate from "./UploadTemplate";
+import ProfileImgUpload from "Pages/ProfileImgUpload/ProfileImgUpload";
 import { findUser, follow, getFollowers, getFollowings } from "store/user";
-import SaveList from "./SaveList";
 import "./mypage.scss";
 
 const MyPage = () => {
@@ -16,7 +16,7 @@ const MyPage = () => {
   const userInfo = useSelector(state => state?.user?.userInfo ?? null);
   const followers = useSelector(state => state?.user?.followers);
   const followings = useSelector(state => state?.user?.followings);
-  const linkedName = location.pathname.slice(1);
+  const linkedName = location.pathname.slice(1).split("/")[0];
   const foundUser = useSelector(state => state?.user?.foundUser ?? null);
   const postList = useSelector(state => state?.post?.postList ?? null);
   const [modal, setModal] = useState(false);
@@ -28,7 +28,9 @@ const MyPage = () => {
   const linkedFeed = postList.filter(el => el.User?.username === linkedName);
 
   useEffect(() => {
-    dispatch(findUser(linkedName));
+    dispatch(
+      findUser((linkedName !== "accounts" && linkedName) || userInfo?.username)
+    );
   }, []);
 
   useEffect(() => {
@@ -39,7 +41,7 @@ const MyPage = () => {
   const handleFollow = id => {
     dispatch(follow(id));
   };
-  console.log(followings.rows);
+
   return (
     <>
       <Wrapper>
@@ -54,19 +56,18 @@ const MyPage = () => {
                   <span className="mypage__profile__username">
                     {foundUser?.username}
                   </span>
-                  {userInfo?.username === linkedName ? (
-                    <Link to="/accounts/edit">
-                      <button className="mypage__profile__btn__shell">
-                        <span className="mypage__profile__btn__white">
-                          프로필 편집
-                        </span>
-                      </button>
-                    </Link>
+                  {(linkedName !== "accounts" && linkedName) ||
+                  userInfo?.username ? (
+                    <button className="mypage__profile__btn__shell">
+                      <span className="mypage__profile__btn__white">
+                        프로필 편집
+                      </span>
+                    </button>
                   ) : (
                     <button className="mypage__profile__btn__shell">
                       {/* effect 때문에 빈 배열일 경우가 있어서 length 조건을 넣어줘야.. */}
                       {followers?.count > 0 &&
-                      followers?.rows?.filter(
+                      followers?.rows?.find(
                         el => el?.username === userInfo?.username
                       ) ? (
                         <span className="mypage__profile__btn__white">
@@ -76,7 +77,7 @@ const MyPage = () => {
                         //  언팔기능 추가를 해야함. 작은 마달창을모달을 컴포넌트화 시키기
                         <span
                           className="mypage__profile__btn__blue"
-                          onClick={() => handleFollow(foundUser?.id)}
+                          onClick={() => handleFollow(userInfo?.id)}
                         >
                           팔로우
                         </span>
@@ -206,8 +207,10 @@ const MyPage = () => {
               defaultActive={1}
             /> */}
           </div>
+
           <Route path="/:username/upload" component={UploadTemplate} />
           <Route
+            exact
             path="/:username"
             render={() => (
               <PostList

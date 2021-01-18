@@ -1,12 +1,12 @@
-import React, { useState, useEffect, createRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState, createRef } from "react";
+import { useDispatch } from "react-redux";
 import { deleteProfile } from "store/user";
 import "Components/Modal/modal.scss";
 import "./img__upload__modal.scss";
 
 const ImgUploadModal = ({ onModalClose, onImgUpload }) => {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.user?.userInfo);
+  //const user = useSelector(state => state.user?.userInfo);
   const [modalClose, setModalClose] = useState(false);
   const handleModalClose = () => {
     setModalClose(true);

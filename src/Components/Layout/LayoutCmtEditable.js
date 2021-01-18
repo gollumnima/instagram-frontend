@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getComments, changeComment, getCommentID } from "store/comment";
+import React, { useState } from "react";
 import "./layout__cmt__box.scss";
 
 const LayoutCmtEditable = props => {

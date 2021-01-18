@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { INCREMENT, DECREMENT, incrementDouble, addTwo } from "store/counter";
-import { add, setValue } from "store/calculator";
+import { DECREMENT, incrementDouble } from "store/counter";
+import { setValue } from "store/calculator";
 import { setOperator } from "../../store/calculator";
 
 const Counter = () => {

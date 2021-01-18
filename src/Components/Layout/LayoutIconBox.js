@@ -9,7 +9,7 @@ const LayoutIconBox = props => {
   const userID = useSelector(state => state?.user?.userInfo?.id);
   const likes = post?.Likes ?? [];
   const hasLikedThisPost = !!likes.find(e => e.User.id === userID);
-  const saves = useSelector(state => state?.save?.savedList);
+  //const saves = useSelector(state => state?.save?.savedList);
   // saved property가 생기면 그때 책갈피 색깔 바뀌게 하기
 
   const handleHeart = () => {

@@ -1,5 +1,4 @@
 import axios from "axios";
-import { API } from "./config";
 
 const instaAPI = axios.create({
   baseURL: "http://15.165.17.58/"

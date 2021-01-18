@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Route, Switch, useHistory, useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getSelf } from "store/user";
 import Main from "./Pages/Main";
 import Login from "./Pages/Login";
@@ -32,13 +32,13 @@ const Routes = () => {
     <>
       <Switch location={background ?? location}>
         <Route exact path="/" component={Main} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/signup" component={SignUp} />
+        <Route path="/login" component={Login} />
+        <Route path="/signup" component={SignUp} />
         <Route path="/:username" component={MyPage} />
-        <Route exact path="/detail" component={Detail} />
-        <Route exact path="/counter" component={Counter} />
-        <Route exact path="/p/:id" component={Detail} />
-        <Route exact path="/accounts/edit" component={ProfileImgUpload} />
+        <Route path="/detail" component={Detail} />
+        <Route path="/counter" component={Counter} />
+        <Route path="/p/:id" component={Detail} />
+        <Route path="/accounts/edit" render={() => <ProfileImgUpload />} />
       </Switch>
       {background && (
         <Route

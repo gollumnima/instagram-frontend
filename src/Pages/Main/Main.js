@@ -47,7 +47,6 @@ const Main = () => {
     };
   }, [feed.length]);
 
-  console.log(feed);
   return (
     <>
       <Wrapper>

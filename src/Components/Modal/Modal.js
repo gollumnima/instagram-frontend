@@ -9,7 +9,7 @@ const Modal = ({ location }) => {
   const dispatch = useDispatch();
   const { postId } = useParams();
   const history = useHistory();
-  const post = useSelector(state => state?.post?.post);
+  //const post = useSelector(state => state?.post?.post);
   const linkedName = location.pathname.slice(1);
   const foundUser = useSelector(
     state => state?.user?.foundUser?.username ?? null
@@ -27,28 +27,27 @@ const Modal = ({ location }) => {
     dispatch(findUser(linkedName));
   }, []);
 
-  const [state, setState] = React.useReducer(
-    (prev, next) => ({ ...prev, ...next }),
-    {
-      prev_id: null,
-      next_id: null
-    }
-  );
+  // const [state, setState] = React.useReducer(
+  //   (prev, next) => ({ ...prev, ...next }),
+  //   {
+  //     prev_id: null,
+  //     next_id: null
+  //   }
+  // );
 
   useLockBodyScroll();
 
-  const NavButton = ({ text, id }) => (
-    // id &&
-    <div
-      className="modal__nav__btn"
-      type="button"
-      onClick={() => history.push(`/p/${id}`, { background: location })}
-    >
-      {text}
-    </div>
-  );
+  // const NavButton = ({ text, id }) => (
+  //   // id &&
+  //   <div
+  //     className="modal__nav__btn"
+  //     type="button"
+  //     onClick={() => history.push(`/p/${id}`, { background: location })}
+  //   >
+  //     {text}
+  //   </div>
+  // );
 
-  console.log(foundUser);
   return (
     <>
       <div

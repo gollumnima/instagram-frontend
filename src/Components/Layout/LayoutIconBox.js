@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getSaves } from "store/save";
 import "./layout__icon__box.scss";
@@ -6,6 +7,7 @@ import "./layout__icon__box.scss";
 const LayoutIconBox = props => {
   const { post, likePost, unlikePost } = props;
   const dispatch = useDispatch();
+  const history = useHistory();
   const userID = useSelector(state => state?.user?.userInfo?.id);
   const likes = post?.Likes ?? [];
   const hasLikedThisPost = !!likes.find(e => e.User.id === userID);
@@ -17,6 +19,7 @@ const LayoutIconBox = props => {
     action();
   };
 
+  console.log(post, "p");
   return (
     <>
       <section className="layout__icon__box">
@@ -50,6 +53,7 @@ const LayoutIconBox = props => {
           <svg
             className="layout__icon__box__icons"
             xmlns="http://www.w3.org/2000/svg"
+            onClick={() => history.push(`/p/${post?.id}`)}
           >
             <path d="M12 1c-6.338 0-12 4.226-12 10.007 0 2.05.739 4.063 2.047 5.625l-1.993 6.368 6.946-3c1.705.439 3.334.641 4.864.641 7.174 0 12.136-4.439 12.136-9.634 0-5.812-5.701-10.007-12-10.007m0 1c6.065 0 11 4.041 11 9.007 0 4.922-4.787 8.634-11.136 8.634-1.881 0-3.401-.299-4.946-.695l-5.258 2.271 1.505-4.808c-1.308-1.564-2.165-3.128-2.165-5.402 0-4.966 4.935-9.007 11-9.007" />
           </svg>

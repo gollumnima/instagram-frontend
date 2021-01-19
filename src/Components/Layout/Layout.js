@@ -10,8 +10,7 @@ import { findUser } from "store/user";
 import * as postAction from "store/post";
 import * as commentAction from "store/comment";
 
-const Layout = props => {
-  const { post, postId, user } = props;
+const Layout = ({ post, postId, user }) => {
   const dispatch = useDispatch();
   //const foundUser = useSelector(state => state.user?.foundUser);
   //const [userList, setUserList] = useState([]);
@@ -66,7 +65,6 @@ const Layout = props => {
         <LayoutContent post={post} />
         <LayoutCmtBox
           // 메인에서 댓글 달 때 문제가 생기는데 문제 파악중
-          post={post}
           updateComment={updateComment}
           deleteComment={deleteComment}
         />

@@ -34,11 +34,11 @@ const Routes = () => {
         <Route exact path="/" component={Main} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignUp} />
-        <Route path="/:username" component={MyPage} />
         <Route path="/detail" component={Detail} />
         <Route path="/counter" component={Counter} />
         <Route path="/p/:id" component={Detail} />
         <Route path="/accounts/edit" render={() => <ProfileImgUpload />} />
+        <Route path="/:username" component={MyPage} />
       </Switch>
       {background && (
         <Route

@@ -6,8 +6,13 @@ import Tabs from "Components/Tabs";
 import Profile from "Components/Profile";
 import PostList from "./PostList";
 import UploadTemplate from "./UploadTemplate";
-import ProfileImgUpload from "Pages/ProfileImgUpload/ProfileImgUpload";
-import { findUser, follow, getFollowers, getFollowings } from "store/user";
+import {
+  findUser,
+  follow,
+  unfollow,
+  getFollowers,
+  getFollowings
+} from "store/user";
 import "./mypage.scss";
 
 const MyPage = () => {
@@ -42,6 +47,11 @@ const MyPage = () => {
     dispatch(follow(id));
   };
 
+  const handleUnfollow = id => {
+    dispatch(unfollow(id));
+  };
+
+  console.log(followers, "f");
   return (
     <>
       <Wrapper>
@@ -56,8 +66,8 @@ const MyPage = () => {
                   <span className="mypage__profile__username">
                     {foundUser?.username}
                   </span>
-                  {(linkedName !== "accounts" && linkedName) ||
-                  userInfo?.username ? (
+                  {linkedName !== "accounts" &&
+                  userInfo?.username === linkedName ? (
                     <button className="mypage__profile__btn__shell">
                       <span className="mypage__profile__btn__white">
                         프로필 편집
@@ -70,14 +80,17 @@ const MyPage = () => {
                       followers?.rows?.find(
                         el => el?.username === userInfo?.username
                       ) ? (
-                        <span className="mypage__profile__btn__white">
+                        <span
+                          className="mypage__profile__btn__white"
+                          onClick={() => handleUnfollow(foundUser?.id)}
+                        >
                           팔로잉 ✔️
                         </span>
                       ) : (
                         //  언팔기능 추가를 해야함. 작은 마달창을모달을 컴포넌트화 시키기
                         <span
                           className="mypage__profile__btn__blue"
-                          onClick={() => handleFollow(userInfo?.id)}
+                          onClick={() => handleFollow(foundUser?.id)}
                         >
                           팔로우
                         </span>

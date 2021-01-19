@@ -59,7 +59,7 @@ const ModalDetail = ({ postId }) => {
         <LayoutHeader username={post.User.username} url={userInfo?.image_url} />
         <LayoutContent post={post} />
         <LayoutCmtBox
-          post={post}
+          // post={post}
           updateComment={updateComment}
           deleteComment={deleteComment}
         />

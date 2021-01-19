@@ -5,7 +5,7 @@
 
 ## 시연 영상
 
-!['instagram_preview_video'](https://github.com/gollumnima/instagram-frontend/blob/main/public/media/instagram_preview.mov)
+!['instagram_preview'](https://github.com/gollumnima/instagram-frontend/blob/main/public/media/instagram_preview.gif)
 
 ## 🍎 구현한 기능
 
@@ -26,7 +26,7 @@
 - 책갈피 기능
 - 사용자 태그(@) 기능
 
-## 👩🏻‍💻 evelopment Stack
+## 👩🏻‍💻 Development Stack
 
 <table>
 <thead>

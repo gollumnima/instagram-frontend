@@ -5,7 +5,7 @@
 
 ## 시연 영상
 
-!['instagram_preview_video'](/Users/dooreplay/pj_dooreplay/westagram/public/media/instagram_preview.mov)
+!['instagram_preview_video'](https://github.com/gollumnima/instagram-frontend/blob/main/public/media/instagram_preview.mov)
 
 ## 🍎 구현한 기능
 

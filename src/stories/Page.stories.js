@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Page } from "./Page";
+import { SignUp } from "Pages/SignUp/SignUp";
 import * as HeaderStories from "./Header.stories";
 
 export default {
@@ -19,3 +20,8 @@ export const LoggedOut = Template.bind({});
 LoggedOut.args = {
   ...HeaderStories.LoggedOut.args
 };
+
+// export const SignedUp = Template.bind({});
+// SignedUp.args = {
+//   ...HeaderStories.SignedUp.args
+// };

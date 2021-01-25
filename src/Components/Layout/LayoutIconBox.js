@@ -19,7 +19,6 @@ const LayoutIconBox = props => {
     action();
   };
 
-  console.log(post, "p");
   return (
     <>
       <section className="layout__icon__box">
